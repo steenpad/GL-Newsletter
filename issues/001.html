@@ -3,87 +3,120 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>GL Inside #001 — Konečně to děláme pořádně</title>
+  <title>GL Inside #001 — Konecne to delame poradne</title>
   <link rel="stylesheet" href="../css/style.css">
   <style>
-    .video-frame {
-      border-radius: 20px;
-      overflow: hidden;
-      background: rgba(255, 255, 255, 0.45);
-      backdrop-filter: blur(20px) saturate(180%);
-      -webkit-backdrop-filter: blur(20px) saturate(180%);
-      border: 1px solid rgba(255, 255, 255, 0.6);
-      box-shadow:
-        0 8px 32px rgba(0, 0, 0, 0.06),
-        inset 0 1px 0 rgba(255, 255, 255, 0.8);
-      padding: 12px;
-      margin-bottom: 40px;
+    /* --- Single news card: video + points --- */
+    .news-card {
+      padding: 32px;
+      display: grid;
+      grid-template-columns: 1.1fr 1fr;
+      gap: 32px;
+      align-items: start;
     }
-    .video-frame iframe {
+    @media (max-width: 900px) {
+      .news-card {
+        grid-template-columns: 1fr;
+        padding: 24px;
+      }
+    }
+
+    /* Left column — video */
+    .news-card__video iframe {
       display: block;
       width: 100%;
       aspect-ratio: 16 / 9;
       border: none;
-      border-radius: 12px;
+      border-radius: 14px;
     }
+    .news-card__video-caption {
+      margin-top: 10px;
+      font-size: 13px;
+      color: rgba(0, 0, 0, 0.35);
+      text-align: center;
+    }
+
+    /* Right column — points */
+    .points-header {
+      margin-bottom: 16px;
+    }
+    .points-header h3 {
+      font-size: 18px;
+      font-weight: 700;
+      color: #1a1a2e;
+      letter-spacing: -0.01em;
+    }
+    .points-header p {
+      font-size: 13px;
+      color: rgba(0, 0, 0, 0.35);
+      margin-top: 4px;
+    }
+    .points {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .point {
+      padding: 16px 18px;
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      background: rgba(255, 255, 255, 0.35);
+      border: 1px solid rgba(255, 255, 255, 0.5);
+      border-radius: 14px;
+      transition: all 0.35s ease;
+    }
+    .point:hover {
+      transform: translateY(-2px);
+      background: rgba(255, 255, 255, 0.55);
+      border-color: rgba(255, 255, 255, 0.7);
+      box-shadow: 0 6px 24px rgba(0, 0, 0, 0.05);
+    }
+    .point__icon {
+      font-size: 18px;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+    .point__body h4 {
+      font-size: 14px;
+      font-weight: 600;
+      color: #1a1a2e;
+      margin-bottom: 3px;
+      line-height: 1.35;
+    }
+    .point__body p {
+      font-size: 12.5px;
+      line-height: 1.55;
+      color: rgba(0, 0, 0, 0.45);
+    }
+    .point__tag {
+      display: inline-block;
+      margin-top: 6px;
+      padding: 2px 8px;
+      border-radius: 5px;
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+    .point__tag--blue {
+      background: rgba(44, 100, 189, 0.08);
+      color: #2C64BD;
+      border: 1px solid rgba(44, 100, 189, 0.18);
+    }
+    .point__tag--pink {
+      background: rgba(234, 64, 111, 0.08);
+      color: #d63060;
+      border: 1px solid rgba(234, 64, 111, 0.18);
+    }
+
+    /* Intro text */
     .intro-text {
       font-size: clamp(16px, 2vw, 18px);
       line-height: 1.7;
       color: rgba(0, 0, 0, 0.55);
       max-width: 720px;
       margin-bottom: 40px;
-    }
-    .takeaways {
-      display: flex;
-      flex-direction: column;
-      gap: 16px;
-    }
-    .takeaway {
-      padding: 24px 28px;
-      display: flex;
-      align-items: flex-start;
-      gap: 16px;
-      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-    }
-    .takeaway:hover {
-      transform: translateY(-2px);
-      border-color: rgba(255, 255, 255, 0.7);
-    }
-    .takeaway__icon {
-      font-size: 22px;
-      flex-shrink: 0;
-      margin-top: 2px;
-    }
-    .takeaway__content h4 {
-      font-size: 16px;
-      font-weight: 600;
-      color: #1a1a2e;
-      margin-bottom: 4px;
-    }
-    .takeaway__content p {
-      font-size: 14px;
-      line-height: 1.6;
-      color: rgba(0, 0, 0, 0.45);
-    }
-    .takeaway__tag {
-      display: inline-block;
-      margin-top: 8px;
-      padding: 3px 10px;
-      border-radius: 6px;
-      font-size: 11px;
-      font-weight: 600;
-      letter-spacing: 0.04em;
-      text-transform: uppercase;
-    }
-    .takeaway__tag--warn {
-      background: rgba(234, 64, 111, 0.08);
-      color: #d63060;
-      border: 1px solid rgba(234, 64, 111, 0.2);
-    }
-    .takeaway__tag--info {
-      background: rgba(44, 100, 189, 0.08);
-      color: #2C64BD;
-      border: 1px solid rgba(44, 100, 189, 0.2);
     }
   </style>
 </head>
@@ -127,7 +160,7 @@
     </div>
   </header>
 
-  <!-- Clay + HeyReach -->
+  <!-- Clay + HeyReach — jedna aktualita -->
   <section class="section" id="clay-heyreach">
     <div class="section__header">
       <p class="section__label">Hlavni tema</p>
@@ -135,48 +168,53 @@
     </div>
 
     <p class="intro-text">
-      David natocil kompletni video navod — hodinu a 45 minut — jak spravne prejit na personalizovane oslovovani pres Clay a HeyReach. Vse krok po kroku, od nastaveni az po spusteni prvni kampane. Podivejte se na to driv, nez zacnete implementovat.
+      David natocil kompletni video navod — hodinu a 45 minut — jak spravne prejit na personalizovane oslovovani pres Clay a HeyReach. Vse krok po kroku, od nastaveni az po spusteni prvni kampane.
     </p>
 
-    <!-- Embedded video -->
-    <div class="video-frame">
-      <iframe
-        src="https://www.youtube.com/embed/jrOPq4Cb2VU"
-        title="Clay + HeyReach navod"
-        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-        allowfullscreen>
-      </iframe>
-    </div>
-
-    <!-- Key takeaways -->
-    <div class="section__header">
-      <p class="section__label">Klicove veci</p>
-      <h2 class="section__title">Souhrn z komentaru</h2>
-    </div>
-
-    <div class="takeaways">
-      <div class="takeaway glass">
-        <span class="takeaway__icon">&#x1F9EA;</span>
-        <div class="takeaway__content">
-          <h4>Lidi do Claye postupne</h4>
-          <p>Importujte kontakty po cca 100. Vzdy nejdriv otestujte na 10 kontaktech, jestli vse funguje spravne. Teprve pak skalujte.</p>
-          <span class="takeaway__tag takeaway__tag--info">PROCESS</span>
-        </div>
+    <!-- Jedna karta: video vlevo, pointy vpravo -->
+    <div class="news-card glass">
+      <!-- Video -->
+      <div class="news-card__video">
+        <iframe
+          src="https://www.youtube.com/embed/jrOPq4Cb2VU"
+          title="Clay + HeyReach navod"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowfullscreen>
+        </iframe>
+        <p class="news-card__video-caption">1h 45min — kompletni navod krok po kroku</p>
       </div>
-      <div class="takeaway glass">
-        <span class="takeaway__icon">&#x1F510;</span>
-        <div class="takeaway__content">
-          <h4>HeyReach potrebuje napojeni klientskeho uctu + dvoufaktorovku</h4>
-          <p>Bez napojeni klientskeho uctu a zapnute dvoufaktorove autentizace to nepojede. Nastavte si to driv, nez zacnete s kampani.</p>
-          <span class="takeaway__tag takeaway__tag--warn">DULEZITE</span>
+
+      <!-- Klicove body -->
+      <div>
+        <div class="points-header">
+          <h3>Klicove veci z videa</h3>
+          <p>Souhrn z komentaru</p>
         </div>
-      </div>
-      <div class="takeaway glass">
-        <span class="takeaway__icon">&#x26A0;&#xFE0F;</span>
-        <div class="takeaway__content">
-          <h4>Pozor na "scheduled" kampane</h4>
-          <p>Pokud kampan v HeyReach bezi jako "scheduled", Clay do ni neposle kontakty. Pred propojenim zkontrolujte stav kampane — tohle je casta past.</p>
-          <span class="takeaway__tag takeaway__tag--warn">TIP OD JOSEFA</span>
+        <div class="points">
+          <div class="point">
+            <span class="point__icon">&#x1F9EA;</span>
+            <div class="point__body">
+              <h4>Lidi do Claye postupne</h4>
+              <p>Importujte kontakty po cca 100. Vzdy nejdriv otestujte na 10 kontaktech, jestli vse funguje spravne.</p>
+              <span class="point__tag point__tag--blue">PROCESS</span>
+            </div>
+          </div>
+          <div class="point">
+            <span class="point__icon">&#x1F510;</span>
+            <div class="point__body">
+              <h4>HeyReach potrebuje napojeni klientskeho uctu + 2FA</h4>
+              <p>Bez napojeni klientskeho uctu a zapnute dvoufaktorove autentizace to nepojede. Nastavte si to driv.</p>
+              <span class="point__tag point__tag--pink">DULEZITE</span>
+            </div>
+          </div>
+          <div class="point">
+            <span class="point__icon">&#x26A0;&#xFE0F;</span>
+            <div class="point__body">
+              <h4>Pozor na "scheduled" kampane</h4>
+              <p>Pokud kampan v HeyReach bezi jako "scheduled", Clay do ni neposle kontakty. Pred propojenim zkontrolujte stav.</p>
+              <span class="point__tag point__tag--pink">TIP OD JOSEFA</span>
+            </div>
+          </div>
         </div>
       </div>
     </div>
