@@ -118,6 +118,93 @@
       max-width: 720px;
       margin-bottom: 40px;
     }
+
+    /* Team section */
+    .team-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 20px;
+      margin-bottom: 24px;
+    }
+    .team-card {
+      padding: 32px;
+      display: flex;
+      gap: 20px;
+      align-items: flex-start;
+      transition: all 0.35s ease;
+    }
+    .team-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 36px rgba(0, 0, 0, 0.06);
+    }
+    .team-card__avatar {
+      width: 64px;
+      height: 64px;
+      border-radius: 18px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+      font-weight: 700;
+      color: #fff;
+      flex-shrink: 0;
+    }
+    .team-card__avatar--pink {
+      background: linear-gradient(135deg, #EA406F, #c0284f);
+    }
+    .team-card__avatar--blue {
+      background: linear-gradient(135deg, #2C64BD, #1a3f7a);
+    }
+    .team-card__name {
+      font-size: 18px;
+      font-weight: 700;
+      color: #1a1a2e;
+      margin-bottom: 2px;
+    }
+    .team-card__role {
+      font-size: 13px;
+      font-weight: 500;
+      color: #2C64BD;
+      margin-bottom: 12px;
+    }
+    .team-card__points {
+      list-style: none;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+    .team-card__points li {
+      font-size: 13px;
+      color: rgba(0, 0, 0, 0.45);
+      padding-left: 16px;
+      position: relative;
+    }
+    .team-card__points li::before {
+      content: '•';
+      position: absolute;
+      left: 0;
+      color: rgba(0, 0, 0, 0.2);
+    }
+    .team-farewell {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 20px 28px;
+      border-radius: 16px;
+      font-size: 14px;
+      color: rgba(0, 0, 0, 0.5);
+      line-height: 1.5;
+    }
+    .team-farewell__icon {
+      font-size: 22px;
+      flex-shrink: 0;
+    }
+    @media (max-width: 768px) {
+      .team-grid {
+        grid-template-columns: 1fr;
+      }
+    }
   </style>
 </head>
 <body>
@@ -137,6 +224,7 @@
       </a>
       <div class="navbar__links">
         <a href="#clay-heyreach" class="navbar__link">Clay + HeyReach</a>
+        <a href="#tym" class="navbar__link">Tým</a>
         <a href="#david" class="navbar__link">David říká</a>
         <a href="../index.html" class="navbar__link">Archiv</a>
       </div>
@@ -217,6 +305,45 @@
           </div>
         </div>
       </div>
+    </div>
+  </section>
+
+  <div class="divider"><div class="divider__line"></div></div>
+
+  <!-- Tým -->
+  <section class="section" id="tym">
+    <div class="section__header">
+      <p class="section__label">Tým</p>
+      <h2 class="section__title">Noví členové</h2>
+    </div>
+
+    <div class="team-grid">
+      <div class="team-card glass">
+        <div class="team-card__avatar team-card__avatar--pink">A</div>
+        <div class="team-card__info">
+          <h3 class="team-card__name">Adéla Dragoun</h3>
+          <p class="team-card__role">LinkedIn specialistka</p>
+          <ul class="team-card__points">
+            <li>Více info brzy</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="team-card glass">
+        <div class="team-card__avatar team-card__avatar--blue">V</div>
+        <div class="team-card__info">
+          <h3 class="team-card__name">Vladimír Kroupar</h3>
+          <p class="team-card__role">Specialista Junior</p>
+          <ul class="team-card__points">
+            <li>Více info brzy</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="team-farewell glass">
+      <span class="team-farewell__icon">&#x1F44B;</span>
+      <p>S <strong>Terkou Nademlejnskou</strong> jsme se rozloučili. Děkujeme za spolupráci a přejeme hodně štěstí!</p>
     </div>
   </section>
 
