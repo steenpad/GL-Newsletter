@@ -3,8 +3,89 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>GL Inside #001 — Týden, kdy jsme rozbili LinkedIn</title>
+  <title>GL Inside #001 — Konečně to děláme pořádně</title>
   <link rel="stylesheet" href="../css/style.css">
+  <style>
+    .video-frame {
+      border-radius: 20px;
+      overflow: hidden;
+      background: rgba(255, 255, 255, 0.45);
+      backdrop-filter: blur(20px) saturate(180%);
+      -webkit-backdrop-filter: blur(20px) saturate(180%);
+      border: 1px solid rgba(255, 255, 255, 0.6);
+      box-shadow:
+        0 8px 32px rgba(0, 0, 0, 0.06),
+        inset 0 1px 0 rgba(255, 255, 255, 0.8);
+      padding: 12px;
+      margin-bottom: 40px;
+    }
+    .video-frame iframe {
+      display: block;
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      border: none;
+      border-radius: 12px;
+    }
+    .intro-text {
+      font-size: clamp(16px, 2vw, 18px);
+      line-height: 1.7;
+      color: rgba(0, 0, 0, 0.55);
+      max-width: 720px;
+      margin-bottom: 40px;
+    }
+    .takeaways {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+    .takeaway {
+      padding: 24px 28px;
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .takeaway:hover {
+      transform: translateY(-2px);
+      border-color: rgba(255, 255, 255, 0.7);
+    }
+    .takeaway__icon {
+      font-size: 22px;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+    .takeaway__content h4 {
+      font-size: 16px;
+      font-weight: 600;
+      color: #1a1a2e;
+      margin-bottom: 4px;
+    }
+    .takeaway__content p {
+      font-size: 14px;
+      line-height: 1.6;
+      color: rgba(0, 0, 0, 0.45);
+    }
+    .takeaway__tag {
+      display: inline-block;
+      margin-top: 8px;
+      padding: 3px 10px;
+      border-radius: 6px;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+    .takeaway__tag--warn {
+      background: rgba(234, 64, 111, 0.08);
+      color: #d63060;
+      border: 1px solid rgba(234, 64, 111, 0.2);
+    }
+    .takeaway__tag--info {
+      background: rgba(44, 100, 189, 0.08);
+      color: #2C64BD;
+      border: 1px solid rgba(44, 100, 189, 0.2);
+    }
+  </style>
 </head>
 <body>
 
@@ -22,11 +103,9 @@
         <span class="navbar__issue">#001</span>
       </a>
       <div class="navbar__links">
-        <a href="#cisla" class="navbar__link">Cisla</a>
-        <a href="#deje" class="navbar__link">Co se deje</a>
-        <a href="#tym" class="navbar__link">Tym</a>
-        <a href="#chystame" class="navbar__link">Chystame</a>
+        <a href="#clay-heyreach" class="navbar__link">Clay + HeyReach</a>
         <a href="#david" class="navbar__link">David rika</a>
+        <a href="../index.html" class="navbar__link">Archiv</a>
       </div>
     </div>
   </nav>
@@ -35,145 +114,69 @@
   <header class="hero">
     <div class="hero__badge glass">
       <span class="hero__badge-dot"></span>
-      Novy issue prave vysel
+      Issue #001
     </div>
     <h1 class="hero__title">
-      Tyden, kdy jsme<br>
-      <span class="hero__title--gradient">rozbili LinkedIn</span>
+      <span class="hero__title--gradient">Konecne to delame poradne.</span>
     </h1>
     <p class="hero__subtitle">
-      3 novi klienti, 47% acceptance rate a jeden viralni post. Tady je recap toho, co se u nas delo.
+      Prechazime na personalizovane oslovovani pres Clay a HeyReach. Takhle to bude fungovat.
     </p>
     <div class="hero__date-badge glass">
-      7. — 11. dubna 2026
+      10. brezna 2026
     </div>
   </header>
 
-  <!-- Cisla tydne -->
-  <section class="section" id="cisla">
+  <!-- Clay + HeyReach -->
+  <section class="section" id="clay-heyreach">
     <div class="section__header">
-      <p class="section__label">Cisla tydne</p>
-      <h2 class="section__title">Jak jsme si vedli</h2>
+      <p class="section__label">Hlavni tema</p>
+      <h2 class="section__title">Novy zpusob oslovovani</h2>
     </div>
-    <div class="stats-grid">
-      <div class="stat-card glass stat-card--blue">
-        <div class="stat-card__number stat-card__number--blue">2,847</div>
-        <div class="stat-card__label">Connection requestu odeslano</div>
-      </div>
-      <div class="stat-card glass stat-card--pink">
-        <div class="stat-card__number stat-card__number--pink">47%</div>
-        <div class="stat-card__label">Acceptance rate</div>
-      </div>
-      <div class="stat-card glass">
-        <div class="stat-card__number stat-card__number--white">189</div>
-        <div class="stat-card__label">Odpovedi na outreach</div>
-      </div>
-      <div class="stat-card glass stat-card--blue">
-        <div class="stat-card__number stat-card__number--blue">23</div>
-        <div class="stat-card__label">Booknutych callu</div>
-      </div>
+
+    <p class="intro-text">
+      David natocil kompletni video navod — hodinu a 45 minut — jak spravne prejit na personalizovane oslovovani pres Clay a HeyReach. Vse krok po kroku, od nastaveni az po spusteni prvni kampane. Podivejte se na to driv, nez zacnete implementovat.
+    </p>
+
+    <!-- Embedded video -->
+    <div class="video-frame">
+      <iframe
+        src="https://www.youtube.com/embed/jrOPq4Cb2VU"
+        title="Clay + HeyReach navod"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowfullscreen>
+      </iframe>
     </div>
-  </section>
 
-  <div class="divider"><div class="divider__line"></div></div>
-
-  <!-- Co se deje -->
-  <section class="section" id="deje">
+    <!-- Key takeaways -->
     <div class="section__header">
-      <p class="section__label">Co se deje</p>
-      <h2 class="section__title">Highlights tydne</h2>
+      <p class="section__label">Klicove veci</p>
+      <h2 class="section__title">Souhrn z komentaru</h2>
     </div>
-    <div class="cards-grid">
-      <div class="content-card glass">
-        <span class="content-card__icon">&#x1F680;</span>
-        <h3 class="content-card__title">Novy klient: TechFlow Solutions</h3>
-        <p class="content-card__text">
-          Podepsali jsme SaaS firmu z Mnichova — 200+ zamestnancu, cili na C-level v DACH regionu. Strategie jde ven pristi pondeli. Tohle bude silny case study.
-        </p>
-        <span class="content-card__tag">NOVY KLIENT</span>
-      </div>
-      <div class="content-card glass">
-        <span class="content-card__icon">&#x1F525;</span>
-        <h3 class="content-card__title">Viralni post pro DataBridge</h3>
-        <p class="content-card__text">
-          Post o B2B cold outreach mythech dosahl 34K impressions a 580+ reactions. CEO DataBridge dostal 12 inbound leadu primo z komentaru. Tohle je to, proc to delame.
-        </p>
-        <span class="content-card__tag content-card__tag--pink">VIRALNI</span>
-      </div>
-      <div class="content-card glass">
-        <span class="content-card__icon">&#x2699;&#xFE0F;</span>
-        <h3 class="content-card__title">Novy outreach framework</h3>
-        <p class="content-card__text">
-          Tomas dopiloval 3-step message sequence, ktera tlaci 47% acceptance. Core insight: personalizace prvni vety pres recent activity, ne job title. Rollujeme na vsechny klienty.
-        </p>
-        <span class="content-card__tag">PROCESS</span>
-      </div>
-      <div class="content-card glass">
-        <span class="content-card__icon">&#x1F3AF;</span>
-        <h3 class="content-card__title">Workshop s Revolut B2B</h3>
-        <p class="content-card__text">
-          Stredecni workshop s jejich growth tymem — mapovali jsme ICP a buying committee strukturu. Super lidi, velky potencial. Follow-up proposal jde v pondeli.
-        </p>
-        <span class="content-card__tag">BUSINESS DEV</span>
-      </div>
-    </div>
-  </section>
 
-  <div class="divider"><div class="divider__line"></div></div>
-
-  <!-- Tym spotlight -->
-  <section class="section" id="tym">
-    <div class="section__header">
-      <p class="section__label">Tym spotlight</p>
-      <h2 class="section__title">Clovek tydne</h2>
-    </div>
-    <div class="spotlight-card glass">
-      <div class="spotlight__avatar">&#x1F468;&#x200D;&#x1F4BB;</div>
-      <div class="spotlight__info">
-        <h3>Tomas Kratochvil</h3>
-        <p class="role">Head of Outreach</p>
-        <p>
-          Tomas tento tyden pushoval novy outreach framework, ktery zvedl acceptance rate o 12 procentnich bodu. Krome toho onboardnul 2 nove klienty solo a porad stihal mentorovat juniory. Machine.
-        </p>
-      </div>
-    </div>
-  </section>
-
-  <div class="divider"><div class="divider__line"></div></div>
-
-  <!-- Co chystame -->
-  <section class="section" id="chystame">
-    <div class="section__header">
-      <p class="section__label">Co chystame</p>
-      <h2 class="section__title">Pristi tyden</h2>
-    </div>
-    <div class="timeline">
-      <div class="timeline-item glass">
-        <div class="timeline-item__marker"></div>
-        <div class="timeline-item__content">
-          <h4>Launch kampane pro TechFlow</h4>
-          <p>Pondeli — prvnich 500 connection requestu + 3 content pieces</p>
+    <div class="takeaways">
+      <div class="takeaway glass">
+        <span class="takeaway__icon">&#x1F9EA;</span>
+        <div class="takeaway__content">
+          <h4>Lidi do Claye postupne</h4>
+          <p>Importujte kontakty po cca 100. Vzdy nejdriv otestujte na 10 kontaktech, jestli vse funguje spravne. Teprve pak skalujte.</p>
+          <span class="takeaway__tag takeaway__tag--info">PROCESS</span>
         </div>
       </div>
-      <div class="timeline-item glass">
-        <div class="timeline-item__marker timeline-item__marker--pink"></div>
-        <div class="timeline-item__content">
-          <h4>Revolut B2B proposal</h4>
-          <p>Utery — finalni verze + pricing deck</p>
+      <div class="takeaway glass">
+        <span class="takeaway__icon">&#x1F510;</span>
+        <div class="takeaway__content">
+          <h4>HeyReach potrebuje napojeni klientskeho uctu + dvoufaktorovku</h4>
+          <p>Bez napojeni klientskeho uctu a zapnute dvoufaktorove autentizace to nepojede. Nastavte si to driv, nez zacnete s kampani.</p>
+          <span class="takeaway__tag takeaway__tag--warn">DULEZITE</span>
         </div>
       </div>
-      <div class="timeline-item glass">
-        <div class="timeline-item__marker"></div>
-        <div class="timeline-item__content">
-          <h4>Content sprint</h4>
-          <p>Streda-ctvrtek — 8 LinkedIn postu pro 4 klienty, focus na thought leadership</p>
-        </div>
-      </div>
-      <div class="timeline-item glass">
-        <div class="timeline-item__marker timeline-item__marker--pink"></div>
-        <div class="timeline-item__content">
-          <h4>Tym retrospektiva Q1</h4>
-          <p>Patek — review cisel, wins, a co zlepsit do Q2</p>
+      <div class="takeaway glass">
+        <span class="takeaway__icon">&#x26A0;&#xFE0F;</span>
+        <div class="takeaway__content">
+          <h4>Pozor na "scheduled" kampane</h4>
+          <p>Pokud kampan v HeyReach bezi jako "scheduled", Clay do ni neposle kontakty. Pred propojenim zkontrolujte stav kampane — tohle je casta past.</p>
+          <span class="takeaway__tag takeaway__tag--warn">TIP OD JOSEFA</span>
         </div>
       </div>
     </div>
@@ -190,13 +193,13 @@
     <div class="quote-panel glass">
       <span class="quote-panel__mark">&ldquo;</span>
       <p class="quote-panel__text">
-        Tenhle tyden byl pripominkou toho, proc GetLeads existuje. Nejde jen o cisla — i kdyz ty cisla jsou dost dobry. Jde o to, ze kazdy z vas pushuje hranice toho, co B2B outreach na LinkedInu muze byt. Tomas s novym frameworkem, Klara s contentem pro DataBridge, cely tym na workshopu s Revolut. Tohle neni agentura. Tohle je laborator. A my jsme teprve na zacatku.
+        Tohle dalo vic prace nez normalne — ale verim, ze vystup stoji za to. Implementujte postupne, testujte na malem vzorku a kdyz narazite na edge case, dejte mi vedet. Jedeme.
       </p>
       <div class="quote-panel__sig">
         <div class="quote-panel__sig-avatar">D</div>
         <div>
-          <div class="quote-panel__sig-name">David</div>
-          <div class="quote-panel__sig-role">Zakladatel & CEO, GetLeads</div>
+          <div class="quote-panel__sig-name">David Kolar</div>
+          <div class="quote-panel__sig-role">CEO, GetLeads</div>
         </div>
       </div>
     </div>
@@ -204,7 +207,7 @@
 
   <!-- Footer -->
   <footer class="footer">
-    <p>GL Inside — interní newsletter GetLeads&ensp;|&ensp;<a href="../index.html">Archiv</a></p>
+    <p>GL Inside — interni newsletter GetLeads&ensp;|&ensp;<a href="../index.html">Archiv</a></p>
     <p style="margin-top: 8px;">&copy; 2026 GetLeads s.r.o. Praha</p>
   </footer>
 
