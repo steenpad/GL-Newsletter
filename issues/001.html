@@ -217,6 +217,58 @@
       .webinar-card__btn { text-align: center; }
     }
 
+    /* App card */
+    .app-card {
+      padding: 0;
+      overflow: hidden;
+    }
+    .app-card__features {
+      padding: 32px;
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+    .app-feature {
+      display: flex;
+      gap: 16px;
+      align-items: flex-start;
+    }
+    .app-feature__icon {
+      font-size: 24px;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+    .app-feature__title {
+      font-size: 15px;
+      font-weight: 700;
+      color: #1a1a2e;
+      margin-bottom: 4px;
+    }
+    .app-feature__desc {
+      font-size: 13px;
+      line-height: 1.6;
+      color: rgba(0, 0, 0, 0.45);
+    }
+    .app-card__footer {
+      padding: 16px 32px;
+      background: rgba(0, 0, 0, 0.02);
+      border-top: 1px solid rgba(0, 0, 0, 0.05);
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+    .app-card__tag {
+      font-size: 12px;
+      color: rgba(0, 0, 0, 0.4);
+      padding: 4px 10px;
+      background: rgba(0, 0, 0, 0.04);
+      border-radius: 6px;
+    }
+    @media (max-width: 600px) {
+      .app-card__features { padding: 24px 20px; }
+      .app-card__footer { padding: 14px 20px; }
+    }
+
     /* Changelog accordion */
     .changelog {
       margin-top: 16px;
@@ -390,6 +442,7 @@
         <a href="#clay-heyreach" class="navbar__link">Clay + HeyReach</a>
         <a href="#richard" class="navbar__link">Richard</a>
         <a href="#webinar" class="navbar__link">Webinář</a>
+        <a href="#appka" class="navbar__link">Appka</a>
         <a href="#tym" class="navbar__link">Tým</a>
         <a href="#david" class="navbar__link">David říká</a>
         <a href="../index.html" class="navbar__link">Archiv</a>
@@ -632,6 +685,58 @@
 
       <div class="webinar-card__bonus">
         <p><strong>Bonusy po webináři:</strong> Záznam webináře &middot; E-book: LinkedIn profil s AI &middot; E-book: SSI index</p>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"><div class="divider__line"></div></div>
+
+  <!-- Controlboard App -->
+  <section class="section" id="appka">
+    <div class="section__header">
+      <p class="section__label">Interní nástroj</p>
+      <h2 class="section__title">Controlboard appka</h2>
+    </div>
+
+    <p class="intro-text">
+      Josef postavil interní appku, která nám pomáhá interpretovat data z controlboardů. Funguje jenom na Creaticom doméně a má vlastní paměť.
+    </p>
+
+    <div class="app-card glass">
+      <div class="app-card__features">
+        <div class="app-feature">
+          <span class="app-feature__icon">&#x1F4CB;</span>
+          <div>
+            <h4 class="app-feature__title">Karty kampaní</h4>
+            <p class="app-feature__desc">Každý klient má vlastní controlboard s klíčovými metrikami — poslaných žádostí, konverze, follow-upy, leady, nová spojení. Dají se tagovat: aktivní/neaktivní, vyplněno/nevyplněno, nebo vlastní tagy podle jména.</p>
+          </div>
+        </div>
+        <div class="app-feature">
+          <span class="app-feature__icon">&#x1F4CA;</span>
+          <div>
+            <h4 class="app-feature__title">Souhrnný controlboard</h4>
+            <p class="app-feature__desc">Přehled důležitých dat ze všech kampaní na jednom místě — celkový nárůst spojení, konverzní poměry, počty leadů a zajímavých konverzací.</p>
+          </div>
+        </div>
+        <div class="app-feature">
+          <span class="app-feature__icon">&#x1F4DD;</span>
+          <div>
+            <h4 class="app-feature__title">Přehled příspěvků</h4>
+            <p class="app-feature__desc">Metriky každého LI postu — dosah, reakce, komentáře, stav a téma. Vše přehledně na jednom místě.</p>
+          </div>
+        </div>
+        <div class="app-feature">
+          <span class="app-feature__icon">&#x1F9E0;</span>
+          <div>
+            <h4 class="app-feature__title">AI interpretace dat</h4>
+            <p class="app-feature__desc">Appka umí číst data z controlboardů a pomáhá s jejich interpretací — trendy, anomálie, doporučení.</p>
+          </div>
+        </div>
+      </div>
+      <div class="app-card__footer">
+        <span class="app-card__tag">&#x1F512; Interní — pouze @creaticom.cz</span>
+        <span class="app-card__tag">&#x1F9E0; S pamětí</span>
+        <span class="app-card__tag">&#x1F468;&#x200D;&#x1F4BB; Autor: Josef</span>
       </div>
     </div>
   </section>
