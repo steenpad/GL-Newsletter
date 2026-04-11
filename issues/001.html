@@ -217,6 +217,55 @@
       .webinar-card__btn { text-align: center; }
     }
 
+    /* Analytics grid */
+    .analytics-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+    }
+    .analytics-card {
+      padding: 28px;
+      transition: all 0.35s ease;
+    }
+    .analytics-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 36px rgba(0, 0, 0, 0.06);
+    }
+    .analytics-card__icon {
+      font-size: 24px;
+      display: block;
+      margin-bottom: 12px;
+    }
+    .analytics-card__title {
+      font-size: 15px;
+      font-weight: 700;
+      color: #1a1a2e;
+      margin-bottom: 10px;
+    }
+    .analytics-card__list {
+      list-style: none;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+    .analytics-card__list li {
+      font-size: 13px;
+      color: rgba(0, 0, 0, 0.45);
+      line-height: 1.5;
+      padding-left: 14px;
+      position: relative;
+    }
+    .analytics-card__list li::before {
+      content: '–';
+      position: absolute;
+      left: 0;
+      color: rgba(0, 0, 0, 0.2);
+    }
+    @media (max-width: 768px) {
+      .analytics-grid { grid-template-columns: 1fr; }
+    }
+
     /* App card */
     .app-card {
       padding: 0;
@@ -254,8 +303,10 @@
       background: rgba(0, 0, 0, 0.02);
       border-top: 1px solid rgba(0, 0, 0, 0.05);
       display: flex;
+      align-items: center;
       gap: 12px;
       flex-wrap: wrap;
+      justify-content: flex-start;
     }
     .app-card__tag {
       font-size: 12px;
@@ -443,6 +494,7 @@
         <a href="#richard" class="navbar__link">Richard</a>
         <a href="#webinar" class="navbar__link">Webinář</a>
         <a href="#appka" class="navbar__link">Appka</a>
+        <a href="#analytika" class="navbar__link">Analytika</a>
         <a href="#tym" class="navbar__link">Tým</a>
         <a href="#david" class="navbar__link">David říká</a>
         <a href="../index.html" class="navbar__link">Archiv</a>
@@ -734,10 +786,66 @@
         </div>
       </div>
       <div class="app-card__footer">
-        <a href="https://campaign-insights-one.vercel.app/" target="_blank" class="webinar-card__btn webinar-card__btn--primary" style="margin-right: auto;">Otevřít appku &rarr;</a>
+        <a href="https://campaign-insights-one.vercel.app/" target="_blank" class="webinar-card__btn webinar-card__btn--primary">Otevřít appku &rarr;</a>
         <span class="app-card__tag">&#x1F512; Interní — pouze @creaticom.cz</span>
         <span class="app-card__tag">&#x1F9E0; S pamětí</span>
         <span class="app-card__tag">&#x1F468;&#x200D;&#x1F4BB; Autor: Josef</span>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"><div class="divider__line"></div></div>
+
+  <!-- Analytika -->
+  <section class="section" id="analytika">
+    <div class="section__header">
+      <p class="section__label">Se Sárou řešíme</p>
+      <h2 class="section__title">Analytika a reporting</h2>
+    </div>
+
+    <p class="intro-text">
+      LinkedIn aktivity měříme dobře. Co ale neměříme, je dopad za hranicí LinkedInu — co se děje s leadem poté, co ho předáme, jak se projevují aktivity na webu klienta, a kde jsou příležitosti k upsellům.
+    </p>
+
+    <div class="analytics-grid">
+      <div class="analytics-card glass">
+        <span class="analytics-card__icon">&#x1F4CF;</span>
+        <h4 class="analytics-card__title">Měření dopadu mimo LinkedIn</h4>
+        <ul class="analytics-card__list">
+          <li>UTM tracking v profilu, příspěvcích i zprávách</li>
+          <li>Napojení na Google Analytics — návštěvy, konverze, bounce rate</li>
+          <li>Sledování cesty leadu od prvního kontaktu po obchod</li>
+        </ul>
+      </div>
+
+      <div class="analytics-card glass">
+        <span class="analytics-card__icon">&#x1F91D;</span>
+        <h4 class="analytics-card__title">Proces předání leadů</h4>
+        <ul class="analytics-card__list">
+          <li>Lepší systém předání — kontext, kategorizace, SLA na reakci</li>
+          <li>Kontrola, zda klient lead skutečně odbavil</li>
+          <li>Měsíční přehled: kolik leadů předáno, kontaktováno, uzavřeno</li>
+        </ul>
+      </div>
+
+      <div class="analytics-card glass">
+        <span class="analytics-card__icon">&#x1F4A1;</span>
+        <h4 class="analytics-card__title">Out of the box přemýšlení</h4>
+        <ul class="analytics-card__list">
+          <li>Kreativní řešení, když standardní kampaň nefunguje</li>
+          <li>Proaktivní přístup — odhalit problém dřív než klient</li>
+          <li>Hledání alternativních kanálů mimo LinkedIn</li>
+        </ul>
+      </div>
+
+      <div class="analytics-card glass">
+        <span class="analytics-card__icon">&#x1F4C8;</span>
+        <h4 class="analytics-card__title">Aktivní rozvoj hodnoty klienta</h4>
+        <ul class="analytics-card__list">
+          <li>Identifikace momentů pro upsell z dat</li>
+          <li>Analytics check jako samostatný balíček</li>
+          <li>Zapojení analytiky do onboardingu klientů</li>
+        </ul>
       </div>
     </div>
   </section>
