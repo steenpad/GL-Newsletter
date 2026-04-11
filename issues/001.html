@@ -266,6 +266,44 @@
       .analytics-grid { grid-template-columns: 1fr; }
     }
 
+    /* Projects */
+    .projects-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      gap: 24px;
+    }
+    .projects-col__title {
+      font-size: 14px;
+      font-weight: 600;
+      margin-bottom: 14px;
+    }
+    .projects-col__title--green { color: #2e7d32; }
+    .projects-col__title--red { color: #c62828; }
+    .projects-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    .project-chip {
+      padding: 8px 16px;
+      border-radius: 10px;
+      font-size: 13px;
+      font-weight: 600;
+    }
+    .project-chip--green {
+      background: rgba(46, 125, 50, 0.08);
+      color: #2e7d32;
+      border: 1px solid rgba(46, 125, 50, 0.15);
+    }
+    .project-chip--red {
+      background: rgba(198, 40, 40, 0.06);
+      color: #c62828;
+      border: 1px solid rgba(198, 40, 40, 0.12);
+    }
+    @media (max-width: 600px) {
+      .projects-grid { grid-template-columns: 1fr; }
+    }
+
     /* App card */
     .app-card {
       padding: 0;
@@ -846,6 +884,41 @@
           <li>Analytics check jako samostatný balíček</li>
           <li>Zapojení analytiky do onboardingu klientů</li>
         </ul>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"><div class="divider__line"></div></div>
+
+  <!-- Projekty -->
+  <section class="section" id="projekty">
+    <div class="section__header">
+      <p class="section__label">Portfolio</p>
+      <h2 class="section__title">Projekty</h2>
+    </div>
+
+    <div class="projects-grid">
+      <div class="projects-col">
+        <h4 class="projects-col__title projects-col__title--green">🟢 Nové projekty</h4>
+        <div class="projects-list">
+          <span class="project-chip project-chip--green">Comenivs</span>
+          <span class="project-chip project-chip--green">Akire</span>
+          <span class="project-chip project-chip--green">White Horse Prague</span>
+          <span class="project-chip project-chip--green">Diamant Expo</span>
+          <span class="project-chip project-chip--green">Cushman &amp; Wakefield</span>
+          <span class="project-chip project-chip--green">Kovosreal</span>
+          <span class="project-chip project-chip--green">Crew-Mont</span>
+          <span class="project-chip project-chip--green">HipHop Kemp</span>
+          <span class="project-chip project-chip--green">Walletory</span>
+        </div>
+      </div>
+      <div class="projects-col">
+        <h4 class="projects-col__title projects-col__title--red">🔴 Ukončené</h4>
+        <div class="projects-list">
+          <span class="project-chip project-chip--red">SEA</span>
+          <span class="project-chip project-chip--red">Eurogreen</span>
+          <span class="project-chip project-chip--red">Smarty</span>
+        </div>
       </div>
     </div>
   </section>
