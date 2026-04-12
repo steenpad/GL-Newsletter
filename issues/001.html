@@ -116,7 +116,7 @@
       line-height: 1.7;
       color: rgba(0, 0, 0, 0.55);
       max-width: 720px;
-      margin-bottom: 40px;
+      margin-bottom: 24px;
     }
 
     /* Webinar card */
@@ -264,6 +264,56 @@
     }
     @media (max-width: 768px) {
       .analytics-grid { grid-template-columns: 1fr; }
+    }
+
+    /* Videos */
+    .videos-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+    .videos-col {
+      padding: 28px;
+    }
+    .videos-col__title {
+      font-size: 16px;
+      font-weight: 700;
+      color: #1a1a2e;
+      margin-bottom: 16px;
+    }
+    .videos-list {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .video-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 12px 16px;
+      background: rgba(0, 0, 0, 0.03);
+      border: 1px solid rgba(0, 0, 0, 0.05);
+      border-radius: 10px;
+      text-decoration: none;
+      transition: all 0.3s ease;
+    }
+    .video-item:hover {
+      background: rgba(44, 100, 189, 0.06);
+      border-color: rgba(44, 100, 189, 0.15);
+    }
+    .video-item__icon {
+      font-size: 18px;
+    }
+    .video-item__name {
+      font-size: 14px;
+      font-weight: 600;
+      color: #1a1a2e;
+    }
+    .video-item:hover .video-item__name {
+      color: #2C64BD;
+    }
+    @media (max-width: 600px) {
+      .videos-grid { grid-template-columns: 1fr; }
     }
 
     /* Projects */
@@ -437,6 +487,151 @@
       color: rgba(0, 0, 0, 0.2);
     }
 
+    /* Stats row */
+    .stats-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+    .stats-row__group {
+      padding: 24px;
+    }
+    .stats-row__period {
+      font-size: 13px;
+      font-weight: 600;
+      color: rgba(0, 0, 0, 0.4);
+      margin-bottom: 16px;
+    }
+    .stats-row__cards {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+    .stat-mini {
+      padding: 16px;
+      background: rgba(0, 0, 0, 0.02);
+      border: 1px solid rgba(0, 0, 0, 0.05);
+      border-radius: 12px;
+    }
+    .stat-mini__label {
+      font-size: 12px;
+      color: rgba(0, 0, 0, 0.4);
+      margin-bottom: 8px;
+    }
+    .stat-mini__value {
+      font-size: 28px;
+      font-weight: 700;
+      color: #1a1a2e;
+      line-height: 1;
+      margin-bottom: 6px;
+    }
+    .stat-mini__badge {
+      font-size: 12px;
+      font-weight: 600;
+      color: #2e7d32;
+      background: rgba(46, 125, 50, 0.1);
+      padding: 2px 8px;
+      border-radius: 6px;
+      vertical-align: middle;
+    }
+    .stat-mini__sub {
+      font-size: 12px;
+      color: rgba(0, 0, 0, 0.3);
+    }
+    @media (max-width: 768px) {
+      .stats-row { grid-template-columns: 1fr; }
+      .stats-row__cards { grid-template-columns: 1fr; }
+    }
+
+    /* David hero section */
+    .david-hero {
+      position: relative;
+      border-radius: 24px;
+      overflow: hidden;
+      max-width: 1200px;
+      margin: 0 auto 36px;
+      aspect-ratio: 4 / 3;
+      display: flex;
+      align-items: flex-end;
+    }
+    .david-hero__bg {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center center;
+    }
+    .david-hero__overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.4) 50%, rgba(0,0,0,0.1) 100%);
+    }
+    .david-hero__content {
+      position: relative;
+      z-index: 1;
+      padding: 48px;
+      max-width: 700px;
+    }
+    .david-hero__label {
+      font-size: 13px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: rgba(255,255,255,0.6);
+      margin-bottom: 6px;
+    }
+    .david-hero__title {
+      font-size: clamp(28px, 4vw, 40px);
+      font-weight: 700;
+      color: #fff;
+      letter-spacing: -0.02em;
+      margin-bottom: 16px;
+    }
+    .david-hero__quote {
+      font-size: clamp(16px, 2vw, 20px);
+      font-style: italic;
+      font-weight: 300;
+      line-height: 1.7;
+      color: rgba(255,255,255,0.85);
+      margin-bottom: 12px;
+    }
+    .david-hero__cta {
+      font-size: 15px;
+      color: rgba(255,255,255,0.6);
+      margin-bottom: 20px;
+      line-height: 1.6;
+    }
+    .david-hero__cta a {
+      color: #fff;
+      text-decoration: underline;
+    }
+    .david-hero__sig {
+      display: flex;
+      gap: 12px;
+      align-items: center;
+    }
+    .david-hero__sig-name {
+      font-size: 15px;
+      font-weight: 700;
+      color: #fff;
+    }
+    .david-hero__sig-role {
+      font-size: 13px;
+      color: rgba(255,255,255,0.5);
+    }
+    @media (max-width: 768px) {
+      .david-hero {
+        min-height: 500px;
+        border-radius: 0;
+        margin-left: -24px;
+        margin-right: -24px;
+      }
+      .david-hero__content {
+        padding: 32px 24px;
+      }
+    }
+
     /* Team section */
     .team-grid {
       display: grid;
@@ -579,6 +774,32 @@
           allowfullscreen>
         </iframe>
         <p class="news-card__video-caption">1h 45min — kompletní návod krok po kroku</p>
+
+        <div style="margin-top: 16px;">
+          <p style="font-size: 13px; font-weight: 600; color: rgba(0,0,0,0.4); margin-bottom: 10px;">📊 První výsledky z HeyReach</p>
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px;">
+            <div class="stat-mini">
+              <div class="stat-mini__label">Spojení (7 dní)</div>
+              <div class="stat-mini__value">17 <span class="stat-mini__badge">+21%</span></div>
+              <div class="stat-mini__sub">Z 80 odeslaných</div>
+            </div>
+            <div class="stat-mini">
+              <div class="stat-mini__label">Odpovědi (7 dní)</div>
+              <div class="stat-mini__value">10 <span class="stat-mini__badge">+59%</span></div>
+              <div class="stat-mini__sub">Z 17 odeslaných</div>
+            </div>
+            <div class="stat-mini">
+              <div class="stat-mini__label">Spojení (28 dní)</div>
+              <div class="stat-mini__value">21 <span class="stat-mini__badge">+45%</span></div>
+              <div class="stat-mini__sub">Ze 47 odeslaných</div>
+            </div>
+            <div class="stat-mini">
+              <div class="stat-mini__label">Odpovědi (28 dní)</div>
+              <div class="stat-mini__value">5 <span class="stat-mini__badge">+24%</span></div>
+              <div class="stat-mini__sub">Z 21 odeslaných</div>
+            </div>
+          </div>
+        </div>
       </div>
 
       <!-- Klicove body -->
@@ -631,6 +852,7 @@
         </div>
       </div>
     </div>
+
   </section>
 
   <div class="divider"><div class="divider__line"></div></div>
@@ -911,6 +1133,7 @@
           <span class="project-chip project-chip--green">HipHop Kemp</span>
           <span class="project-chip project-chip--green">Walletory</span>
           <span class="project-chip project-chip--green">Turbo-soft</span>
+          <span class="project-chip project-chip--green">Cemix</span>
         </div>
       </div>
       <div class="projects-col">
@@ -919,6 +1142,55 @@
           <span class="project-chip project-chip--red">SEA</span>
           <span class="project-chip project-chip--red">Eurogreen</span>
           <span class="project-chip project-chip--red">Smarty</span>
+          <span class="project-chip project-chip--red">Finest</span>
+          <span class="project-chip project-chip--red">Twistcafe</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"><div class="divider__line"></div></div>
+
+  <!-- Nová videa -->
+  <section class="section" id="videa">
+    <div class="section__header">
+      <p class="section__label">Obsah</p>
+      <h2 class="section__title">Nová videa</h2>
+    </div>
+
+    <p class="intro-text" style="max-width: 100%;">
+      Aktuálně hodně natáčíme a pouštíme nové kreativy do placené reklamy. Testujeme různé formáty — zprávy, volání, listování profilem — v české i německé verzi. Tady máte summary z aktuální dílny. Nejsou to finální verze, spíše pro náhled toho, na čem se pracuje a kam to směřuje. Feedbacky vítány.
+    </p>
+
+    <div class="videos-grid">
+      <div class="videos-col glass">
+        <h4 class="videos-col__title">🇨🇿 Česky</h4>
+        <div class="videos-list">
+          <a href="https://drive.google.com/file/d/1G4CV3n1cfRU_7ScNIC6HM8gNQGfG1mwV/view" target="_blank" class="video-item">
+            <span class="video-item__icon">&#x1F4E9;</span>
+            <span class="video-item__name">Zprávy</span>
+          </a>
+          <a href="https://drive.google.com/file/d/1yu41WNUpr5U82yBrmZIQOHiLIeRHyF5z/view" target="_blank" class="video-item">
+            <span class="video-item__icon">&#x1F4DE;</span>
+            <span class="video-item__name">Volání</span>
+          </a>
+          <a href="https://drive.google.com/file/d/1rqbJjTLZ2Rx8G2R0n0UYTC7sENGpD6_Q/view" target="_blank" class="video-item">
+            <span class="video-item__icon">&#x1F4C4;</span>
+            <span class="video-item__name">Listování</span>
+          </a>
+        </div>
+      </div>
+      <div class="videos-col glass">
+        <h4 class="videos-col__title">🇩🇪 Deutsch</h4>
+        <div class="videos-list">
+          <a href="https://drive.google.com/file/d/1WIrPyPNplTmPZ72djDSgFyIbXkk2Kh_M/view" target="_blank" class="video-item">
+            <span class="video-item__icon">&#x1F4E9;</span>
+            <span class="video-item__name">Zprávy</span>
+          </a>
+          <a href="https://drive.google.com/file/d/1quc0rt0kjZAb3DCT7682J0tooELhi2q3/view" target="_blank" class="video-item">
+            <span class="video-item__icon">&#x1F4DE;</span>
+            <span class="video-item__name">Volání</span>
+          </a>
         </div>
       </div>
     </div>
@@ -968,22 +1240,21 @@
   <div class="divider"><div class="divider__line"></div></div>
 
   <!-- David rika -->
-  <section class="section" id="david">
-    <div class="section__header">
-      <p class="section__label">David říká</p>
-      <h2 class="section__title">Slovo zakladatele</h2>
-    </div>
-    <div class="quote-panel glass">
-      <span class="quote-panel__mark">&ldquo;</span>
-      <p class="quote-panel__text">
-        Tohle dalo víc práce než normálně — ale věřím, že výstup stojí za to. Implementujte postupně, testujte na malém vzorku a když narazíte na edge case, dejte mi vědět. Jedeme.
+  <section class="david-hero" id="david">
+    <img class="david-hero__bg" src="../img/david.jpg" alt="David Kolář">
+    <div class="david-hero__overlay"></div>
+    <div class="david-hero__content">
+      <p class="david-hero__label">David říká</p>
+      <h2 class="david-hero__title">Dejvidovo slovo</h2>
+      <p class="david-hero__quote">
+        &ldquo;Sice to maličko trvalo, ale máme za sebou první vydání newsletteru. Doufám, že jsem shrnul vše, co se děje napříč GetLeads a můžete se těšit na další vydání s dalšíma topovkama.&rdquo;
       </p>
-      <div class="quote-panel__sig">
-        <div class="quote-panel__sig-avatar">D</div>
-        <div>
-          <div class="quote-panel__sig-name">David Kolář</div>
-          <div class="quote-panel__sig-role">CEO, GetLeads</div>
-        </div>
+      <p class="david-hero__cta">
+        Taky jsem začal postovat na LinkedInu — kdo mě ještě nesleduje, <a href="https://www.linkedin.com/in/davidkolardk/" target="_blank">sledujte mě tady</a>.
+      </p>
+      <div class="david-hero__sig">
+        <span class="david-hero__sig-name">David Kolář</span>
+        <span class="david-hero__sig-role">CEO, GetLeads</span>
       </div>
     </div>
   </section>
