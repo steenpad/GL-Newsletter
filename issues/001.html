@@ -266,6 +266,56 @@
       .analytics-grid { grid-template-columns: 1fr; }
     }
 
+    /* Videos */
+    .videos-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+    .videos-col {
+      padding: 28px;
+    }
+    .videos-col__title {
+      font-size: 16px;
+      font-weight: 700;
+      color: #1a1a2e;
+      margin-bottom: 16px;
+    }
+    .videos-list {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .video-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 12px 16px;
+      background: rgba(0, 0, 0, 0.03);
+      border: 1px solid rgba(0, 0, 0, 0.05);
+      border-radius: 10px;
+      text-decoration: none;
+      transition: all 0.3s ease;
+    }
+    .video-item:hover {
+      background: rgba(44, 100, 189, 0.06);
+      border-color: rgba(44, 100, 189, 0.15);
+    }
+    .video-item__icon {
+      font-size: 18px;
+    }
+    .video-item__name {
+      font-size: 14px;
+      font-weight: 600;
+      color: #1a1a2e;
+    }
+    .video-item:hover .video-item__name {
+      color: #2C64BD;
+    }
+    @media (max-width: 600px) {
+      .videos-grid { grid-template-columns: 1fr; }
+    }
+
     /* Projects */
     .projects-grid {
       display: grid;
@@ -922,6 +972,49 @@
           <span class="project-chip project-chip--red">Smarty</span>
           <span class="project-chip project-chip--red">Finest</span>
           <span class="project-chip project-chip--red">Twistcafe</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"><div class="divider__line"></div></div>
+
+  <!-- Nová videa -->
+  <section class="section" id="videa">
+    <div class="section__header">
+      <p class="section__label">Obsah</p>
+      <h2 class="section__title">Nová videa</h2>
+    </div>
+
+    <div class="videos-grid">
+      <div class="videos-col glass">
+        <h4 class="videos-col__title">🇨🇿 Česky</h4>
+        <div class="videos-list">
+          <a href="https://drive.google.com/file/d/1G4CV3n1cfRU_7ScNIC6HM8gNQGfG1mwV/view" target="_blank" class="video-item">
+            <span class="video-item__icon">&#x1F4E9;</span>
+            <span class="video-item__name">Zprávy</span>
+          </a>
+          <a href="https://drive.google.com/file/d/1yu41WNUpr5U82yBrmZIQOHiLIeRHyF5z/view" target="_blank" class="video-item">
+            <span class="video-item__icon">&#x1F4DE;</span>
+            <span class="video-item__name">Volání</span>
+          </a>
+          <a href="https://drive.google.com/file/d/1rqbJjTLZ2Rx8G2R0n0UYTC7sENGpD6_Q/view" target="_blank" class="video-item">
+            <span class="video-item__icon">&#x1F4C4;</span>
+            <span class="video-item__name">Listování</span>
+          </a>
+        </div>
+      </div>
+      <div class="videos-col glass">
+        <h4 class="videos-col__title">🇩🇪 Deutsch</h4>
+        <div class="videos-list">
+          <a href="https://drive.google.com/file/d/1WIrPyPNplTmPZ72djDSgFyIbXkk2Kh_M/view" target="_blank" class="video-item">
+            <span class="video-item__icon">&#x1F4E9;</span>
+            <span class="video-item__name">Zprávy</span>
+          </a>
+          <a href="https://drive.google.com/file/d/1quc0rt0kjZAb3DCT7682J0tooELhi2q3/view" target="_blank" class="video-item">
+            <span class="video-item__icon">&#x1F4DE;</span>
+            <span class="video-item__name">Volání</span>
+          </a>
         </div>
       </div>
     </div>
