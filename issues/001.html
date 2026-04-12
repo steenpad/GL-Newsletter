@@ -543,70 +543,92 @@
       .stats-row__cards { grid-template-columns: 1fr; }
     }
 
-    /* David testimonial */
-    .david-testimonial {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 32px;
-      align-items: center;
-    }
-    .david-testimonial__photo {
-      width: 100%;
-      object-fit: cover;
-      border-radius: 24px;
-    }
-    .david-testimonial__card {
-      padding: 36px;
+    /* David hero section */
+    .david-hero {
       position: relative;
+      border-radius: 24px;
       overflow: hidden;
+      max-width: 1200px;
+      margin: 0 auto 36px;
+      min-height: 420px;
+      display: flex;
+      align-items: flex-end;
     }
-    .david-testimonial__card::after {
-      content: '';
+    .david-hero__bg {
       position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      height: 2px;
-      background: linear-gradient(90deg, #2C64BD, #EA406F, #2C64BD);
-      border-radius: 2px;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center 20%;
     }
-    .david-testimonial__text {
-      font-size: 18px;
+    .david-hero__overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.4) 50%, rgba(0,0,0,0.1) 100%);
+    }
+    .david-hero__content {
+      position: relative;
+      z-index: 1;
+      padding: 48px;
+      max-width: 700px;
+    }
+    .david-hero__label {
+      font-size: 13px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: rgba(255,255,255,0.6);
+      margin-bottom: 6px;
+    }
+    .david-hero__title {
+      font-size: clamp(28px, 4vw, 40px);
+      font-weight: 700;
+      color: #fff;
+      letter-spacing: -0.02em;
+      margin-bottom: 16px;
+    }
+    .david-hero__quote {
+      font-size: clamp(16px, 2vw, 20px);
       font-style: italic;
       font-weight: 300;
       line-height: 1.7;
-      color: rgba(0, 0, 0, 0.6);
-      margin-bottom: 16px;
+      color: rgba(255,255,255,0.85);
+      margin-bottom: 12px;
     }
-    .david-testimonial__cta {
+    .david-hero__cta {
       font-size: 15px;
-      color: rgba(0, 0, 0, 0.45);
-      margin-bottom: 24px;
+      color: rgba(255,255,255,0.6);
+      margin-bottom: 20px;
       line-height: 1.6;
     }
-    .david-testimonial__cta a {
-      color: #2C64BD;
+    .david-hero__cta a {
+      color: #fff;
       text-decoration: underline;
     }
-    .david-testimonial__name {
-      font-size: 16px;
-      font-weight: 700;
-      color: #1a1a2e;
+    .david-hero__sig {
+      display: flex;
+      gap: 12px;
+      align-items: center;
     }
-    .david-testimonial__role {
+    .david-hero__sig-name {
+      font-size: 15px;
+      font-weight: 700;
+      color: #fff;
+    }
+    .david-hero__sig-role {
       font-size: 13px;
-      color: rgba(0, 0, 0, 0.35);
+      color: rgba(255,255,255,0.5);
     }
     @media (max-width: 768px) {
-      .david-testimonial {
-        grid-template-columns: 1fr;
+      .david-hero {
+        min-height: 500px;
+        border-radius: 0;
+        margin-left: -24px;
+        margin-right: -24px;
       }
-      .david-testimonial__photo {
-        aspect-ratio: 16 / 9;
-        max-height: 300px;
-      }
-      .david-testimonial__card {
-        padding: 28px;
+      .david-hero__content {
+        padding: 32px 24px;
       }
     }
 
@@ -1218,25 +1240,21 @@
   <div class="divider"><div class="divider__line"></div></div>
 
   <!-- David rika -->
-  <section class="section" id="david">
-    <div class="section__header">
-      <p class="section__label">David říká</p>
-      <h2 class="section__title">Dejvidovo slovo</h2>
-    </div>
-    <div class="david-testimonial">
-      <img class="david-testimonial__photo" src="../img/david.jpg" alt="David Kolář">
-      <div class="david-testimonial__card glass">
-        <span class="quote-panel__mark">&ldquo;</span>
-        <p class="david-testimonial__text">
-          Sice to maličko trvalo, ale máme za sebou první vydání newsletteru. Doufám, že jsem shrnul vše, co se děje napříč GetLeads a můžete se těšit na další vydání s dalšíma topovkama.
-        </p>
-        <p class="david-testimonial__cta">
-          Taky jsem začal postovat na LinkedInu — kdo mě ještě nesleduje, <a href="https://www.linkedin.com/in/davidkolardk/" target="_blank">sledujte mě tady</a>.
-        </p>
-        <div class="david-testimonial__sig">
-          <div class="david-testimonial__name">David Kolář</div>
-          <div class="david-testimonial__role">CEO, GetLeads</div>
-        </div>
+  <section class="david-hero" id="david">
+    <img class="david-hero__bg" src="../img/david.jpg" alt="David Kolář">
+    <div class="david-hero__overlay"></div>
+    <div class="david-hero__content">
+      <p class="david-hero__label">David říká</p>
+      <h2 class="david-hero__title">Dejvidovo slovo</h2>
+      <p class="david-hero__quote">
+        &ldquo;Sice to maličko trvalo, ale máme za sebou první vydání newsletteru. Doufám, že jsem shrnul vše, co se děje napříč GetLeads a můžete se těšit na další vydání s dalšíma topovkama.&rdquo;
+      </p>
+      <p class="david-hero__cta">
+        Taky jsem začal postovat na LinkedInu — kdo mě ještě nesleduje, <a href="https://www.linkedin.com/in/davidkolardk/" target="_blank">sledujte mě tady</a>.
+      </p>
+      <div class="david-hero__sig">
+        <span class="david-hero__sig-name">David Kolář</span>
+        <span class="david-hero__sig-role">CEO, GetLeads</span>
       </div>
     </div>
   </section>
