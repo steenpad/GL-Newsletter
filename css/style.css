@@ -191,7 +191,7 @@ body {
   align-items: center;
   justify-content: center;
   text-align: center;
-  padding: 100px 24px 48px;
+  padding: 80px 24px 32px;
   position: relative;
 }
 
@@ -204,7 +204,7 @@ body {
   font-size: 14px;
   font-weight: 500;
   color: rgba(0, 0, 0, 0.5);
-  margin-bottom: 32px;
+  margin-bottom: 20px;
   border: 1px solid rgba(255, 255, 255, 0.5);
   background: rgba(255, 255, 255, 0.4);
   backdrop-filter: blur(12px);
@@ -232,7 +232,7 @@ body {
   line-height: 1.05;
   color: #1a1a2e;
   max-width: 900px;
-  margin-bottom: 20px;
+  margin-bottom: 14px;
 }
 
 .hero__title--gradient {
@@ -248,7 +248,7 @@ body {
   color: rgba(0, 0, 0, 0.4);
   max-width: 600px;
   line-height: 1.5;
-  margin-bottom: 40px;
+  margin-bottom: 24px;
 }
 
 .hero__date-badge {
@@ -264,11 +264,11 @@ body {
 .section {
   max-width: 1200px;
   margin: 0 auto;
-  padding: 60px 24px;
+  padding: 36px 24px;
 }
 
 .section__header {
-  margin-bottom: 40px;
+  margin-bottom: 24px;
 }
 
 .section__label {
@@ -731,7 +731,7 @@ body {
 /* --- Footer --- */
 .footer {
   text-align: center;
-  padding: 80px 24px 48px;
+  padding: 48px 24px 32px;
   color: rgba(0, 0, 0, 0.25);
   font-size: 13px;
 }
