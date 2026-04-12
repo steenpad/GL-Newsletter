@@ -119,6 +119,324 @@
       margin-bottom: 40px;
     }
 
+    /* Webinar card */
+    .webinar-card {
+      padding: 0;
+      overflow: hidden;
+    }
+    .webinar-card__header {
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+      padding: 32px 32px 0;
+    }
+    .webinar-card__emoji {
+      font-size: 32px;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+    .webinar-card__title {
+      font-size: clamp(18px, 2.5vw, 22px);
+      font-weight: 700;
+      color: #1a1a2e;
+      letter-spacing: -0.01em;
+      line-height: 1.3;
+      margin-bottom: 6px;
+    }
+    .webinar-card__meta {
+      font-size: 13px;
+      color: rgba(0, 0, 0, 0.4);
+    }
+    .webinar-card__body {
+      padding: 24px 32px;
+    }
+    .webinar-card__desc {
+      font-size: 15px;
+      line-height: 1.65;
+      color: rgba(0, 0, 0, 0.5);
+      margin-bottom: 20px;
+    }
+    .webinar-card__topics {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+      margin-bottom: 24px;
+    }
+    .webinar-card__topic {
+      font-size: 13px;
+      color: rgba(0, 0, 0, 0.5);
+      padding: 10px 14px;
+      background: rgba(0, 0, 0, 0.03);
+      border: 1px solid rgba(0, 0, 0, 0.05);
+      border-radius: 10px;
+    }
+    .webinar-card__actions {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+    .webinar-card__btn {
+      display: inline-block;
+      padding: 12px 24px;
+      border-radius: 12px;
+      font-size: 14px;
+      font-weight: 600;
+      text-decoration: none;
+      transition: all 0.3s ease;
+    }
+    .webinar-card__btn--primary {
+      background: linear-gradient(135deg, #2C64BD, #1a3f7a);
+      color: #fff;
+    }
+    .webinar-card__btn--primary:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 6px 20px rgba(44, 100, 189, 0.3);
+    }
+    .webinar-card__btn--secondary {
+      background: rgba(0, 0, 0, 0.04);
+      border: 1px solid rgba(0, 0, 0, 0.08);
+      color: rgba(0, 0, 0, 0.55);
+    }
+    .webinar-card__btn--secondary:hover {
+      background: rgba(0, 0, 0, 0.07);
+      color: rgba(0, 0, 0, 0.7);
+    }
+    .webinar-card__bonus {
+      padding: 16px 32px;
+      background: rgba(44, 100, 189, 0.04);
+      border-top: 1px solid rgba(0, 0, 0, 0.05);
+      font-size: 13px;
+      color: rgba(0, 0, 0, 0.45);
+    }
+    @media (max-width: 600px) {
+      .webinar-card__header { padding: 24px 20px 0; }
+      .webinar-card__body { padding: 20px; }
+      .webinar-card__bonus { padding: 14px 20px; }
+      .webinar-card__topics { grid-template-columns: 1fr; }
+      .webinar-card__actions { flex-direction: column; }
+      .webinar-card__btn { text-align: center; }
+    }
+
+    /* Analytics grid */
+    .analytics-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+    }
+    .analytics-card {
+      padding: 28px;
+      transition: all 0.35s ease;
+    }
+    .analytics-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 36px rgba(0, 0, 0, 0.06);
+    }
+    .analytics-card__icon {
+      font-size: 24px;
+      display: block;
+      margin-bottom: 12px;
+    }
+    .analytics-card__title {
+      font-size: 15px;
+      font-weight: 700;
+      color: #1a1a2e;
+      margin-bottom: 10px;
+    }
+    .analytics-card__list {
+      list-style: none;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+    .analytics-card__list li {
+      font-size: 13px;
+      color: rgba(0, 0, 0, 0.45);
+      line-height: 1.5;
+      padding-left: 14px;
+      position: relative;
+    }
+    .analytics-card__list li::before {
+      content: '–';
+      position: absolute;
+      left: 0;
+      color: rgba(0, 0, 0, 0.2);
+    }
+    @media (max-width: 768px) {
+      .analytics-grid { grid-template-columns: 1fr; }
+    }
+
+    /* Projects */
+    .projects-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      gap: 24px;
+    }
+    .projects-col__title {
+      font-size: 14px;
+      font-weight: 600;
+      margin-bottom: 14px;
+    }
+    .projects-col__title--green { color: #2e7d32; }
+    .projects-col__title--red { color: #c62828; }
+    .projects-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    .project-chip {
+      padding: 8px 16px;
+      border-radius: 10px;
+      font-size: 13px;
+      font-weight: 600;
+    }
+    .project-chip--green {
+      background: rgba(46, 125, 50, 0.08);
+      color: #2e7d32;
+      border: 1px solid rgba(46, 125, 50, 0.15);
+    }
+    .project-chip--red {
+      background: rgba(198, 40, 40, 0.06);
+      color: #c62828;
+      border: 1px solid rgba(198, 40, 40, 0.12);
+    }
+    @media (max-width: 600px) {
+      .projects-grid { grid-template-columns: 1fr; }
+    }
+
+    /* App card */
+    .app-card {
+      padding: 0;
+      overflow: hidden;
+    }
+    .app-card__features {
+      padding: 32px;
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+    .app-feature {
+      display: flex;
+      gap: 16px;
+      align-items: flex-start;
+    }
+    .app-feature__icon {
+      font-size: 24px;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+    .app-feature__title {
+      font-size: 15px;
+      font-weight: 700;
+      color: #1a1a2e;
+      margin-bottom: 4px;
+    }
+    .app-feature__desc {
+      font-size: 13px;
+      line-height: 1.6;
+      color: rgba(0, 0, 0, 0.45);
+    }
+    .app-card__footer {
+      padding: 16px 32px;
+      background: rgba(0, 0, 0, 0.02);
+      border-top: 1px solid rgba(0, 0, 0, 0.05);
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+      justify-content: flex-start;
+    }
+    .app-card__tag {
+      font-size: 12px;
+      color: rgba(0, 0, 0, 0.4);
+      padding: 4px 10px;
+      background: rgba(0, 0, 0, 0.04);
+      border-radius: 6px;
+    }
+    @media (max-width: 600px) {
+      .app-card__features { padding: 24px 20px; }
+      .app-card__footer { padding: 14px 20px; }
+    }
+
+    /* Changelog accordion */
+    .changelog {
+      margin-top: 16px;
+      border-radius: 12px;
+      overflow: hidden;
+    }
+    .changelog__toggle {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px 16px;
+      font-size: 13px;
+      font-weight: 600;
+      color: rgba(0, 0, 0, 0.45);
+      cursor: pointer;
+      background: rgba(0, 0, 0, 0.03);
+      border: 1px solid rgba(0, 0, 0, 0.06);
+      border-radius: 12px;
+      transition: all 0.3s ease;
+      list-style: none;
+    }
+    .changelog__toggle::-webkit-details-marker { display: none; }
+    .changelog__toggle:hover {
+      background: rgba(0, 0, 0, 0.05);
+      color: rgba(0, 0, 0, 0.6);
+    }
+    .changelog__arrow {
+      transition: transform 0.3s ease;
+      font-size: 16px;
+    }
+    .changelog[open] .changelog__arrow {
+      transform: rotate(180deg);
+    }
+    .changelog[open] .changelog__toggle {
+      border-radius: 12px 12px 0 0;
+      border-bottom-color: transparent;
+    }
+    .changelog__content {
+      padding: 16px 18px 20px;
+      background: rgba(0, 0, 0, 0.02);
+      border: 1px solid rgba(0, 0, 0, 0.06);
+      border-top: none;
+      border-radius: 0 0 12px 12px;
+    }
+    .changelog__group {
+      margin-bottom: 16px;
+    }
+    .changelog__group:last-child {
+      margin-bottom: 0;
+    }
+    .changelog__date {
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: #2C64BD;
+      margin-bottom: 6px;
+    }
+    .changelog__content ul {
+      list-style: none;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+    .changelog__content li {
+      font-size: 12.5px;
+      color: rgba(0, 0, 0, 0.5);
+      line-height: 1.5;
+      padding-left: 12px;
+      position: relative;
+    }
+    .changelog__content li::before {
+      content: '–';
+      position: absolute;
+      left: 0;
+      color: rgba(0, 0, 0, 0.2);
+    }
+
     /* Team section */
     .team-grid {
       display: grid;
@@ -172,14 +490,6 @@
     .team-card__points li {
       font-size: 13px;
       color: rgba(0, 0, 0, 0.45);
-      padding-left: 16px;
-      position: relative;
-    }
-    .team-card__points li::before {
-      content: '•';
-      position: absolute;
-      left: 0;
-      color: rgba(0, 0, 0, 0.2);
     }
     .team-farewell {
       display: flex;
@@ -219,6 +529,10 @@
       </a>
       <div class="navbar__links">
         <a href="#clay-heyreach" class="navbar__link">Clay + HeyReach</a>
+        <a href="#richard" class="navbar__link">Richard</a>
+        <a href="#webinar" class="navbar__link">Webinář</a>
+        <a href="#appka" class="navbar__link">Appka</a>
+        <a href="#analytika" class="navbar__link">Analytika</a>
         <a href="#tym" class="navbar__link">Tým</a>
         <a href="#david" class="navbar__link">David říká</a>
         <a href="../index.html" class="navbar__link">Archiv</a>
@@ -298,6 +612,313 @@
               <span class="point__tag point__tag--pink">TIP OD JOSEFA</span>
             </div>
           </div>
+          <div class="point">
+            <span class="point__icon">&#x2705;</span>
+            <div class="point__body">
+              <h4>Kampaň se automaticky stopne po odpovědi</h4>
+              <p>Jakmile lead odpoví — ať už na connection request nebo follow-up — celá kampaň se pro něj automaticky zastaví. Žádné další follow-upy nepřijdou.</p>
+              <span class="point__tag point__tag--pink">DŮLEŽITÉ</span>
+            </div>
+          </div>
+          <div class="point">
+            <span class="point__icon">&#x1F916;</span>
+            <div class="point__body">
+              <h4>Clay Assistant</h4>
+              <p>Potřebujete pomoct s Clay? Zkuste našeho <a href="https://chatgpt.com/g/g-699868f02fd48191ba2586bf656e9349-clay-assistant" target="_blank" style="color: #2C64BD; text-decoration: underline;">Clay Assistanta v ChatGPT</a>.</p>
+              <span class="point__tag point__tag--blue">NÁSTROJ</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"><div class="divider__line"></div></div>
+
+  <!-- Richard -->
+  <section class="section" id="richard">
+    <div class="section__header">
+      <p class="section__label">Novinky</p>
+      <h2 class="section__title">Práce s Richardem</h2>
+    </div>
+
+    <p class="intro-text">
+      David natočil quick návod, jak s Richardem pracovat. Mezitím Matěj nasázel hromadu updatů — od Google Kalendáře po push notifikace.
+    </p>
+
+    <!-- Hlavní features -->
+    <div class="news-card glass">
+      <!-- Video -->
+      <div class="news-card__video">
+        <iframe
+          src="https://www.youtube.com/embed/uesvX5FfQ3k"
+          title="Práce s Richardem — návod"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowfullscreen>
+        </iframe>
+        <p class="news-card__video-caption">~8 min — quick návod od Davida</p>
+
+        <!-- Rozbalovací changelog -->
+        <details class="changelog">
+          <summary class="changelog__toggle">
+            <span>📋 Kompletní changelog</span>
+            <span class="changelog__arrow">&#x25BE;</span>
+          </summary>
+          <div class="changelog__content">
+            <div class="changelog__group">
+              <h5 class="changelog__date">27. března</h5>
+              <ul>
+                <li><strong>Fix:</strong> Nenačítání summarizací u speakerů</li>
+                <li><strong>Fix:</strong> Špatná synchronizace mezi zařízeními</li>
+                <li><strong>Fix:</strong> Automatické sdílení nefungovalo</li>
+                <li><strong>Nové:</strong> Automatické sdílení — Doména / Všichni / Nesdílet</li>
+                <li><strong>Nové:</strong> Délka AI shrnutí — Stručné / Normální / Podrobné</li>
+              </ul>
+            </div>
+            <div class="changelog__group">
+              <h5 class="changelog__date">3. dubna</h5>
+              <ul>
+                <li><strong>Alpha:</strong> Ask Richard — AI chat s vyhledáváním Google, ARES, LinkedIn</li>
+                <li><strong>Alpha:</strong> Onboarding — základní verze</li>
+                <li><em>Pozn:</em> Ask Richard na mobilu zatím rozbitý</li>
+              </ul>
+            </div>
+            <div class="changelog__group">
+              <h5 class="changelog__date">6. dubna</h5>
+              <ul>
+                <li><strong>Nové:</strong> Push notifikace — Chrome, Firefox, Brave, Safari, iOS</li>
+              </ul>
+            </div>
+          </div>
+        </details>
+      </div>
+
+      <!-- Klíčové features -->
+      <div>
+        <div class="points-header">
+          <h3>Co je nového v Richardovi</h3>
+          <p>Updaty od Matěje Kašky</p>
+        </div>
+        <div class="points">
+          <div class="point">
+            <span class="point__icon">&#x1F4C5;</span>
+            <div class="point__body">
+              <h4>Napojení na Google Kalendář</h4>
+              <p>Při nahrávání si vyberete událost — automaticky se doplní jména účastníků a kontext schůzky pro lepší AI shrnutí.</p>
+              <span class="point__tag point__tag--blue">FEATURE</span>
+            </div>
+          </div>
+          <div class="point">
+            <span class="point__icon">&#x1F916;</span>
+            <div class="point__body">
+              <h4>Ask Richard (alpha)</h4>
+              <p>AI chat — napíšete s kým máte schůzku a Richard najde info z Google, ARES i LinkedIn.</p>
+              <span class="point__tag point__tag--pink">ALPHA</span>
+            </div>
+          </div>
+          <div class="point">
+            <span class="point__icon">&#x1F514;</span>
+            <div class="point__body">
+              <h4>Push notifikace</h4>
+              <p>Fungují na PC (Chrome, Firefox, Brave), Macu (Safari) i iOS.</p>
+              <span class="point__tag point__tag--blue">FEATURE</span>
+            </div>
+          </div>
+          <div class="point">
+            <span class="point__icon">&#x1F504;</span>
+            <div class="point__body">
+              <h4>Automatické sdílení + délka shrnutí</h4>
+              <p>Sdílet session podle domény, všem, nebo nikomu. AI shrnutí ve třech délkách.</p>
+              <span class="point__tag point__tag--blue">FEATURE</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"><div class="divider__line"></div></div>
+
+  <!-- Webinář -->
+  <section class="section" id="webinar">
+    <div class="section__header">
+      <p class="section__label">Event</p>
+      <h2 class="section__title">Webinář — 7. května</h2>
+    </div>
+
+    <div class="webinar-card glass">
+      <div class="webinar-card__header">
+        <span class="webinar-card__emoji">&#x1F3A4;</span>
+        <div>
+          <h3 class="webinar-card__title">Flirtování pro firmy: Jak na LinkedInu budovat vztahy, které končí zakázkou?</h3>
+          <p class="webinar-card__meta">7. května 2026 &middot; 14:00–15:00 &middot; Online &middot; Zdarma</p>
+        </div>
+      </div>
+
+      <div class="webinar-card__body">
+        <p class="webinar-card__desc">
+          Kdybyste si chtěli s Terkou a Davidem zaflirtovat, zvou vás na interní generálku webináře, kde je můžete navíc zhejtit 😄 Kdo může, registrujte se — pomůže jim to!
+        </p>
+
+        <div class="webinar-card__topics">
+          <div class="webinar-card__topic">&#x1F50D; Kde najít cílové klienty</div>
+          <div class="webinar-card__topic">&#x1F3AF; Identifikace decision-makerů</div>
+          <div class="webinar-card__topic">&#x1F4AC; Zprávy bez pitchování</div>
+          <div class="webinar-card__topic">&#x1F91D; Touchpointy → zakázka</div>
+        </div>
+
+        <div class="webinar-card__actions">
+          <a href="https://getleads.cz/webinar" class="webinar-card__btn webinar-card__btn--primary" target="_blank">Registrace na webinář &rarr;</a>
+          <a href="https://luma.com/5ltin0oh" class="webinar-card__btn webinar-card__btn--secondary" target="_blank">&#x1F3AC; Generálka — 6. května</a>
+        </div>
+      </div>
+
+      <div class="webinar-card__bonus">
+        <p><strong>Bonusy po webináři:</strong> Záznam webináře &middot; E-book: LinkedIn profil s AI &middot; E-book: SSI index</p>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"><div class="divider__line"></div></div>
+
+  <!-- Controlboard App -->
+  <section class="section" id="appka">
+    <div class="section__header">
+      <p class="section__label">Interní nástroj</p>
+      <h2 class="section__title">Controlboard appka</h2>
+    </div>
+
+    <p class="intro-text">
+      Josef postavil interní appku, která nám pomáhá interpretovat data z controlboardů. Funguje jenom na Creaticom doméně a má vlastní paměť.
+    </p>
+
+    <div class="app-card glass">
+      <div class="app-card__features">
+        <div class="app-feature">
+          <span class="app-feature__icon">&#x1F4CB;</span>
+          <div>
+            <h4 class="app-feature__title">Karty kampaní</h4>
+            <p class="app-feature__desc">Každý klient má vlastní controlboard s klíčovými metrikami — poslaných žádostí, konverze, follow-upy, leady, nová spojení. Dají se tagovat: aktivní/neaktivní, vyplněno/nevyplněno, nebo vlastní tagy podle jména.</p>
+          </div>
+        </div>
+        <div class="app-feature">
+          <span class="app-feature__icon">&#x1F4CA;</span>
+          <div>
+            <h4 class="app-feature__title">Souhrnný controlboard</h4>
+            <p class="app-feature__desc">Přehled důležitých dat ze všech kampaní na jednom místě — celkový nárůst spojení, konverzní poměry, počty leadů a zajímavých konverzací.</p>
+          </div>
+        </div>
+        <div class="app-feature">
+          <span class="app-feature__icon">&#x1F4DD;</span>
+          <div>
+            <h4 class="app-feature__title">Přehled příspěvků</h4>
+            <p class="app-feature__desc">Metriky každého LI postu — dosah, reakce, komentáře, stav a téma. Vše přehledně na jednom místě.</p>
+          </div>
+        </div>
+        <div class="app-feature">
+          <span class="app-feature__icon">&#x1F9E0;</span>
+          <div>
+            <h4 class="app-feature__title">AI interpretace dat</h4>
+            <p class="app-feature__desc">Appka umí číst data z controlboardů a pomáhá s jejich interpretací — trendy, anomálie, doporučení.</p>
+          </div>
+        </div>
+      </div>
+      <div class="app-card__footer">
+        <a href="https://campaign-insights-one.vercel.app/" target="_blank" class="webinar-card__btn webinar-card__btn--primary">Otevřít appku &rarr;</a>
+        <span class="app-card__tag">&#x1F512; Interní — pouze @creaticom.cz</span>
+        <span class="app-card__tag">&#x1F9E0; S pamětí</span>
+        <span class="app-card__tag">&#x1F468;&#x200D;&#x1F4BB; Autor: Josef</span>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"><div class="divider__line"></div></div>
+
+  <!-- Analytika -->
+  <section class="section" id="analytika">
+    <div class="section__header">
+      <p class="section__label">Se Sárou řešíme</p>
+      <h2 class="section__title">Analytika a reporting</h2>
+    </div>
+
+    <p class="intro-text">
+      LinkedIn aktivity měříme dobře. Co ale neměříme, je dopad za hranicí LinkedInu — co se děje s leadem poté, co ho předáme, jak se projevují aktivity na webu klienta, a kde jsou příležitosti k upsellům.
+    </p>
+
+    <div class="analytics-grid">
+      <div class="analytics-card glass">
+        <span class="analytics-card__icon">&#x1F4CF;</span>
+        <h4 class="analytics-card__title">Měření dopadu mimo LinkedIn</h4>
+        <ul class="analytics-card__list">
+          <li>UTM tracking v profilu, příspěvcích i zprávách</li>
+          <li>Napojení na Google Analytics — návštěvy, konverze, bounce rate</li>
+          <li>Sledování cesty leadu od prvního kontaktu po obchod</li>
+        </ul>
+      </div>
+
+      <div class="analytics-card glass">
+        <span class="analytics-card__icon">&#x1F91D;</span>
+        <h4 class="analytics-card__title">Proces předání leadů</h4>
+        <ul class="analytics-card__list">
+          <li>Lepší systém předání — kontext, kategorizace, SLA na reakci</li>
+          <li>Kontrola, zda klient lead skutečně odbavil</li>
+          <li>Měsíční přehled: kolik leadů předáno, kontaktováno, uzavřeno</li>
+        </ul>
+      </div>
+
+      <div class="analytics-card glass">
+        <span class="analytics-card__icon">&#x1F4A1;</span>
+        <h4 class="analytics-card__title">Out of the box přemýšlení</h4>
+        <ul class="analytics-card__list">
+          <li>Kreativní řešení, když standardní kampaň nefunguje</li>
+          <li>Proaktivní přístup — odhalit problém dřív než klient</li>
+          <li>Hledání alternativních kanálů mimo LinkedIn</li>
+        </ul>
+      </div>
+
+      <div class="analytics-card glass">
+        <span class="analytics-card__icon">&#x1F4C8;</span>
+        <h4 class="analytics-card__title">Aktivní rozvoj hodnoty klienta</h4>
+        <ul class="analytics-card__list">
+          <li>Identifikace momentů pro upsell z dat</li>
+          <li>Analytics check jako samostatný balíček</li>
+          <li>Zapojení analytiky do onboardingu klientů</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"><div class="divider__line"></div></div>
+
+  <!-- Projekty -->
+  <section class="section" id="projekty">
+    <div class="section__header">
+      <p class="section__label">Portfolio</p>
+      <h2 class="section__title">Projekty</h2>
+    </div>
+
+    <div class="projects-grid">
+      <div class="projects-col">
+        <h4 class="projects-col__title projects-col__title--green">🟢 Nové projekty</h4>
+        <div class="projects-list">
+          <span class="project-chip project-chip--green">Comenivs</span>
+          <span class="project-chip project-chip--green">Akire</span>
+          <span class="project-chip project-chip--green">White Horse Prague</span>
+          <span class="project-chip project-chip--green">Diamant Expo</span>
+          <span class="project-chip project-chip--green">Cushman &amp; Wakefield</span>
+          <span class="project-chip project-chip--green">Kovosreal</span>
+          <span class="project-chip project-chip--green">Crew-Mont</span>
+          <span class="project-chip project-chip--green">HipHop Kemp</span>
+          <span class="project-chip project-chip--green">Walletory</span>
+          <span class="project-chip project-chip--green">Turbo-soft</span>
+        </div>
+      </div>
+      <div class="projects-col">
+        <h4 class="projects-col__title projects-col__title--red">🔴 Ukončené</h4>
+        <div class="projects-list">
+          <span class="project-chip project-chip--red">SEA</span>
+          <span class="project-chip project-chip--red">Eurogreen</span>
+          <span class="project-chip project-chip--red">Smarty</span>
         </div>
       </div>
     </div>
@@ -319,7 +940,9 @@
           <h3 class="team-card__name">Adéla Dragoun</h3>
           <p class="team-card__role">LinkedIn specialistka</p>
           <ul class="team-card__points">
-            <li>Více info brzy</li>
+            <li>📚 Vystudovaná čeština</li>
+            <li>🏆 Achievement za první lead</li>
+            <li>💪 Ambassador Holek z Marketingu</li>
           </ul>
         </div>
       </div>
@@ -338,7 +961,7 @@
 
     <div class="team-farewell glass">
       <span class="team-farewell__icon">&#x1F44B;</span>
-      <p>S <strong>Terkou Nademlejnskou</strong> jsme se rozloučili. Děkujeme za spolupráci a přejeme hodně štěstí!</p>
+      <p><strong>Terka Nademlejnská</strong> od nás odchází. Díky za vše a držíme palce do dalšího.</p>
     </div>
   </section>
 
