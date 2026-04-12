@@ -487,6 +487,75 @@
       color: rgba(0, 0, 0, 0.2);
     }
 
+    /* David testimonial */
+    .david-testimonial {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 32px;
+      align-items: center;
+      max-width: 900px;
+    }
+    .david-testimonial__photo {
+      width: 100%;
+      aspect-ratio: 3 / 4;
+      object-fit: cover;
+      border-radius: 24px;
+    }
+    .david-testimonial__card {
+      padding: 40px;
+      position: relative;
+      overflow: hidden;
+    }
+    .david-testimonial__card::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, #2C64BD, #EA406F, #2C64BD);
+      border-radius: 2px;
+    }
+    .david-testimonial__text {
+      font-size: 18px;
+      font-style: italic;
+      font-weight: 300;
+      line-height: 1.7;
+      color: rgba(0, 0, 0, 0.6);
+      margin-bottom: 16px;
+    }
+    .david-testimonial__cta {
+      font-size: 15px;
+      color: rgba(0, 0, 0, 0.45);
+      margin-bottom: 24px;
+      line-height: 1.6;
+    }
+    .david-testimonial__cta a {
+      color: #2C64BD;
+      text-decoration: underline;
+    }
+    .david-testimonial__name {
+      font-size: 16px;
+      font-weight: 700;
+      color: #1a1a2e;
+    }
+    .david-testimonial__role {
+      font-size: 13px;
+      color: rgba(0, 0, 0, 0.35);
+    }
+    @media (max-width: 768px) {
+      .david-testimonial {
+        grid-template-columns: 1fr;
+      }
+      .david-testimonial__photo {
+        aspect-ratio: 16 / 9;
+        max-height: 300px;
+      }
+      .david-testimonial__card {
+        padding: 28px;
+      }
+    }
+
     /* Team section */
     .team-grid {
       display: grid;
@@ -1071,21 +1140,21 @@
   <section class="section" id="david">
     <div class="section__header">
       <p class="section__label">David říká</p>
-      <h2 class="section__title">Slovo zakladatele</h2>
+      <h2 class="section__title">Dejvidovo slovo</h2>
     </div>
-    <div class="quote-panel glass" style="max-width: 100%; padding: 56px;">
-      <span class="quote-panel__mark">&ldquo;</span>
-      <p class="quote-panel__text" style="font-size: clamp(20px, 3vw, 26px);">
-        Sice to maličko trvalo, ale máme za sebou první vydání newsletteru. Doufám, že jsem shrnul vše, co se děje napříč GetLeads a můžete se těšit na další vydání s dalšíma topovkama.
-      </p>
-      <p style="font-size: 16px; color: rgba(0,0,0,0.5); margin-bottom: 28px; line-height: 1.6;">
-        Taky jsem začal postovat na LinkedInu — kdo mě ještě nesleduje, <a href="https://www.linkedin.com/in/davidkolardk/" target="_blank" style="color: #2C64BD; text-decoration: underline;">sledujte mě tady</a>.
-      </p>
-      <div class="quote-panel__sig">
-        <img class="quote-panel__sig-avatar" src="../img/david.jpg" alt="David Kolář" style="object-fit: cover; width: 56px; height: 56px;">
-        <div>
-          <div class="quote-panel__sig-name">David Kolář</div>
-          <div class="quote-panel__sig-role">CEO, GetLeads</div>
+    <div class="david-testimonial">
+      <img class="david-testimonial__photo" src="../img/david.jpg" alt="David Kolář">
+      <div class="david-testimonial__card glass">
+        <span class="quote-panel__mark">&ldquo;</span>
+        <p class="david-testimonial__text">
+          Sice to maličko trvalo, ale máme za sebou první vydání newsletteru. Doufám, že jsem shrnul vše, co se děje napříč GetLeads a můžete se těšit na další vydání s dalšíma topovkama.
+        </p>
+        <p class="david-testimonial__cta">
+          Taky jsem začal postovat na LinkedInu — kdo mě ještě nesleduje, <a href="https://www.linkedin.com/in/davidkolardk/" target="_blank">sledujte mě tady</a>.
+        </p>
+        <div class="david-testimonial__sig">
+          <div class="david-testimonial__name">David Kolář</div>
+          <div class="david-testimonial__role">CEO, GetLeads</div>
         </div>
       </div>
     </div>
