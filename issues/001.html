@@ -487,21 +487,76 @@
       color: rgba(0, 0, 0, 0.2);
     }
 
+    /* Stats row */
+    .stats-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+    .stats-row__group {
+      padding: 24px;
+    }
+    .stats-row__period {
+      font-size: 13px;
+      font-weight: 600;
+      color: rgba(0, 0, 0, 0.4);
+      margin-bottom: 16px;
+    }
+    .stats-row__cards {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+    .stat-mini {
+      padding: 16px;
+      background: rgba(0, 0, 0, 0.02);
+      border: 1px solid rgba(0, 0, 0, 0.05);
+      border-radius: 12px;
+    }
+    .stat-mini__label {
+      font-size: 12px;
+      color: rgba(0, 0, 0, 0.4);
+      margin-bottom: 8px;
+    }
+    .stat-mini__value {
+      font-size: 28px;
+      font-weight: 700;
+      color: #1a1a2e;
+      line-height: 1;
+      margin-bottom: 6px;
+    }
+    .stat-mini__badge {
+      font-size: 12px;
+      font-weight: 600;
+      color: #2e7d32;
+      background: rgba(46, 125, 50, 0.1);
+      padding: 2px 8px;
+      border-radius: 6px;
+      vertical-align: middle;
+    }
+    .stat-mini__sub {
+      font-size: 12px;
+      color: rgba(0, 0, 0, 0.3);
+    }
+    @media (max-width: 768px) {
+      .stats-row { grid-template-columns: 1fr; }
+      .stats-row__cards { grid-template-columns: 1fr; }
+    }
+
     /* David testimonial */
     .david-testimonial {
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 32px;
-      align-items: stretch;
+      align-items: start;
     }
     .david-testimonial__photo {
       width: 100%;
-      aspect-ratio: 3 / 4;
       object-fit: cover;
       border-radius: 24px;
     }
     .david-testimonial__card {
-      padding: 40px;
+      padding: 36px;
       position: relative;
       overflow: hidden;
     }
@@ -697,6 +752,32 @@
           allowfullscreen>
         </iframe>
         <p class="news-card__video-caption">1h 45min — kompletní návod krok po kroku</p>
+
+        <div style="margin-top: 16px;">
+          <p style="font-size: 13px; font-weight: 600; color: rgba(0,0,0,0.4); margin-bottom: 10px;">📊 První výsledky z HeyReach</p>
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px;">
+            <div class="stat-mini">
+              <div class="stat-mini__label">Spojení (7 dní)</div>
+              <div class="stat-mini__value">17 <span class="stat-mini__badge">+21%</span></div>
+              <div class="stat-mini__sub">Z 80 odeslaných</div>
+            </div>
+            <div class="stat-mini">
+              <div class="stat-mini__label">Odpovědi (7 dní)</div>
+              <div class="stat-mini__value">10 <span class="stat-mini__badge">+59%</span></div>
+              <div class="stat-mini__sub">Z 17 odeslaných</div>
+            </div>
+            <div class="stat-mini">
+              <div class="stat-mini__label">Spojení (28 dní)</div>
+              <div class="stat-mini__value">21 <span class="stat-mini__badge">+45%</span></div>
+              <div class="stat-mini__sub">Ze 47 odeslaných</div>
+            </div>
+            <div class="stat-mini">
+              <div class="stat-mini__label">Odpovědi (28 dní)</div>
+              <div class="stat-mini__value">5 <span class="stat-mini__badge">+24%</span></div>
+              <div class="stat-mini__sub">Z 21 odeslaných</div>
+            </div>
+          </div>
+        </div>
       </div>
 
       <!-- Klicove body -->
@@ -749,6 +830,7 @@
         </div>
       </div>
     </div>
+
   </section>
 
   <div class="divider"><div class="divider__line"></div></div>
