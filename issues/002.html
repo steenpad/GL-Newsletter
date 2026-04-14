@@ -600,7 +600,7 @@
       <span class="hero__title--gradient">Clay už nežere diakritiku.</span>
     </h1>
     <p class="hero__subtitle">
-      Vyřešili jsme bug s mazáním háčků a čárek ve follow-upech a opravili špatné skloňování jmen a příjmení. Kompletní nový prompt najdete níže.
+      Jedl nám háčky ve follow-upech a občas plácl jméno ve špatném pádu. Už ne. Celý nový prompt je dole.
     </p>
     <div class="hero__date-badge glass">
       14. dubna 2026
@@ -615,15 +615,15 @@
     </div>
 
     <p class="intro-text">
-      Poslední týdny jsme zápasili se dvěma věcmi, které kazily kvalitu oslovování: Clay mazal diakritiku ve follow-up zprávách a občas plácl špatné oslovení (pátý pád, rody, přechýlení). Oboje je teď ošetřené novým promptem — detaily níže.
+      Chvíli nám to leželo v hlavě. Clay občas sežral háčky ve follow-upech a sem tam plácl pátý pád, jak se mu zrovna zachtělo. Obojí je teď v promptu ošetřené. Detaily níže.
     </p>
 
     <!-- Josef už nasadil — banner -->
     <div class="deployed-banner glass">
       <span class="deployed-banner__icon">&#x2728;</span>
       <div class="deployed-banner__body">
-        <h3 class="deployed-banner__title">Nic nemusíte dělat — Josef už to nasadil do všech starých controlboardů.</h3>
-        <p class="deployed-banner__desc">Nový prompt je aplikovaný napříč všemi kampaněmi, i těmi, co už běžely. Stačí si to jen přečíst a příště počítat s tím, že to funguje.</p>
+        <h3 class="deployed-banner__title">Nic nemusíte dělat. Josef to nasadil do všech starých controlboardů za vás.</h3>
+        <p class="deployed-banner__desc">Nový prompt jede ve všech kampaních, i těch, co už dávno běží. Stačí si to přečíst a počítat s tím, že to prostě funguje.</p>
       </div>
       <a href="#dik-pepovi" class="deployed-banner__cta">Dát Pepovi like &rarr;</a>
     </div>
@@ -635,11 +635,11 @@
         <span class="problem-card__icon">&#x1F524;</span>
         <h3 class="problem-card__title">Mizející diakritika ve follow-upech</h3>
         <p class="problem-card__desc">
-          Když se do Claye nalil follow-up text s háčky a čárkami, při průchodu přes jednu z AI transformací se diakritika občas ztrácela — a do HeyReache letěl text bez háčků. Vypadalo to jak od robota, co nikdy neviděl češtinu.
+          Když do Claye natekl follow-up s háčky a čárkami, některá z AI transformací je občas sežrala. Do HeyReache pak letěl text bez diakritiky. Vypadalo to jak od robota, co nikdy neviděl češtinu.
         </p>
         <div class="problem-card__solution">
           <strong>Řešení</strong>
-          Přidali jsme prompt guard, který explicitně zakazuje modifikaci českých znaků, plus finální validační krok, který text porovná se vstupem a v případě odchylky zprávu zahazuje. Prošlo testem na 200 vzorcích.
+          Přidali jsme do promptu guard, který modelu jasně řekne, že háčky a čárky jsou součást slova. A kontrolu, která srovná vstup s výstupem. Když se něco ztratí, zpráva jde do review, ne ven.
         </div>
       </div>
 
@@ -649,11 +649,11 @@
         <span class="problem-card__icon">&#x1F464;</span>
         <h3 class="problem-card__title">Špatné oslovování</h3>
         <p class="problem-card__desc">
-          Pátý pád, rody, přechýlení příjmení u žen — Clay to dělal správně asi v 85 % případů, ale těch 15 % byl průšvih. „Ahoj Pavla" místo „Ahoj Pavlo", „Dobrý den pane Nováková" a podobné perly.
+          Pátý pád, rody, přechýlená ženská příjmení. Většinu času to Clay zvládal, ale občas z toho vypadlo „Ahoj Pavla" nebo „Dobrý den pane Nováková". Na interní kampani přežijeme, u klienta ne.
         </p>
         <div class="problem-card__solution">
           <strong>Řešení</strong>
-          Přepsali jsme prompt pro skloňování — rozepsané vzory pro křestní jména (-el, -as, -av…) i pro příjmení (-ák, adjektivní tvary, ženská přechýlená). Plus jasné pravidlo: když si model není jistý, nesklonuje. Detaily v FAQ níže.
+          Přepsali jsme prompt. Rozepsané vzory pro křestní jména i příjmení, a jedno pravidlo navrch: když si model není jistý, radši nesklonuj. Celý výtah je v FAQ.
         </div>
       </div>
 
@@ -670,7 +670,7 @@
     </div>
 
     <p class="intro-text">
-      Kompletní prompt, kterým se Clay teď řídí při generování follow-up zpráv. Chipy <span class="clay-chip"><span class="clay-chip__close">×</span><span class="clay-chip__list">≡</span><span class="clay-chip__t">T</span> Název</span> odkazují na konkrétní proměnné v Clayi (popis klienta, cílová skupina, předchozí zpráva…). Body <strong>11)</strong> a <strong>13)</strong> jsou přesně ty pravidla, která vyřešila opakování oslovovací zprávy a mizející diakritiku.
+      Takhle teď Clay generuje follow-upy. Chipy <span class="clay-chip"><span class="clay-chip__close">×</span><span class="clay-chip__list">≡</span><span class="clay-chip__t">T</span> Název</span> jsou proměnné z Claye (popis klienta, cílová skupina, předchozí zpráva…). Body <strong>11)</strong> a <strong>13)</strong> jsou ty, co zabily opakování oslovovací zprávy a mizející diakritiku.
     </p>
 
     <div class="glass" style="padding: 32px;">
@@ -720,7 +720,7 @@
     </div>
 
     <p class="intro-text">
-      Pár otázek, co nejčastěji zaznívají v Basecampu a na interních callech — odpovědi na jednom místě.
+      Pár otázek, co nejčastěji lítají v Basecampu a na callech. Odpovědi na jednom místě.
     </p>
 
     <div class="faq-list">
@@ -730,8 +730,8 @@
           <span class="faq-item__arrow">&#x25BE;</span>
         </summary>
         <div class="faq-item__answer">
-          <p>Samotný Clay s diakritikou nemá problém — text umí uložit, načíst, poslat dál bez ztráty. Problém vznikal, když jsme do pipeline zapojili AI transformaci (personalizace follow-upu podle profilu leadu). Model občas „přeložil" text do formy bez diakritiky, protože interně normalizuje vstup.</p>
-          <p>Nebylo to ve 100 % případů — odhadem 5–8 % zpráv procházelo bez háčků, ale stačilo to, aby nám to nabourávalo kvalitu výstupu.</p>
+          <p>Samotný Clay s diakritikou problém nemá. Text umí uložit, načíst, poslat dál. Problém nastal, jakmile jsme do pipeline přidali AI transformaci pro personalizaci follow-upu podle profilu leadu. Model si ten text občas v hlavě přeložil do formy bez háčků, protože si vstup interně normalizuje.</p>
+          <p>Nedělo se to u každé zprávy. Ale stačilo to na to, aby nám to nabourávalo kvalitu výstupu.</p>
         </div>
       </details>
 
@@ -742,8 +742,8 @@
         </summary>
         <div class="faq-item__answer">
           <p>Dvě vrstvy:</p>
-          <p><strong>1) Prompt guard</strong> — v systémové zprávě pro AI transformaci je teď explicitní instrukce: <code>Zachovej českou diakritiku. Háčky a čárky jsou součást slova, ne formátování.</code> Plus pár few-shot příkladů, kde ukazujeme správný a špatný výstup.</p>
-          <p><strong>2) Validační krok</strong> — po AI transformaci běží lehký check, který porovná diakritické znaky ve vstupu a výstupu. Když výstup má méně háčků a čárek než vstup, zpráva se označí jako „needs review" a nejde ven automaticky.</p>
+          <p><strong>1) Prompt guard.</strong> V systémové zprávě pro AI transformaci je teď jasná instrukce: <code>Zachovej českou diakritiku. Háčky a čárky jsou součást slova, ne formátování.</code> Plus pár few-shot příkladů, kde ukazujeme správný a špatný výstup.</p>
+          <p><strong>2) Validační krok.</strong> Po AI transformaci běží lehký check, který porovná diakritické znaky ve vstupu a výstupu. Když má výstup méně háčků než vstup, zpráva se označí jako „needs review" a automaticky nejde ven.</p>
         </div>
       </details>
 
@@ -776,7 +776,7 @@
             • Výjimka: nečeská nepřechýlená příjmení (Lee, Kim) → beze změny
           </p>
 
-          <p>Klíčová věta je <em>„pokud si nejsi jistý, nesklonuj"</em> — radši bezpečně ponechat jméno v základním tvaru, než vygenerovat komolený pátý pád.</p>
+          <p>Klíčová věta je <em>„pokud si nejsi jistý, nesklonuj"</em>. Radši ponechat jméno v základním tvaru, než vygenerovat komolený pátý pád.</p>
         </div>
       </details>
 
@@ -786,7 +786,7 @@
           <span class="faq-item__arrow">&#x25BE;</span>
         </summary>
         <div class="faq-item__answer">
-          <p><strong>Nemusíte dělat vůbec nic.</strong> Josef už nový prompt nasadil do všech starých controlboardů — napříč všemi kampaněmi, i těmi, co už dávno běžely. Při další iteraci (další follow-up wave) se fix propíše automaticky.</p>
+          <p><strong>Nemusíte dělat vůbec nic.</strong> Josef nasadil nový prompt do všech starých controlboardů, včetně kampaní, co už dávno běžely. Při další follow-up vlně se fix propíše sám.</p>
           <p>Jediné, co můžete udělat, je <a href="#dik-pepovi" style="color: #2C64BD; text-decoration: underline;">dát Pepovi like</a>.</p>
         </div>
       </details>
@@ -797,12 +797,12 @@
           <span class="faq-item__arrow">&#x25BE;</span>
         </summary>
         <div class="faq-item__answer">
-          <p>Máme sadu testovacích vzorků pokrývající různá jména, vzory a follow-up kontexty. Po každé úpravě promptu dávku projedeme a ručně zkontrolujeme:</p>
-          <p>1) Diakritika vstup vs. výstup — jestli se něco neztratilo.<br>
+          <p>Máme sadu testovacích vzorků napříč různými jmény, vzory i kontexty follow-upu. Po každé úpravě promptu dávku projedeme a ručně koukáme na:</p>
+          <p>1) Diakritika vstup vs. výstup. Jestli se něco neztratilo.<br>
           2) Pátý pád u mužských jmen podle vzorů z promptu.<br>
           3) Přechýlená ženská příjmení ponechaná beze změny.<br>
-          4) Nejistá jména (cizí, atypická) padají do základního tvaru, nevymýšlí se pátý pád.</p>
-          <p>Pokud narazíš ve vlastní kampani na chybu, pošli konkrétní příklad — přidáme ho do testovací sady a prompt kalibrujeme dál.</p>
+          4) Jestli si nejistá jména (cizí, atypická) modelu nevymyslí pátý pád.</p>
+          <p>Když u sebe v kampani narazíš na chybu, pošli konkrétní příklad. Přidáme ho do testovací sady a prompt dál kalibrujeme.</p>
         </div>
       </details>
 
@@ -812,8 +812,8 @@
           <span class="faq-item__arrow">&#x25BE;</span>
         </summary>
         <div class="faq-item__answer">
-          <p>Do Basecampu, do projektu Clay → Message Board, thread <em>Bugs & feedback</em>. Přilož screenshot nebo odkaz na konkrétní zprávu/kampaň a napiš, co jsi čekal vs. co se stalo.</p>
-          <p>Pokud je to blocker pro běžící kampaň, tagni rovnou Josefa — řeší to v den oznámení.</p>
+          <p>Do Basecampu, projekt Clay → Message Board, thread <em>Bugs & feedback</em>. Přihoď screenshot nebo odkaz na konkrétní zprávu a napiš, co jsi čekal a co se fakt stalo.</p>
+          <p>Když je to blocker pro běžící kampaň, tagni rovnou Pepu. Reaguje i ten samý den.</p>
         </div>
       </details>
     </div>
@@ -829,7 +829,7 @@
       <p class="pepa-hero__label">David říká</p>
       <h2 class="pepa-hero__title">Díky Pepovi.</h2>
       <p class="pepa-hero__quote">
-        &ldquo;Chtěl bych ze srdce poděkovat Pepovi. Nejen, že ten bug se skloňováním a diakritikou vyřešil, ale rovnou to nasadil do všech starých controlboardů, aby nikdo z vás nemusel dělat vůbec nic. Přesně takový drive a proaktivita dělá GetLeads tím, čím je. Díky, Pepo — umíš.&rdquo;
+        &ldquo;Díky Pepovi. Nejen, že ten bug se skloňováním a diakritikou vyřešil, ale rovnou to nasadil do všech starých controlboardů, aby z vás nikdo nemusel hnout prstem. Přesně tohle je ten typ věcí, proč GetLeads jede. Díky, Pepo.&rdquo;
       </p>
       <div class="pepa-hero__sig">
         <span class="pepa-hero__sig-name">David Kolář</span>
