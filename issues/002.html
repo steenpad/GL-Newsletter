@@ -1,0 +1,631 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GL Inside #002 — Clay už nemaže diakritiku</title>
+  <link rel="stylesheet" href="../css/style.css">
+  <style>
+    /* Intro text */
+    .intro-text {
+      font-size: clamp(16px, 2vw, 18px);
+      line-height: 1.7;
+      color: rgba(0, 0, 0, 0.55);
+      max-width: 720px;
+      margin-bottom: 24px;
+    }
+
+    /* Problem / solution cards */
+    .problems-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+    .problem-card {
+      padding: 28px;
+      transition: all 0.35s ease;
+      display: flex;
+      flex-direction: column;
+    }
+    .problem-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 36px rgba(0, 0, 0, 0.06);
+    }
+    .problem-card__tag {
+      display: inline-block;
+      padding: 3px 10px;
+      border-radius: 6px;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+      align-self: flex-start;
+    }
+    .problem-card__tag--bug {
+      background: rgba(234, 64, 111, 0.08);
+      color: #d63060;
+      border: 1px solid rgba(234, 64, 111, 0.18);
+    }
+    .problem-card__tag--fix {
+      background: rgba(46, 125, 50, 0.08);
+      color: #2e7d32;
+      border: 1px solid rgba(46, 125, 50, 0.15);
+    }
+    .problem-card__icon {
+      font-size: 28px;
+      margin-bottom: 12px;
+    }
+    .problem-card__title {
+      font-size: 16px;
+      font-weight: 700;
+      color: #1a1a2e;
+      margin-bottom: 8px;
+      line-height: 1.3;
+    }
+    .problem-card__desc {
+      font-size: 13px;
+      line-height: 1.6;
+      color: rgba(0, 0, 0, 0.5);
+      margin-bottom: 14px;
+      flex-grow: 1;
+    }
+    .problem-card__solution {
+      font-size: 12.5px;
+      line-height: 1.55;
+      color: rgba(0, 0, 0, 0.55);
+      padding: 12px 14px;
+      background: rgba(46, 125, 50, 0.05);
+      border-left: 3px solid #2e7d32;
+      border-radius: 6px;
+    }
+    .problem-card__solution strong {
+      color: #2e7d32;
+      display: block;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      margin-bottom: 4px;
+    }
+    @media (max-width: 900px) {
+      .problems-grid { grid-template-columns: 1fr; }
+    }
+
+    /* Checklist section */
+    .checklist-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+    .checklist-card {
+      padding: 32px;
+    }
+    .checklist-card__header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 20px;
+      padding-bottom: 16px;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+    }
+    .checklist-card__icon {
+      font-size: 28px;
+    }
+    .checklist-card__role {
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: #2C64BD;
+      margin-bottom: 2px;
+    }
+    .checklist-card__title {
+      font-size: 19px;
+      font-weight: 700;
+      color: #1a1a2e;
+      letter-spacing: -0.01em;
+    }
+    .checklist-items {
+      list-style: none;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .checklist-items li {
+      font-size: 13.5px;
+      line-height: 1.55;
+      color: rgba(0, 0, 0, 0.6);
+      padding: 12px 14px 12px 40px;
+      background: rgba(255, 255, 255, 0.35);
+      border: 1px solid rgba(255, 255, 255, 0.5);
+      border-radius: 10px;
+      position: relative;
+      transition: all 0.3s ease;
+    }
+    .checklist-items li:hover {
+      background: rgba(255, 255, 255, 0.55);
+      border-color: rgba(255, 255, 255, 0.8);
+    }
+    .checklist-items li::before {
+      content: '';
+      position: absolute;
+      left: 14px;
+      top: 14px;
+      width: 16px;
+      height: 16px;
+      border: 2px solid rgba(44, 100, 189, 0.35);
+      border-radius: 5px;
+      background: rgba(255, 255, 255, 0.5);
+    }
+    .checklist-items li strong {
+      color: #1a1a2e;
+      font-weight: 700;
+    }
+    .checklist-items li em {
+      display: block;
+      margin-top: 4px;
+      font-style: normal;
+      font-size: 12px;
+      color: rgba(0, 0, 0, 0.4);
+    }
+    @media (max-width: 900px) {
+      .checklist-grid { grid-template-columns: 1fr; }
+    }
+
+    /* FAQ */
+    .faq-list {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .faq-item {
+      border-radius: 14px;
+      overflow: hidden;
+      background: rgba(255, 255, 255, 0.35);
+      border: 1px solid rgba(255, 255, 255, 0.5);
+      transition: all 0.3s ease;
+    }
+    .faq-item[open] {
+      background: rgba(255, 255, 255, 0.55);
+      border-color: rgba(255, 255, 255, 0.8);
+    }
+    .faq-item__question {
+      padding: 18px 22px;
+      font-size: 15px;
+      font-weight: 600;
+      color: #1a1a2e;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+      list-style: none;
+      line-height: 1.4;
+    }
+    .faq-item__question::-webkit-details-marker { display: none; }
+    .faq-item__arrow {
+      font-size: 18px;
+      color: rgba(0, 0, 0, 0.3);
+      transition: transform 0.3s ease;
+      flex-shrink: 0;
+    }
+    .faq-item[open] .faq-item__arrow {
+      transform: rotate(180deg);
+    }
+    .faq-item__answer {
+      padding: 0 22px 20px;
+      font-size: 14px;
+      line-height: 1.7;
+      color: rgba(0, 0, 0, 0.55);
+    }
+    .faq-item__answer p {
+      margin-bottom: 10px;
+    }
+    .faq-item__answer p:last-child {
+      margin-bottom: 0;
+    }
+    .faq-item__answer code {
+      font-family: 'SF Mono', Menlo, monospace;
+      font-size: 12.5px;
+      padding: 2px 6px;
+      background: rgba(0, 0, 0, 0.05);
+      border-radius: 4px;
+      color: #2C64BD;
+    }
+
+    /* Clay-style variable chip */
+    .clay-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      padding: 2px 8px 2px 4px;
+      background: #fff;
+      border: 1px solid rgba(0, 0, 0, 0.1);
+      border-radius: 6px;
+      font-size: 12px;
+      font-weight: 500;
+      color: #1a1a2e;
+      line-height: 1.6;
+      vertical-align: baseline;
+      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+      white-space: nowrap;
+    }
+    .clay-chip__close {
+      font-size: 10px;
+      color: rgba(0, 0, 0, 0.3);
+      padding: 0 2px;
+    }
+    .clay-chip__list {
+      font-size: 11px;
+      color: rgba(0, 0, 0, 0.35);
+      padding: 0 1px;
+    }
+    .clay-chip__t {
+      font-size: 10px;
+      font-weight: 700;
+      color: #2C64BD;
+      background: rgba(44, 100, 189, 0.08);
+      padding: 1px 5px;
+      border-radius: 3px;
+    }
+    .clay-chip__toggle {
+      display: inline-block;
+      width: 22px;
+      height: 12px;
+      background: #2C64BD;
+      border-radius: 10px;
+      position: relative;
+      margin-left: 4px;
+      vertical-align: middle;
+    }
+    .clay-chip__toggle::after {
+      content: '';
+      position: absolute;
+      right: 1px;
+      top: 1px;
+      width: 10px;
+      height: 10px;
+      background: #fff;
+      border-radius: 50%;
+    }
+
+    /* Instructions list (prompt render) */
+    .prompt-instructions {
+      counter-reset: instr;
+      list-style: none;
+      padding: 0;
+      margin: 8px 0 0;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .prompt-instructions > li {
+      counter-increment: instr;
+      padding: 14px 16px 14px 44px;
+      background: rgba(255, 255, 255, 0.5);
+      border: 1px solid rgba(0, 0, 0, 0.06);
+      border-radius: 10px;
+      position: relative;
+      font-size: 13.5px;
+      line-height: 1.65;
+      color: rgba(0, 0, 0, 0.65);
+    }
+    .prompt-instructions > li::before {
+      content: counter(instr) ")";
+      position: absolute;
+      left: 14px;
+      top: 14px;
+      font-size: 12px;
+      font-weight: 700;
+      color: #2C64BD;
+      font-variant-numeric: tabular-nums;
+    }
+    .prompt-instructions strong {
+      color: #1a1a2e;
+      font-weight: 700;
+    }
+    .prompt-instructions ul {
+      list-style: none;
+      padding: 8px 0 0;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+    .prompt-instructions ul li {
+      padding-left: 14px;
+      position: relative;
+      font-size: 13px;
+      color: rgba(0, 0, 0, 0.55);
+    }
+    .prompt-instructions ul li::before {
+      content: '–';
+      position: absolute;
+      left: 0;
+      color: rgba(0, 0, 0, 0.25);
+    }
+
+    /* Recap card */
+    .recap-card {
+      padding: 32px;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+    .recap-stat {
+      text-align: center;
+      padding: 16px;
+      background: rgba(0, 0, 0, 0.02);
+      border: 1px solid rgba(0, 0, 0, 0.04);
+      border-radius: 14px;
+    }
+    .recap-stat__value {
+      font-size: clamp(28px, 4vw, 36px);
+      font-weight: 700;
+      color: #2C64BD;
+      line-height: 1;
+      margin-bottom: 6px;
+      letter-spacing: -0.02em;
+    }
+    .recap-stat__label {
+      font-size: 12px;
+      color: rgba(0, 0, 0, 0.45);
+      line-height: 1.4;
+    }
+    @media (max-width: 700px) {
+      .recap-card { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Background -->
+  <div class="bg-canvas"></div>
+  <div class="bg-orb bg-orb--blue"></div>
+  <div class="bg-orb bg-orb--pink"></div>
+  <div class="bg-orb bg-orb--cyan"></div>
+
+  <!-- Navbar -->
+  <nav class="navbar">
+    <div class="navbar__inner glass">
+      <a href="../index.html" class="navbar__brand">
+        <span class="navbar__logo">GL Inside</span>
+        <span class="navbar__issue">#002</span>
+      </a>
+      <div class="navbar__links">
+        <a href="#clay-fix" class="navbar__link">Clay fix</a>
+        <a href="#instructions" class="navbar__link">Instructions</a>
+        <a href="#faq" class="navbar__link">FAQ</a>
+        <a href="../index.html" class="navbar__link">Archiv</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <header class="hero">
+    <div class="hero__badge glass">
+      <span class="hero__badge-dot"></span>
+      Vydání #002
+    </div>
+    <h1 class="hero__title">
+      <span class="hero__title--gradient">Clay už nežere diakritiku.</span>
+    </h1>
+    <p class="hero__subtitle">
+      Vyřešili jsme bug s mazáním háčků a čárek ve follow-upech a opravili špatné skloňování jmen a příjmení. Kompletní nový prompt najdete níže.
+    </p>
+    <div class="hero__date-badge glass">
+      14. dubna 2026
+    </div>
+  </header>
+
+  <!-- Clay fix — Hlavní téma -->
+  <section class="section" id="clay-fix">
+    <div class="section__header">
+      <p class="section__label">Hlavní téma</p>
+      <h2 class="section__title">Bug fix v Clayi</h2>
+    </div>
+
+    <p class="intro-text">
+      Poslední týdny jsme zápasili se dvěma věcmi, které kazily kvalitu oslovování: Clay mazal diakritiku ve follow-up zprávách a občas plácl špatné oslovení (pátý pád, rody, přechýlení). Oboje je teď ošetřené novým promptem — detaily níže.
+    </p>
+
+    <div class="problems-grid">
+      <!-- Problem 1: Diakritika -->
+      <div class="problem-card glass">
+        <span class="problem-card__tag problem-card__tag--bug">BUG</span>
+        <span class="problem-card__icon">&#x1F524;</span>
+        <h3 class="problem-card__title">Mizející diakritika ve follow-upech</h3>
+        <p class="problem-card__desc">
+          Když se do Claye nalil follow-up text s háčky a čárkami, při průchodu přes jednu z AI transformací se diakritika občas ztrácela — a do HeyReache letěl text bez háčků. Vypadalo to jak od robota, co nikdy neviděl češtinu.
+        </p>
+        <div class="problem-card__solution">
+          <strong>Řešení</strong>
+          Přidali jsme prompt guard, který explicitně zakazuje modifikaci českých znaků, plus finální validační krok, který text porovná se vstupem a v případě odchylky zprávu zahazuje. Prošlo testem na 200 vzorcích.
+        </div>
+      </div>
+
+      <!-- Problem 2: Oslovování -->
+      <div class="problem-card glass">
+        <span class="problem-card__tag problem-card__tag--bug">BUG</span>
+        <span class="problem-card__icon">&#x1F464;</span>
+        <h3 class="problem-card__title">Špatné oslovování</h3>
+        <p class="problem-card__desc">
+          Pátý pád, rody, přechýlení příjmení u žen — Clay to dělal správně asi v 85 % případů, ale těch 15 % byl průšvih. „Ahoj Pavla" místo „Ahoj Pavlo", „Dobrý den pane Nováková" a podobné perly.
+        </p>
+        <div class="problem-card__solution">
+          <strong>Řešení</strong>
+          Přepsali jsme prompt pro skloňování — rozepsané vzory pro křestní jména (-el, -as, -av…) i pro příjmení (-ák, adjektivní tvary, ženská přechýlená). Plus jasné pravidlo: když si model není jistý, nesklonuje. Detaily v FAQ níže.
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <div class="divider"><div class="divider__line"></div></div>
+
+  <!-- Instructions -->
+  <section class="section" id="instructions">
+    <div class="section__header">
+      <p class="section__label">Instructions</p>
+      <h2 class="section__title">Návod pro follow-up v Clayi</h2>
+    </div>
+
+    <p class="intro-text">
+      Kompletní prompt, kterým se Clay teď řídí při generování follow-up zpráv. Chipy <span class="clay-chip"><span class="clay-chip__close">×</span><span class="clay-chip__list">≡</span><span class="clay-chip__t">T</span> Název</span> odkazují na konkrétní proměnné v Clayi (popis klienta, cílová skupina, předchozí zpráva…). Body <strong>11)</strong> a <strong>13)</strong> jsou přesně ty pravidla, která vyřešila opakování oslovovací zprávy a mizející diakritiku.
+    </p>
+
+    <div class="glass" style="padding: 32px;">
+      <ol class="prompt-instructions">
+        <li>Řiď se návodem <span class="clay-chip"><span class="clay-chip__close">×</span><span class="clay-chip__list">≡</span><span class="clay-chip__t">T</span> Jak psát follow-up</span>.</li>
+
+        <li>Vycházej z popisu: <span class="clay-chip"><span class="clay-chip__close">×</span><span class="clay-chip__list">≡</span><span class="clay-chip__t">T</span> Popis klienta</span> (Náš popis) <span class="clay-chip"><span class="clay-chip__close">×</span><span class="clay-chip__list">≡</span><span class="clay-chip__t">T</span> Cílová skupina</span> (Jak pomáháme cílové skupině).</li>
+
+        <li>Formuluj <em>„proposition fit"</em> na základě <span class="clay-chip"><span class="clay-chip__list">≡</span><span class="clay-chip__t">T</span> Proposition Fit Summary</span> — pojmenuj pravděpodobnou situaci/kontext/výzvu firmy opatrným jazykem (např. „u podobných firem často vidíme…"). <strong>Neuvádět řešení ani styl výsledků.</strong></li>
+
+        <li>Přečti si předchozí zprávu <span class="clay-chip"><span class="clay-chip__close">×</span><span class="clay-chip__list">≡</span><span class="clay-chip__t">T</span> Oslovovací zpráva</span> a neopakuj její sdělení.</li>
+
+        <li>
+          <strong>Formát:</strong>
+          <ul>
+            <li>První řádek: přesné oslovení <span class="clay-chip"><span class="clay-chip__close">×</span><span class="clay-chip__list">≡</span><span class="clay-chip__t">T</span> Oslovovací jméno</span></li>
+            <li>Druhý řádek: navazující text do celkové délky minimálně 500 znaků a maximálně 700 znaků.</li>
+          </ul>
+        </li>
+
+        <li><strong>Styl:</strong> stručný, lidský, konkrétní, bez pitchování, bez údajů a emojí. Používej „vykání" dle kontextu, zachovej češtinu.</li>
+
+        <li>Nepřidávej žádné jiné výstupy, jen finální zprávu.</li>
+
+        <li>Nevyužívej žádné obecné ani obchodní fráze. Komunikaci udržuj <strong>beznátlakovou</strong> a ukaž, že pro tebe je důležitý jejich zájem.</li>
+
+        <li>Pokud je follow-up kratší než 500 znaků nebo delší než 700 znaků, automaticky ho zkrať tak, aby měl méně než 700 znaků a více než 500 znaků.</li>
+
+        <li>Ve zprávě nikdy nevyužívej znaky jako <code>—</code> <code>–</code> <code>-</code>.</li>
+
+        <li>Ve zprávě <strong>neopakuj</strong> <span class="clay-chip"><span class="clay-chip__close">×</span><span class="clay-chip__list">≡</span><span class="clay-chip__t">T</span> Oslovovací zpráva<span class="clay-chip__toggle"></span></span>, pouze na ni musíš navázat.</li>
+
+        <li>Neuvádějte znovu sebe, svou společnost ani to, čím se zabýváte. Vycházíte z toho, že tyto informace již byly uvedeny v předchozí zprávě.</li>
+
+        <li><strong>Follow-up vždy zanech s diakritikou</strong>, pokud ji jazyk využívá a všemi pravidly daného jazyka.</li>
+      </ol>
+    </div>
+  </section>
+
+  <div class="divider"><div class="divider__line"></div></div>
+
+  <!-- FAQ -->
+  <section class="section" id="faq">
+    <div class="section__header">
+      <p class="section__label">FAQ</p>
+      <h2 class="section__title">Jak jsme to vyřešili</h2>
+    </div>
+
+    <p class="intro-text">
+      Pár otázek, co nejčastěji zaznívají v Basecampu a na interních callech — odpovědi na jednom místě.
+    </p>
+
+    <div class="faq-list">
+      <details class="faq-item">
+        <summary class="faq-item__question">
+          <span>Proč Clay vůbec mazal diakritiku? Nemá to dělat out of the box?</span>
+          <span class="faq-item__arrow">&#x25BE;</span>
+        </summary>
+        <div class="faq-item__answer">
+          <p>Samotný Clay s diakritikou nemá problém — text umí uložit, načíst, poslat dál bez ztráty. Problém vznikal, když jsme do pipeline zapojili AI transformaci (personalizace follow-upu podle profilu leadu). Model občas „přeložil" text do formy bez diakritiky, protože interně normalizuje vstup.</p>
+          <p>Nebylo to ve 100 % případů — odhadem 5–8 % zpráv procházelo bez háčků, ale stačilo to, aby nám to nabourávalo kvalitu výstupu.</p>
+        </div>
+      </details>
+
+      <details class="faq-item">
+        <summary class="faq-item__question">
+          <span>Jak přesně fix funguje? Je to nový prompt, nebo něco větší?</span>
+          <span class="faq-item__arrow">&#x25BE;</span>
+        </summary>
+        <div class="faq-item__answer">
+          <p>Dvě vrstvy:</p>
+          <p><strong>1) Prompt guard</strong> — v systémové zprávě pro AI transformaci je teď explicitní instrukce: <code>Zachovej českou diakritiku. Háčky a čárky jsou součást slova, ne formátování.</code> Plus pár few-shot příkladů, kde ukazujeme správný a špatný výstup.</p>
+          <p><strong>2) Validační krok</strong> — po AI transformaci běží lehký check, který porovná diakritické znaky ve vstupu a výstupu. Když výstup má méně háčků a čárek než vstup, zpráva se označí jako „needs review" a nejde ven automaticky.</p>
+        </div>
+      </details>
+
+      <details class="faq-item">
+        <summary class="faq-item__question">
+          <span>Jak přesně teď prompt řeší skloňování? (celý výtah)</span>
+          <span class="faq-item__arrow">&#x25BE;</span>
+        </summary>
+        <div class="faq-item__answer">
+          <p>Prompt má rozepsané vzory zvlášť pro křestní jména a zvlášť pro příjmení. Tady je výtah, co se do něj přidalo:</p>
+
+          <p><strong>3c) Křestní jména — výjimky a specifické vzory (5. pád)</strong></p>
+          <p>
+            • Vzor na <code>-el, -uel, -ael, -iel</code> → 5. pád přidá <code>-i</code>: Samuel→Samueli, Daniel→Danieli, Michael→Michaeli, Gabriel→Gabrieli, Rafael→Rafaeli, Nathaniel→Nathanieli<br>
+            • Vzor na <code>-as, -es</code> → 5. pád nahradí za <code>-i</code> nebo ponechá: Tomáš→Tomáši, Lukáš→Lukáši, Matyáš→Matyáši<br>
+            • Vzor na <code>-av, -ev</code> → 5. pád přidá <code>-e</code>: Pavel→Pavle, Jaroslav→Jaroslavu (pozor — 5. pád Jaroslavu!)<br>
+            • Cizí jména bez jasného vzoru → ponech beze změny nebo přidej <code>-i</code>: Kevin→Kevine, Brian→Briane, Andrew→Andrewe<br>
+            • Pokud si nejsi jistý → použij křestní jméno <strong>BEZ skloňování</strong>.
+          </p>
+
+          <p><strong>3d) Příjmení — 5. pád</strong></p>
+          <p><strong>MUŽI:</strong><br>
+            • Končí <code>-ák, -ek, -ík</code> → přidej <code>-u</code>: Novák→Nováku, Hájek→Hájku<br>
+            • Adjektivní tvar (<code>-ný, -ský, -ní</code>) → beze změny: Novotný→Novotný<br>
+            • Cizí příjmení (končí souhláskou) → beze změny: Schmidt→Schmidt<br>
+            • Pokud si nejsi jistý → beze změny
+          </p>
+          <p><strong>ŽENY:</strong><br>
+            • Vždy beze změny: Nováková→Nováková, Horáková→Horáková<br>
+            • Výjimka: nečeská nepřechýlená příjmení (Lee, Kim) → beze změny
+          </p>
+
+          <p>Klíčová věta je <em>„pokud si nejsi jistý, nesklonuj"</em> — radši bezpečně ponechat jméno v základním tvaru, než vygenerovat komolený pátý pád.</p>
+        </div>
+      </details>
+
+      <details class="faq-item">
+        <summary class="faq-item__question">
+          <span>Musím něco ručně zapínat, nebo to běží všem automaticky?</span>
+          <span class="faq-item__arrow">&#x25BE;</span>
+        </summary>
+        <div class="faq-item__answer">
+          <p>Běží to automaticky pro všechny nové kampaně, které se spouští po 14. 4. 2026. U starších kampaní, co už běží, fix dobhehne při další iteraci (další follow-up wave).</p>
+          <p>Pokud máš kampaň, kde chceš fix aplikovat hned, napiš Josefovi do Basecampu — pustí to ručně.</p>
+        </div>
+      </details>
+
+      <details class="faq-item">
+        <summary class="faq-item__question">
+          <span>Jak testujeme, že fix opravdu funguje?</span>
+          <span class="faq-item__arrow">&#x25BE;</span>
+        </summary>
+        <div class="faq-item__answer">
+          <p>Máme sadu testovacích vzorků pokrývající různá jména, vzory a follow-up kontexty. Po každé úpravě promptu dávku projedeme a ručně zkontrolujeme:</p>
+          <p>1) Diakritika vstup vs. výstup — jestli se něco neztratilo.<br>
+          2) Pátý pád u mužských jmen podle vzorů z promptu.<br>
+          3) Přechýlená ženská příjmení ponechaná beze změny.<br>
+          4) Nejistá jména (cizí, atypická) padají do základního tvaru, nevymýšlí se pátý pád.</p>
+          <p>Pokud narazíš ve vlastní kampani na chybu, pošli konkrétní příklad — přidáme ho do testovací sady a prompt kalibrujeme dál.</p>
+        </div>
+      </details>
+
+      <details class="faq-item">
+        <summary class="faq-item__question">
+          <span>Co když narazím na další bug? Kam to hlásit?</span>
+          <span class="faq-item__arrow">&#x25BE;</span>
+        </summary>
+        <div class="faq-item__answer">
+          <p>Do Basecampu, do projektu Clay → Message Board, thread <em>Bugs & feedback</em>. Přilož screenshot nebo odkaz na konkrétní zprávu/kampaň a napiš, co jsi čekal vs. co se stalo.</p>
+          <p>Pokud je to blocker pro běžící kampaň, tagni rovnou Josefa — řeší to v den oznámení.</p>
+        </div>
+      </details>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <p>GL Inside — interní newsletter GetLeads&ensp;|&ensp;<a href="../index.html">Archiv</a></p>
+    <p style="margin-top: 8px;">&copy; 2026 GetLeads s.r.o. Praha</p>
+  </footer>
+
+</body>
+</html>
