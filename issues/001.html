@@ -102,6 +102,11 @@
         <span class="navbar__logo">GL Inside</span>
         <span class="navbar__issue">#001</span>
       </a>
+      <button class="navbar__hamburger" aria-label="Otevrit menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
       <div class="navbar__links">
         <a href="#clay-heyreach" class="navbar__link">Clay + HeyReach</a>
         <a href="#david" class="navbar__link">David rika</a>
@@ -211,5 +216,11 @@
     <p style="margin-top: 8px;">&copy; 2026 GetLeads s.r.o. Praha</p>
   </footer>
 
+  <script>
+    document.querySelector('.navbar__hamburger').addEventListener('click', function () {
+      this.classList.toggle('is-open');
+      document.querySelector('.navbar__links').classList.toggle('is-open');
+    });
+  </script>
 </body>
 </html>

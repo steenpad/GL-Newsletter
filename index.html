@@ -20,6 +20,11 @@
       <a href="index.html" class="navbar__brand">
         <span class="navbar__logo">GL Inside</span>
       </a>
+      <button class="navbar__hamburger" aria-label="Otevrit menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
       <div class="navbar__links">
         <a href="#archiv" class="navbar__link">Archiv</a>
       </div>
@@ -86,5 +91,11 @@
     <p style="margin-top: 8px;">&copy; 2026 GetLeads s.r.o. Praha</p>
   </footer>
 
+  <script>
+    document.querySelector('.navbar__hamburger').addEventListener('click', function () {
+      this.classList.toggle('is-open');
+      document.querySelector('.navbar__links').classList.toggle('is-open');
+    });
+  </script>
 </body>
 </html>
