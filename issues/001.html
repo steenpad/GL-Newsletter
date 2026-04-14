@@ -705,6 +705,64 @@
         grid-template-columns: 1fr;
       }
     }
+
+    /* Like button */
+    .like-david {
+      margin-top: 20px;
+      display: inline-flex;
+      align-items: center;
+      gap: 16px;
+      padding: 14px 24px 14px 20px;
+      background: #fff;
+      color: #1a1a2e;
+      border: none;
+      border-radius: 18px;
+      font-size: 16px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.25s ease;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+      font-family: inherit;
+    }
+    .like-david:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 14px 36px rgba(0, 0, 0, 0.22);
+    }
+    .like-david:active {
+      transform: translateY(0) scale(0.98);
+    }
+    .like-david__emoji {
+      font-size: 26px;
+      display: inline-block;
+      transition: transform 0.3s ease;
+    }
+    .like-david--clicked .like-david__emoji {
+      animation: likePulseD 0.5s ease;
+    }
+    @keyframes likePulseD {
+      0%   { transform: scale(1) rotate(0); }
+      40%  { transform: scale(1.5) rotate(-14deg); }
+      70%  { transform: scale(1.2) rotate(12deg); }
+      100% { transform: scale(1) rotate(0); }
+    }
+    .like-david__count {
+      min-width: 36px;
+      padding: 4px 12px;
+      background: linear-gradient(135deg, #EA406F, #c0284f);
+      color: #fff;
+      border-radius: 10px;
+      font-size: 15px;
+      font-variant-numeric: tabular-nums;
+      font-weight: 700;
+      letter-spacing: -0.01em;
+    }
+    .like-david__hint {
+      display: block;
+      margin-top: 12px;
+      font-size: 12px;
+      color: rgba(255, 255, 255, 0.55);
+      letter-spacing: 0.04em;
+    }
   </style>
 </head>
 <body>
@@ -1256,8 +1314,36 @@
         <span class="david-hero__sig-name">David Kolář</span>
         <span class="david-hero__sig-role">CEO, GetLeads</span>
       </div>
+      <div>
+        <button type="button" class="like-david" id="like-david">
+          <span class="like-david__emoji">&#x1F44D;</span>
+          <span>Dát Davidovi like</span>
+          <span class="like-david__count" id="like-david-count">0</span>
+        </button>
+        <span class="like-david__hint">Když se ti první vydání líbilo, klikni.</span>
+      </div>
     </div>
   </section>
+
+  <script>
+    (function () {
+      const KEY = 'gl-inside-001-david-likes';
+      const btn = document.getElementById('like-david');
+      const countEl = document.getElementById('like-david-count');
+      if (!btn || !countEl) return;
+      let n = parseInt(localStorage.getItem(KEY) || '0', 10);
+      if (isNaN(n)) n = 0;
+      countEl.textContent = n;
+      btn.addEventListener('click', () => {
+        n += 1;
+        localStorage.setItem(KEY, String(n));
+        countEl.textContent = n;
+        btn.classList.remove('like-david--clicked');
+        void btn.offsetWidth;
+        btn.classList.add('like-david--clicked');
+      });
+    })();
+  </script>
 
   <!-- Footer -->
   <footer class="footer">
