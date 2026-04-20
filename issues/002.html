@@ -3,19 +3,26 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>GL Inside #002 — Clay už nemaže diakritiku</title>
+  <title>GL Inside #002 - Clay už nemaže diakritiku</title>
   <link rel="stylesheet" href="../css/style.css">
   <style>
-    /* Intro text */
+    /* --- Status semantic colors --- */
+    :root {
+      --color-success: #16A34A;
+      --color-success-bg: #DCFCE7;
+    }
+
+    /* --- Intro --- */
     .intro-text {
       font-size: clamp(16px, 2vw, 18px);
-      line-height: 1.7;
-      color: rgba(0, 0, 0, 0.55);
-      max-width: 720px;
+      font-weight: 300;
+      line-height: 1.6;
+      color: var(--color-text-secondary);
+      max-width: 760px;
       margin-bottom: 24px;
     }
 
-    /* Problem / solution cards */
+    /* --- Problem / solution cards --- */
     .problems-grid {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
@@ -23,75 +30,77 @@
     }
     .problem-card {
       padding: 28px;
-      transition: all 0.35s ease;
+      transition: border-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
       display: flex;
       flex-direction: column;
     }
     .problem-card:hover {
       transform: translateY(-2px);
-      box-shadow: 0 12px 36px rgba(0, 0, 0, 0.06);
+      border-color: var(--color-sky-blue-light);
+      box-shadow: var(--shadow-md);
     }
     .problem-card__tag {
       display: inline-block;
       padding: 3px 10px;
-      border-radius: 6px;
+      border-radius: var(--radius-full);
       font-size: 10px;
-      font-weight: 700;
+      font-weight: 600;
       letter-spacing: 0.08em;
       text-transform: uppercase;
-      margin-bottom: 12px;
+      margin-bottom: 14px;
       align-self: flex-start;
     }
     .problem-card__tag--bug {
-      background: rgba(234, 64, 111, 0.08);
-      color: #d63060;
-      border: 1px solid rgba(234, 64, 111, 0.18);
+      background: var(--color-rose-lightest);
+      color: var(--color-rose);
     }
     .problem-card__tag--fix {
-      background: rgba(46, 125, 50, 0.08);
-      color: #2e7d32;
-      border: 1px solid rgba(46, 125, 50, 0.15);
+      background: var(--color-success-bg);
+      color: var(--color-success);
     }
     .problem-card__icon {
       font-size: 28px;
       margin-bottom: 12px;
     }
     .problem-card__title {
-      font-size: 16px;
-      font-weight: 700;
-      color: #1a1a2e;
-      margin-bottom: 8px;
+      font-family: var(--font-display);
+      font-size: 17px;
+      font-weight: 600;
+      color: var(--color-slate-darkest);
+      margin-bottom: 10px;
       line-height: 1.3;
     }
     .problem-card__desc {
-      font-size: 13px;
+      font-size: 13.5px;
       line-height: 1.6;
-      color: rgba(0, 0, 0, 0.5);
-      margin-bottom: 14px;
+      color: var(--color-text-secondary);
+      margin-bottom: 16px;
       flex-grow: 1;
     }
     .problem-card__solution {
-      font-size: 12.5px;
+      font-size: 13px;
       line-height: 1.55;
-      color: rgba(0, 0, 0, 0.55);
+      color: var(--color-text-secondary);
       padding: 12px 14px;
-      background: rgba(46, 125, 50, 0.05);
-      border-left: 3px solid #2e7d32;
-      border-radius: 6px;
+      background: var(--color-success-bg);
+      border-left: 3px solid var(--color-success);
+      border-radius: var(--radius-md);
     }
     .problem-card__solution strong {
-      color: #2e7d32;
+      color: var(--color-success);
       display: block;
+      font-family: var(--font-body);
       font-size: 11px;
       text-transform: uppercase;
-      letter-spacing: 0.06em;
+      letter-spacing: 0.08em;
+      font-weight: 700;
       margin-bottom: 4px;
     }
     @media (max-width: 900px) {
       .problems-grid { grid-template-columns: 1fr; }
     }
 
-    /* Checklist section */
+    /* --- Checklist section --- */
     .checklist-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -106,23 +115,25 @@
       gap: 12px;
       margin-bottom: 20px;
       padding-bottom: 16px;
-      border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+      border-bottom: 1px solid var(--color-border);
     }
     .checklist-card__icon {
-      font-size: 28px;
+      font-size: 26px;
     }
     .checklist-card__role {
+      font-family: var(--font-body);
       font-size: 11px;
       font-weight: 700;
       text-transform: uppercase;
       letter-spacing: 0.08em;
-      color: #2C64BD;
+      color: var(--color-sky-blue);
       margin-bottom: 2px;
     }
     .checklist-card__title {
-      font-size: 19px;
-      font-weight: 700;
-      color: #1a1a2e;
+      font-family: var(--font-display);
+      font-size: 18px;
+      font-weight: 600;
+      color: var(--color-slate-darkest);
       letter-spacing: -0.01em;
     }
     .checklist-items {
@@ -135,17 +146,17 @@
     .checklist-items li {
       font-size: 13.5px;
       line-height: 1.55;
-      color: rgba(0, 0, 0, 0.6);
+      color: var(--color-text-secondary);
       padding: 12px 14px 12px 40px;
-      background: rgba(255, 255, 255, 0.35);
-      border: 1px solid rgba(255, 255, 255, 0.5);
-      border-radius: 10px;
+      background: var(--color-bg-subtle);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-lg);
       position: relative;
-      transition: all 0.3s ease;
+      transition: background 0.15s ease, border-color 0.15s ease;
     }
     .checklist-items li:hover {
-      background: rgba(255, 255, 255, 0.55);
-      border-color: rgba(255, 255, 255, 0.8);
+      background: var(--color-sky-blue-lightest);
+      border-color: var(--color-sky-blue-light);
     }
     .checklist-items li::before {
       content: '';
@@ -154,12 +165,12 @@
       top: 14px;
       width: 16px;
       height: 16px;
-      border: 2px solid rgba(44, 100, 189, 0.35);
-      border-radius: 5px;
-      background: rgba(255, 255, 255, 0.5);
+      border: 2px solid var(--color-sky-blue);
+      border-radius: var(--radius-sm);
+      background: #fff;
     }
     .checklist-items li strong {
-      color: #1a1a2e;
+      color: var(--color-slate-darkest);
       font-weight: 700;
     }
     .checklist-items li em {
@@ -167,34 +178,35 @@
       margin-top: 4px;
       font-style: normal;
       font-size: 12px;
-      color: rgba(0, 0, 0, 0.4);
+      color: var(--color-text-muted);
     }
     @media (max-width: 900px) {
       .checklist-grid { grid-template-columns: 1fr; }
     }
 
-    /* FAQ */
+    /* --- FAQ --- */
     .faq-list {
       display: flex;
       flex-direction: column;
       gap: 10px;
     }
     .faq-item {
-      border-radius: 14px;
+      border-radius: var(--radius-lg);
       overflow: hidden;
-      background: rgba(255, 255, 255, 0.35);
-      border: 1px solid rgba(255, 255, 255, 0.5);
-      transition: all 0.3s ease;
+      background: var(--color-bg-primary);
+      border: 1px solid var(--color-border);
+      transition: border-color 0.15s ease, box-shadow 0.15s ease;
     }
     .faq-item[open] {
-      background: rgba(255, 255, 255, 0.55);
-      border-color: rgba(255, 255, 255, 0.8);
+      border-color: var(--color-sky-blue-light);
+      box-shadow: var(--shadow-sm);
     }
     .faq-item__question {
       padding: 18px 22px;
+      font-family: var(--font-display);
       font-size: 15px;
-      font-weight: 600;
-      color: #1a1a2e;
+      font-weight: 500;
+      color: var(--color-slate-darkest);
       cursor: pointer;
       display: flex;
       justify-content: space-between;
@@ -205,9 +217,9 @@
     }
     .faq-item__question::-webkit-details-marker { display: none; }
     .faq-item__arrow {
-      font-size: 18px;
-      color: rgba(0, 0, 0, 0.3);
-      transition: transform 0.3s ease;
+      font-size: 16px;
+      color: var(--color-text-muted);
+      transition: transform 0.2s ease;
       flex-shrink: 0;
     }
     .faq-item[open] .faq-item__arrow {
@@ -217,7 +229,7 @@
       padding: 0 22px 20px;
       font-size: 14px;
       line-height: 1.7;
-      color: rgba(0, 0, 0, 0.55);
+      color: var(--color-text-secondary);
     }
     .faq-item__answer p {
       margin-bottom: 10px;
@@ -226,23 +238,32 @@
       margin-bottom: 0;
     }
     .faq-item__answer code {
-      font-family: 'SF Mono', Menlo, monospace;
+      font-family: 'SF Mono', Menlo, Consolas, monospace;
       font-size: 12.5px;
       padding: 2px 6px;
-      background: rgba(0, 0, 0, 0.05);
-      border-radius: 4px;
-      color: #2C64BD;
+      background: var(--color-sky-blue-lightest);
+      border-radius: var(--radius-sm);
+      color: var(--color-sky-blue-darkest);
+    }
+    .faq-item__answer a {
+      color: var(--color-sky-blue);
+      text-decoration: underline;
     }
 
-    /* Deployed banner */
+    /* --- Deployed banner --- */
     .deployed-banner {
       margin-top: 24px;
-      margin-bottom: 40px;
-      padding: 20px 28px;
+      margin-bottom: 36px;
+      padding: 20px 26px;
       display: flex;
       align-items: center;
       gap: 20px;
-      border-left: 4px solid #2e7d32;
+      background: var(--color-success-bg);
+      border-left: 4px solid var(--color-success);
+      border-radius: var(--radius-lg);
+      border-top: none;
+      border-right: none;
+      border-bottom: none;
     }
     .deployed-banner__icon {
       font-size: 28px;
@@ -252,33 +273,35 @@
       flex-grow: 1;
     }
     .deployed-banner__title {
+      font-family: var(--font-display);
       font-size: 15px;
-      font-weight: 700;
-      color: #1a1a2e;
+      font-weight: 600;
+      color: var(--color-slate-darkest);
       margin-bottom: 4px;
       line-height: 1.4;
     }
     .deployed-banner__desc {
-      font-size: 13px;
-      color: rgba(0, 0, 0, 0.5);
+      font-size: 13.5px;
+      color: var(--color-text-secondary);
       line-height: 1.5;
     }
     .deployed-banner__cta {
       flex-shrink: 0;
       padding: 10px 18px;
-      border-radius: 10px;
-      background: rgba(46, 125, 50, 0.1);
-      color: #2e7d32;
-      border: 1px solid rgba(46, 125, 50, 0.2);
+      border-radius: var(--radius-lg);
+      background: var(--color-success);
+      color: #fff;
+      border: none;
       font-size: 13px;
-      font-weight: 600;
+      font-weight: 500;
       text-decoration: none;
-      transition: all 0.25s ease;
+      transition: transform 0.15s ease, box-shadow 0.15s ease;
       white-space: nowrap;
     }
     .deployed-banner__cta:hover {
-      background: rgba(46, 125, 50, 0.18);
       transform: translateY(-1px);
+      box-shadow: 0 6px 16px rgba(22, 163, 74, 0.25);
+      color: #fff;
     }
     @media (max-width: 700px) {
       .deployed-banner {
@@ -286,12 +309,13 @@
         align-items: flex-start;
         gap: 14px;
       }
+      .deployed-banner__cta { width: 100%; text-align: center; }
     }
 
-    /* Thanks to Josef section */
+    /* --- Pepa hero (photo overlay) --- */
     .pepa-hero {
       position: relative;
-      border-radius: 24px;
+      border-radius: var(--radius-2xl);
       overflow: hidden;
       max-width: 1200px;
       margin: 0 auto 36px;
@@ -311,7 +335,7 @@
     .pepa-hero__overlay {
       position: absolute;
       inset: 0;
-      background: linear-gradient(to top, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.45) 55%, rgba(0,0,0,0.1) 100%);
+      background: linear-gradient(to top, rgba(4, 33, 80, 0.92) 0%, rgba(4, 33, 80, 0.5) 55%, rgba(4, 33, 80, 0.05) 100%);
     }
     .pepa-hero__content {
       position: relative;
@@ -320,37 +344,39 @@
       max-width: 760px;
     }
     .pepa-hero__label {
-      font-size: 13px;
+      font-size: 12px;
       font-weight: 600;
       text-transform: uppercase;
       letter-spacing: 0.14em;
-      color: rgba(255, 255, 255, 0.65);
+      color: rgba(255, 255, 255, 0.7);
       margin-bottom: 8px;
     }
     .pepa-hero__title {
+      font-family: var(--font-display);
       font-size: clamp(28px, 4vw, 40px);
-      font-weight: 700;
+      font-weight: 600;
       letter-spacing: -0.02em;
       margin-bottom: 16px;
       color: #fff;
     }
     .pepa-hero__quote {
+      font-family: var(--font-body);
       font-size: clamp(15px, 1.8vw, 19px);
       font-style: italic;
       font-weight: 300;
-      line-height: 1.7;
-      color: rgba(255, 255, 255, 0.88);
+      line-height: 1.6;
+      color: rgba(255, 255, 255, 0.9);
       margin-bottom: 22px;
     }
     .pepa-hero__sig {
       display: flex;
       gap: 12px;
       align-items: center;
-      margin-bottom: 26px;
+      margin-bottom: 20px;
     }
     .pepa-hero__sig-name {
       font-size: 15px;
-      font-weight: 700;
+      font-weight: 600;
     }
     .pepa-hero__sig-role {
       font-size: 13px;
@@ -358,39 +384,39 @@
     }
     @media (max-width: 768px) {
       .pepa-hero {
+        aspect-ratio: auto;
+        min-height: 520px;
         border-radius: 0;
-        margin-left: -24px;
-        margin-right: -24px;
+        margin-left: -16px;
+        margin-right: -16px;
       }
-      .pepa-hero__content { padding: 32px 24px; }
+      .pepa-hero__content { padding: 28px 20px; }
     }
 
-    /* Like button */
+    /* --- Like button --- */
     .like-josef {
       display: inline-flex;
       align-items: center;
-      gap: 16px;
-      padding: 14px 24px 14px 20px;
+      gap: 14px;
+      padding: 12px 22px 12px 18px;
       background: #fff;
-      color: #1a1a2e;
+      color: var(--color-slate-darkest);
       border: none;
-      border-radius: 18px;
-      font-size: 16px;
-      font-weight: 700;
+      border-radius: var(--radius-lg);
+      font-family: var(--font-body);
+      font-size: 15px;
+      font-weight: 600;
       cursor: pointer;
-      transition: all 0.25s ease;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
-      font-family: inherit;
+      transition: transform 0.15s ease, box-shadow 0.15s ease;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.18);
     }
     .like-josef:hover {
       transform: translateY(-2px);
-      box-shadow: 0 14px 36px rgba(0, 0, 0, 0.22);
+      box-shadow: 0 12px 32px rgba(0, 0, 0, 0.25);
     }
-    .like-josef:active {
-      transform: translateY(0) scale(0.98);
-    }
+    .like-josef:active { transform: translateY(0) scale(0.98); }
     .like-josef__emoji {
-      font-size: 26px;
+      font-size: 22px;
       display: inline-block;
       transition: transform 0.3s ease;
     }
@@ -399,70 +425,71 @@
     }
     @keyframes likePulse {
       0%   { transform: scale(1) rotate(0); }
-      40%  { transform: scale(1.5) rotate(-14deg); }
-      70%  { transform: scale(1.2) rotate(12deg); }
+      40%  { transform: scale(1.4) rotate(-14deg); }
+      70%  { transform: scale(1.15) rotate(12deg); }
       100% { transform: scale(1) rotate(0); }
     }
     .like-josef__count {
       min-width: 36px;
-      padding: 4px 12px;
-      background: linear-gradient(135deg, #EA406F, #c0284f);
+      padding: 3px 12px;
+      background: var(--color-rose);
       color: #fff;
-      border-radius: 10px;
-      font-size: 15px;
+      border-radius: var(--radius-md);
+      font-size: 14px;
       font-variant-numeric: tabular-nums;
       font-weight: 700;
       letter-spacing: -0.01em;
     }
     .like-josef__hint {
       display: block;
-      margin-top: 14px;
+      margin-top: 12px;
       font-size: 12px;
       color: rgba(255, 255, 255, 0.55);
-      letter-spacing: 0.04em;
+      letter-spacing: 0.02em;
     }
 
-    /* Clay-style variable chip */
+    /* --- Clay-style variable chip (kept as faithful Clay UI replica) --- */
     .clay-chip {
       display: inline-flex;
       align-items: center;
       gap: 4px;
       padding: 2px 8px 2px 4px;
       background: #fff;
-      border: 1px solid rgba(0, 0, 0, 0.1);
-      border-radius: 6px;
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-sm);
+      font-family: var(--font-body);
       font-size: 12px;
       font-weight: 500;
-      color: #1a1a2e;
+      color: var(--color-slate-darkest);
       line-height: 1.6;
       vertical-align: baseline;
-      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+      box-shadow: 0 1px 2px rgba(4, 33, 80, 0.04);
       white-space: nowrap;
     }
     .clay-chip__close {
       font-size: 10px;
-      color: rgba(0, 0, 0, 0.3);
+      color: var(--color-text-muted);
       padding: 0 2px;
     }
     .clay-chip__list {
       font-size: 11px;
-      color: rgba(0, 0, 0, 0.35);
+      color: var(--color-text-muted);
       padding: 0 1px;
     }
     .clay-chip__t {
       font-size: 10px;
       font-weight: 700;
-      color: #2C64BD;
-      background: rgba(44, 100, 189, 0.08);
+      color: var(--color-sky-blue);
+      background: var(--color-sky-blue-lightest);
       padding: 1px 5px;
-      border-radius: 3px;
+      border-radius: var(--radius-sm);
     }
     .clay-chip__toggle {
       display: inline-block;
       width: 22px;
       height: 12px;
-      background: #2C64BD;
-      border-radius: 10px;
+      background: var(--color-sky-blue);
+      border-radius: var(--radius-full);
       position: relative;
       margin-left: 4px;
       vertical-align: middle;
@@ -478,7 +505,7 @@
       border-radius: 50%;
     }
 
-    /* Instructions list (prompt render) */
+    /* --- Prompt instructions list --- */
     .prompt-instructions {
       counter-reset: instr;
       list-style: none;
@@ -491,26 +518,27 @@
     .prompt-instructions > li {
       counter-increment: instr;
       padding: 14px 16px 14px 44px;
-      background: rgba(255, 255, 255, 0.5);
-      border: 1px solid rgba(0, 0, 0, 0.06);
-      border-radius: 10px;
+      background: var(--color-bg-subtle);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-lg);
       position: relative;
       font-size: 13.5px;
       line-height: 1.65;
-      color: rgba(0, 0, 0, 0.65);
+      color: var(--color-text-secondary);
     }
     .prompt-instructions > li::before {
       content: counter(instr) ")";
       position: absolute;
       left: 14px;
       top: 14px;
+      font-family: var(--font-display);
       font-size: 12px;
       font-weight: 700;
-      color: #2C64BD;
+      color: var(--color-sky-blue);
       font-variant-numeric: tabular-nums;
     }
     .prompt-instructions strong {
-      color: #1a1a2e;
+      color: var(--color-slate-darkest);
       font-weight: 700;
     }
     .prompt-instructions ul {
@@ -525,44 +553,19 @@
       padding-left: 14px;
       position: relative;
       font-size: 13px;
-      color: rgba(0, 0, 0, 0.55);
+      color: var(--color-text-secondary);
     }
     .prompt-instructions ul li::before {
-      content: '–';
+      content: '-';
       position: absolute;
       left: 0;
-      color: rgba(0, 0, 0, 0.25);
+      color: var(--color-text-muted);
     }
 
-    /* Recap card */
-    .recap-card {
-      padding: 32px;
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 20px;
-    }
-    .recap-stat {
-      text-align: center;
-      padding: 16px;
-      background: rgba(0, 0, 0, 0.02);
-      border: 1px solid rgba(0, 0, 0, 0.04);
-      border-radius: 14px;
-    }
-    .recap-stat__value {
-      font-size: clamp(28px, 4vw, 36px);
-      font-weight: 700;
-      color: #2C64BD;
-      line-height: 1;
-      margin-bottom: 6px;
-      letter-spacing: -0.02em;
-    }
-    .recap-stat__label {
-      font-size: 12px;
-      color: rgba(0, 0, 0, 0.45);
-      line-height: 1.4;
-    }
-    @media (max-width: 700px) {
-      .recap-card { grid-template-columns: 1fr; }
+    /* --- Footer --- */
+    .footer--tight {
+      padding: 40px 24px 28px;
+      margin-top: 24px;
     }
   </style>
 </head>
@@ -570,17 +573,19 @@
 
   <!-- Background -->
   <div class="bg-canvas"></div>
-  <div class="bg-orb bg-orb--blue"></div>
-  <div class="bg-orb bg-orb--pink"></div>
-  <div class="bg-orb bg-orb--cyan"></div>
 
   <!-- Navbar -->
   <nav class="navbar">
-    <div class="navbar__inner glass">
+    <div class="navbar__inner">
       <a href="../index.html" class="navbar__brand">
         <span class="navbar__logo">GL Inside</span>
         <span class="navbar__issue">#002</span>
       </a>
+      <button class="navbar__hamburger" aria-label="Otevrit menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
       <div class="navbar__links">
         <a href="#clay-fix" class="navbar__link">Clay fix</a>
         <a href="#instructions" class="navbar__link">Instructions</a>
@@ -593,22 +598,22 @@
 
   <!-- Hero -->
   <header class="hero">
-    <div class="hero__badge glass">
+    <div class="hero__badge">
       <span class="hero__badge-dot"></span>
       Vydání #002
     </div>
     <h1 class="hero__title">
-      <span class="hero__title--gradient">Clay už nežere diakritiku.</span>
+      Clay už nežere <span class="accent">diakritiku.</span>
     </h1>
     <p class="hero__subtitle">
       Jedl nám háčky ve follow-upech a občas plácl jméno ve špatném pádu. Už ne. Celý nový prompt je dole.
     </p>
-    <div class="hero__date-badge glass">
+    <div class="hero__date-badge">
       14. dubna 2026
     </div>
   </header>
 
-  <!-- Clay fix — Hlavní téma -->
+  <!-- Clay fix -->
   <section class="section" id="clay-fix">
     <div class="section__header">
       <p class="section__label">Hlavní téma</p>
@@ -619,8 +624,8 @@
       Chvíli mi to leželo v hlavě. Clay občas sežral háčky ve follow-upech a sem tam plácl pátý pád, jak se mu zrovna zachtělo. Obojí je teď v promptu ošetřené. Detaily níže.
     </p>
 
-    <!-- Josef už nasadil — banner -->
-    <div class="deployed-banner glass">
+    <!-- Josef už nasadil -->
+    <div class="deployed-banner">
       <span class="deployed-banner__icon">&#x2728;</span>
       <div class="deployed-banner__body">
         <h3 class="deployed-banner__title">Nic nemusíte dělat. Josef to nasadil do všech starých controlboardů za vás.</h3>
@@ -630,7 +635,6 @@
     </div>
 
     <div class="problems-grid">
-      <!-- Problem 1: Diakritika -->
       <div class="problem-card glass">
         <span class="problem-card__tag problem-card__tag--bug">BUG</span>
         <h3 class="problem-card__title">Mizející diakritika ve follow-upech</h3>
@@ -643,7 +647,6 @@
         </div>
       </div>
 
-      <!-- Problem 2: Oslovování -->
       <div class="problem-card glass">
         <span class="problem-card__tag problem-card__tag--bug">BUG</span>
         <h3 class="problem-card__title">Špatné oslovování</h3>
@@ -655,7 +658,6 @@
           Přepsali jsme prompt. Rozepsané vzory pro křestní jména i příjmení, a jedno pravidlo navrch: když si model není jistý, radši nesklonuj. Celý výtah je v FAQ.
         </div>
       </div>
-
     </div>
   </section>
 
@@ -669,7 +671,7 @@
     </div>
 
     <p class="intro-text">
-      Takhle teď Clay generuje follow-upy. Chipy <span class="clay-chip"><span class="clay-chip__close">×</span><span class="clay-chip__list">≡</span><span class="clay-chip__t">T</span> Název</span> jsou proměnné z Claye (popis klienta, cílová skupina, předchozí zpráva…). Body <strong>11)</strong> a <strong>13)</strong> jsou ty, co zabily opakování oslovovací zprávy a mizející diakritiku.
+      Takhle teď Clay generuje follow-upy. Chipy <span class="clay-chip"><span class="clay-chip__close">×</span><span class="clay-chip__list">≡</span><span class="clay-chip__t">T</span> Název</span> jsou proměnné z Claye (popis klienta, cílová skupina, předchozí zpráva...). Body <strong>11)</strong> a <strong>13)</strong> jsou ty, co zabily opakování oslovovací zprávy a mizející diakritiku.
     </p>
 
     <div class="glass" style="padding: 32px;">
@@ -678,7 +680,7 @@
 
         <li>Vycházej z popisu: <span class="clay-chip"><span class="clay-chip__close">×</span><span class="clay-chip__list">≡</span><span class="clay-chip__t">T</span> Popis klienta</span> (Náš popis) <span class="clay-chip"><span class="clay-chip__close">×</span><span class="clay-chip__list">≡</span><span class="clay-chip__t">T</span> Cílová skupina</span> (Jak pomáháme cílové skupině).</li>
 
-        <li>Formuluj <em>„proposition fit"</em> na základě <span class="clay-chip"><span class="clay-chip__list">≡</span><span class="clay-chip__t">T</span> Proposition Fit Summary</span> — pojmenuj pravděpodobnou situaci/kontext/výzvu firmy opatrným jazykem (např. „u podobných firem často vidíme…"). <strong>Neuvádět řešení ani styl výsledků.</strong></li>
+        <li>Formuluj <em>„proposition fit"</em> na základě <span class="clay-chip"><span class="clay-chip__list">≡</span><span class="clay-chip__t">T</span> Proposition Fit Summary</span>. Pojmenuj pravděpodobnou situaci/kontext/výzvu firmy opatrným jazykem (např. „u podobných firem často vidíme..."). <strong>Neuvádět řešení ani styl výsledků.</strong></li>
 
         <li>Přečti si předchozí zprávu <span class="clay-chip"><span class="clay-chip__close">×</span><span class="clay-chip__list">≡</span><span class="clay-chip__t">T</span> Oslovovací zpráva</span> a neopakuj její sdělení.</li>
 
@@ -736,7 +738,7 @@
 
       <details class="faq-item">
         <summary class="faq-item__question">
-          <span>Jak přesně fix funguje? Je to nový prompt, nebo něco větší?</span>
+          <span>Jak přesně fix funguje? Je to nový prompt, nebo něco většího?</span>
           <span class="faq-item__arrow">&#x25BE;</span>
         </summary>
         <div class="faq-item__answer">
@@ -754,16 +756,16 @@
         <div class="faq-item__answer">
           <p>Prompt má rozepsané vzory zvlášť pro křestní jména a zvlášť pro příjmení. Tady je výtah, co se do něj přidalo:</p>
 
-          <p><strong>3c) Křestní jména — výjimky a specifické vzory (5. pád)</strong></p>
+          <p><strong>3c) Křestní jména. Výjimky a specifické vzory (5. pád)</strong></p>
           <p>
             • Vzor na <code>-el, -uel, -ael, -iel</code> → 5. pád přidá <code>-i</code>: Samuel→Samueli, Daniel→Danieli, Michael→Michaeli, Gabriel→Gabrieli, Rafael→Rafaeli, Nathaniel→Nathanieli<br>
             • Vzor na <code>-as, -es</code> → 5. pád nahradí za <code>-i</code> nebo ponechá: Tomáš→Tomáši, Lukáš→Lukáši, Matyáš→Matyáši<br>
-            • Vzor na <code>-av, -ev</code> → 5. pád přidá <code>-e</code>: Pavel→Pavle, Jaroslav→Jaroslavu (pozor — 5. pád Jaroslavu!)<br>
+            • Vzor na <code>-av, -ev</code> → 5. pád přidá <code>-e</code>: Pavel→Pavle, Jaroslav→Jaroslavu (pozor, 5. pád Jaroslavu!)<br>
             • Cizí jména bez jasného vzoru → ponech beze změny nebo přidej <code>-i</code>: Kevin→Kevine, Brian→Briane, Andrew→Andrewe<br>
             • Pokud si nejsi jistý → použij křestní jméno <strong>BEZ skloňování</strong>.
           </p>
 
-          <p><strong>3d) Příjmení — 5. pád</strong></p>
+          <p><strong>3d) Příjmení. 5. pád</strong></p>
           <p><strong>MUŽI:</strong><br>
             • Končí <code>-ák, -ek, -ík</code> → přidej <code>-u</code>: Novák→Nováku, Hájek→Hájku<br>
             • Adjektivní tvar (<code>-ný, -ský, -ní</code>) → beze změny: Novotný→Novotný<br>
@@ -786,7 +788,7 @@
         </summary>
         <div class="faq-item__answer">
           <p><strong>Nemusíte dělat vůbec nic.</strong> Josef nasadil nový prompt do všech starých controlboardů, včetně kampaní, co už dávno běžely. Při další follow-up vlně se fix propíše sám.</p>
-          <p>Jediné, co můžete udělat, je <a href="#dik-pepovi" style="color: #2C64BD; text-decoration: underline;">dát Pepovi like</a>.</p>
+          <p>Jediné, co můžete udělat, je <a href="#dik-pepovi">dát Pepovi like</a>.</p>
         </div>
       </details>
 
@@ -811,7 +813,7 @@
           <span class="faq-item__arrow">&#x25BE;</span>
         </summary>
         <div class="faq-item__answer">
-          <p>Do Basecampu, projekt Clay → Message Board, thread <em>Bugs & feedback</em>. Přihoď screenshot nebo odkaz na konkrétní zprávu a napiš, co jsi čekal a co se fakt stalo.</p>
+          <p>Do Basecampu, projekt Clay → Message Board, thread <em>Bugs &amp; feedback</em>. Přihoď screenshot nebo odkaz na konkrétní zprávu a napiš, co jsi čekal a co se fakt stalo.</p>
           <p>Když je to blocker pro běžící kampaň, tagni rovnou Pepu. Reaguje i ten samý den.</p>
         </div>
       </details>
@@ -820,7 +822,7 @@
 
   <div class="divider"><div class="divider__line"></div></div>
 
-  <!-- David říká — díky Pepovi -->
+  <!-- David říká - díky Pepovi -->
   <section class="pepa-hero" id="dik-pepovi">
     <img class="pepa-hero__bg" src="../img/david.jpg" alt="David Kolář">
     <div class="pepa-hero__overlay"></div>
@@ -840,7 +842,7 @@
           <span>Dát Pepovi like</span>
           <span class="like-josef__count" id="like-josef-count">0</span>
         </button>
-        <span class="like-josef__hint">Klikni kolikrát chceš — Josef si to zaslouží.</span>
+        <span class="like-josef__hint">Klikni kolikrát chceš, Josef si to zaslouží.</span>
       </div>
     </div>
   </section>
@@ -859,7 +861,6 @@
         localStorage.setItem(KEY, String(n));
         countEl.textContent = n;
         btn.classList.remove('like-josef--clicked');
-        // restart animation
         void btn.offsetWidth;
         btn.classList.add('like-josef--clicked');
       });
@@ -867,10 +868,16 @@
   </script>
 
   <!-- Footer -->
-  <footer class="footer">
-    <p>GL Inside — interní newsletter GetLeads&ensp;|&ensp;<a href="../index.html">Archiv</a></p>
+  <footer class="footer footer--tight">
+    <p>GL Inside - interní newsletter GetLeads&ensp;|&ensp;<a href="../index.html">Archiv</a></p>
     <p style="margin-top: 8px;">&copy; 2026 GetLeads s.r.o. Praha</p>
   </footer>
 
+  <script>
+    document.querySelector('.navbar__hamburger').addEventListener('click', function () {
+      this.classList.toggle('is-open');
+      document.querySelector('.navbar__links').classList.toggle('is-open');
+    });
+  </script>
 </body>
 </html>
