@@ -251,6 +251,39 @@
       }
     }
 
+    /* --- HeyReach how-to video --- */
+    .howto-video {
+      max-width: 880px;
+      margin: 0 auto;
+    }
+    .howto-video__frame {
+      border-radius: var(--radius-xl);
+      overflow: hidden;
+      border: 1px solid var(--color-border);
+      background: var(--color-slate-darkest);
+      box-shadow: var(--shadow-md);
+    }
+    .howto-video__frame iframe {
+      display: block;
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      border: none;
+    }
+    .howto-video__note {
+      margin-top: 16px;
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      padding: 16px 20px;
+      background: var(--color-rose-lightest);
+      border-radius: var(--radius-lg);
+      font-size: 14px;
+      line-height: 1.55;
+      color: var(--color-text-secondary);
+    }
+    .howto-video__note strong { color: var(--color-slate-darkest); }
+    .howto-video__note-emoji { font-size: 20px; flex-shrink: 0; }
+
     /* --- Lessons (Z provozu) --- */
     .lessons-grid {
       display: grid;
@@ -569,6 +602,7 @@
         <a href="#engine" class="navbar__link">Engine</a>
         <a href="#decisions" class="navbar__link">Designová rozhodnutí</a>
         <a href="#appka" class="navbar__link">Clay Appka</a>
+        <a href="#heyreach" class="navbar__link">HeyReach</a>
         <a href="#provoz" class="navbar__link">Z provozu</a>
         <a href="#roadmap" class="navbar__link">Co dál</a>
         <a href="#david" class="navbar__link">David říká</a>
@@ -752,6 +786,30 @@
       <div class="appka-card__right">
         <h4>Technicky</h4>
         <p>GPT z ChatGPT nejde přenést jako celek. Co přenášíme, je jeho mozek (instrukce + knowledge soubory) a vložíme ho do volání API. Appka dělá přesně totéž co GPT, jen přes API. Pro kolegu se nic nemění, jen mizí limity.</p>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"><div class="divider__line"></div></div>
+
+  <!-- Sekce: HeyReach setup video -->
+  <section class="section" id="heyreach">
+    <div class="section__header">
+      <p class="section__label">Návod</p>
+      <h2 class="section__title">Pepa natočil nový setup HeyReache</h2>
+    </div>
+
+    <p class="intro-text">
+      Pepa prošel krok za krokem, jak nastavit HeyReach po novu. Pustíš, klikáš podle něj a máš hotovo.
+    </p>
+
+    <div class="howto-video">
+      <div class="howto-video__frame">
+        <iframe src="https://www.youtube.com/embed/SgX63g2S0UU" title="Nový setup HeyReache - návod od Pepy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+      </div>
+      <div class="howto-video__note">
+        <span class="howto-video__note-emoji">📹</span>
+        <p>Pepa u toho neměl webku, takže žádný obličej, jen sdílená obrazovka a hlas. Za produkční hodnotu <strong>bod mínus</strong>, za samotný návod <strong>deset bodů plus</strong>.</p>
       </div>
     </div>
   </section>
