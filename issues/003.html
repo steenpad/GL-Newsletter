@@ -1,0 +1,978 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GL Inside #003 - Engine je hotový</title>
+  <link rel="stylesheet" href="../css/style.css">
+  <style>
+    /* --- Status semantic colors --- */
+    :root {
+      --color-warn: #B45309;
+      --color-warn-bg: #FEF3C7;
+      --color-success: #16A34A;
+      --color-success-bg: #DCFCE7;
+    }
+
+    /* --- Article intro --- */
+    .intro-text {
+      font-size: clamp(16px, 2vw, 18px);
+      font-weight: 300;
+      line-height: 1.6;
+      color: var(--color-text-secondary);
+      max-width: 760px;
+      margin-bottom: 28px;
+    }
+
+    /* --- Feature grid (sekce 1) --- */
+    .feature-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 16px;
+    }
+    .feature {
+      padding: 24px;
+      transition: border-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
+    }
+    .feature:hover {
+      transform: translateY(-2px);
+      border-color: var(--color-sky-blue-light);
+      box-shadow: var(--shadow-md);
+    }
+    .feature__icon {
+      font-size: 20px;
+      display: inline-flex;
+      width: 44px;
+      height: 44px;
+      align-items: center;
+      justify-content: center;
+      background: var(--color-rose-lightest);
+      color: var(--color-rose);
+      border-radius: var(--radius-lg);
+      margin-bottom: 14px;
+    }
+    .feature__title {
+      font-family: var(--font-display);
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--color-slate-darkest);
+      margin-bottom: 8px;
+      letter-spacing: -0.01em;
+    }
+    .feature__desc {
+      font-size: 13.5px;
+      line-height: 1.6;
+      color: var(--color-text-secondary);
+    }
+
+    /* --- Klicovy zlom (highlight card) --- */
+    .keymoment {
+      padding: 32px 36px;
+      background: var(--color-sky-blue-darkest);
+      border: none;
+      border-radius: var(--radius-2xl);
+      color: #fff;
+      margin-bottom: 20px;
+      position: relative;
+      overflow: hidden;
+    }
+    .keymoment::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      width: 4px;
+      background: var(--color-rose);
+    }
+    .keymoment__label {
+      font-family: var(--font-body);
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--color-rose-light);
+      margin-bottom: 12px;
+      display: inline-block;
+      padding: 4px 12px;
+      background: rgba(234, 64, 111, 0.15);
+      border-radius: var(--radius-full);
+    }
+    .keymoment__title {
+      font-family: var(--font-display);
+      font-size: clamp(20px, 2.6vw, 26px);
+      font-weight: 600;
+      color: #fff;
+      letter-spacing: -0.01em;
+      margin-bottom: 14px;
+      line-height: 1.25;
+    }
+    .keymoment__text {
+      font-family: var(--font-body);
+      font-size: 15px;
+      font-weight: 300;
+      line-height: 1.6;
+      color: rgba(255, 255, 255, 0.85);
+      max-width: 720px;
+    }
+    .keymoment__text strong {
+      color: #fff;
+      font-weight: 600;
+    }
+    @media (max-width: 600px) {
+      .keymoment { padding: 24px 22px; }
+    }
+
+    /* --- Decisions stack (sekce 2 - .point styl) --- */
+    .decisions {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .decision {
+      padding: 20px 22px;
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+      background: var(--color-bg-primary);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-lg);
+      transition: border-color 0.15s ease, background 0.15s ease;
+    }
+    .decision:hover {
+      border-color: var(--color-sky-blue-light);
+      background: var(--color-sky-blue-lightest);
+    }
+    .decision__num {
+      font-family: var(--font-display);
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--color-sky-blue);
+      flex-shrink: 0;
+      width: 28px;
+      height: 28px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--color-sky-blue-lightest);
+      border-radius: var(--radius-md);
+      margin-top: 1px;
+    }
+    .decision__body h4 {
+      font-family: var(--font-display);
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--color-slate-darkest);
+      margin-bottom: 4px;
+      line-height: 1.35;
+    }
+    .decision__body p {
+      font-size: 13.5px;
+      line-height: 1.6;
+      color: var(--color-text-secondary);
+    }
+
+    /* --- Clay Appka sekce --- */
+    .appka-card {
+      padding: 32px 36px;
+      display: grid;
+      grid-template-columns: 1.4fr 1fr;
+      gap: 32px;
+      align-items: start;
+    }
+    .appka-card__left h3 {
+      font-family: var(--font-display);
+      font-size: 20px;
+      font-weight: 600;
+      color: var(--color-slate-darkest);
+      letter-spacing: -0.01em;
+      margin-bottom: 12px;
+    }
+    .appka-card__left p {
+      font-size: 14px;
+      line-height: 1.6;
+      color: var(--color-text-secondary);
+      margin-bottom: 12px;
+    }
+    .appka-card__left p:last-child { margin-bottom: 0; }
+    .appka-card__meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 18px;
+    }
+    .appka-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 5px 12px;
+      border-radius: var(--radius-full);
+      font-size: 12px;
+      font-weight: 500;
+      background: var(--color-bg-subtle);
+      color: var(--color-text-secondary);
+      border: 1px solid var(--color-border);
+    }
+    .appka-tag--progress {
+      background: var(--color-warn-bg);
+      color: var(--color-warn);
+      border-color: transparent;
+    }
+    .appka-tag--url {
+      background: var(--color-sky-blue-lightest);
+      color: var(--color-sky-blue-darkest);
+      border-color: transparent;
+      font-family: 'SF Mono', Menlo, Consolas, monospace;
+    }
+    .appka-card__right {
+      background: var(--color-sky-blue-lightest);
+      border-radius: var(--radius-lg);
+      padding: 22px;
+    }
+    .appka-card__right h4 {
+      font-family: var(--font-display);
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--color-sky-blue-darkest);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 10px;
+    }
+    .appka-card__right p {
+      font-size: 13px;
+      line-height: 1.6;
+      color: var(--color-sky-blue-darkest);
+    }
+    @media (max-width: 768px) {
+      .appka-card {
+        grid-template-columns: 1fr;
+        padding: 24px;
+        gap: 20px;
+      }
+    }
+
+    /* --- Lessons (Z provozu) --- */
+    .lessons-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 16px;
+    }
+    .lesson {
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      transition: border-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
+    }
+    .lesson:hover {
+      transform: translateY(-2px);
+      border-color: var(--color-sky-blue-light);
+      box-shadow: var(--shadow-md);
+    }
+    .lesson__tag {
+      display: inline-block;
+      padding: 3px 10px;
+      border-radius: var(--radius-full);
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+      align-self: flex-start;
+      background: var(--color-warn-bg);
+      color: var(--color-warn);
+    }
+    .lesson__title {
+      font-family: var(--font-display);
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--color-slate-darkest);
+      margin-bottom: 8px;
+      line-height: 1.3;
+    }
+    .lesson__desc {
+      font-size: 13.5px;
+      line-height: 1.6;
+      color: var(--color-text-secondary);
+      margin-bottom: 14px;
+      flex-grow: 1;
+    }
+    .lesson__lesson {
+      font-size: 13px;
+      line-height: 1.55;
+      color: var(--color-text-secondary);
+      padding: 10px 12px;
+      background: var(--color-bg-subtle);
+      border-radius: var(--radius-md);
+    }
+    .lesson__lesson strong {
+      color: var(--color-slate-darkest);
+      display: block;
+      font-family: var(--font-body);
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      font-weight: 700;
+      margin-bottom: 4px;
+    }
+    .lesson__lesson code {
+      font-family: 'SF Mono', Menlo, Consolas, monospace;
+      font-size: 12.5px;
+      padding: 1px 5px;
+      background: #fff;
+      border-radius: var(--radius-sm);
+      color: var(--color-sky-blue-darkest);
+    }
+
+    /* --- Wins (Highlights) --- */
+    .wins-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 12px;
+    }
+    .win {
+      padding: 16px 18px;
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      background: var(--color-success-bg);
+      border-radius: var(--radius-lg);
+      border: 1px solid transparent;
+    }
+    .win__check {
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: var(--color-success);
+      color: #fff;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      font-size: 12px;
+      font-weight: 700;
+      margin-top: 1px;
+    }
+    .win__text {
+      font-size: 13.5px;
+      line-height: 1.5;
+      color: var(--color-slate-darkest);
+    }
+    .win__text strong {
+      font-weight: 600;
+    }
+
+    /* --- Roadmap --- */
+    .roadmap {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .roadmap-item {
+      padding: 18px 22px;
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+      background: var(--color-bg-primary);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-lg);
+      transition: border-color 0.15s ease;
+    }
+    .roadmap-item:hover {
+      border-color: var(--color-sky-blue-light);
+    }
+    .roadmap-item__marker {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: var(--color-rose);
+      flex-shrink: 0;
+      margin-top: 8px;
+    }
+    .roadmap-item__body h4 {
+      font-family: var(--font-display);
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--color-slate-darkest);
+      margin-bottom: 4px;
+      line-height: 1.35;
+    }
+    .roadmap-item__body p {
+      font-size: 13.5px;
+      line-height: 1.55;
+      color: var(--color-text-secondary);
+    }
+
+    /* --- David hero (photo overlay, jako #001/#002) --- */
+    .david-hero {
+      position: relative;
+      border-radius: var(--radius-2xl);
+      overflow: hidden;
+      max-width: 1200px;
+      margin: 0 auto 36px;
+      aspect-ratio: 4 / 3;
+      color: #fff;
+      display: flex;
+      align-items: flex-end;
+    }
+    .david-hero__bg {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center center;
+    }
+    .david-hero__overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(4, 33, 80, 0.92) 0%, rgba(4, 33, 80, 0.5) 55%, rgba(4, 33, 80, 0.05) 100%);
+    }
+    .david-hero__content {
+      position: relative;
+      z-index: 1;
+      padding: 48px;
+      max-width: 760px;
+    }
+    .david-hero__label {
+      font-size: 12px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      color: rgba(255, 255, 255, 0.7);
+      margin-bottom: 8px;
+    }
+    .david-hero__title {
+      font-family: var(--font-display);
+      font-size: clamp(28px, 4vw, 40px);
+      font-weight: 600;
+      letter-spacing: -0.02em;
+      margin-bottom: 16px;
+      color: #fff;
+    }
+    .david-hero__quote {
+      font-family: var(--font-body);
+      font-size: clamp(15px, 1.8vw, 19px);
+      font-style: italic;
+      font-weight: 300;
+      line-height: 1.6;
+      color: rgba(255, 255, 255, 0.9);
+      margin-bottom: 22px;
+    }
+    .david-hero__sig {
+      display: flex;
+      gap: 12px;
+      align-items: center;
+      margin-bottom: 18px;
+    }
+    .david-hero__sig-name {
+      font-size: 15px;
+      font-weight: 600;
+    }
+    .david-hero__sig-role {
+      font-size: 13px;
+      color: rgba(255, 255, 255, 0.55);
+    }
+    @media (max-width: 768px) {
+      .david-hero {
+        aspect-ratio: auto;
+        min-height: 520px;
+        border-radius: 0;
+        margin-left: -16px;
+        margin-right: -16px;
+      }
+      .david-hero__content { padding: 28px 20px; }
+    }
+
+    /* --- Like button --- */
+    .like {
+      display: inline-flex;
+      align-items: center;
+      gap: 14px;
+      padding: 12px 22px 12px 18px;
+      background: #fff;
+      color: var(--color-slate-darkest);
+      border: none;
+      border-radius: var(--radius-lg);
+      font-family: var(--font-body);
+      font-size: 15px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: transform 0.15s ease, box-shadow 0.15s ease;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.18);
+    }
+    .like:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 32px rgba(0, 0, 0, 0.25);
+    }
+    .like:active { transform: translateY(0) scale(0.98); }
+    .like__emoji {
+      font-size: 22px;
+      transition: transform 0.3s ease;
+    }
+    .like--clicked .like__emoji {
+      animation: likePulse 0.5s ease;
+    }
+    @keyframes likePulse {
+      0%   { transform: scale(1) rotate(0); }
+      40%  { transform: scale(1.4) rotate(-14deg); }
+      70%  { transform: scale(1.15) rotate(12deg); }
+      100% { transform: scale(1) rotate(0); }
+    }
+    .like__count {
+      min-width: 36px;
+      padding: 3px 12px;
+      background: var(--color-rose);
+      color: #fff;
+      border-radius: var(--radius-md);
+      font-size: 14px;
+      font-variant-numeric: tabular-nums;
+      font-weight: 700;
+      letter-spacing: -0.01em;
+    }
+    .like__hint {
+      display: block;
+      margin-top: 12px;
+      font-size: 12px;
+      color: rgba(255, 255, 255, 0.55);
+      letter-spacing: 0.02em;
+    }
+
+    .footer--tight {
+      padding: 40px 24px 28px;
+      margin-top: 24px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Background -->
+  <div class="bg-canvas"></div>
+
+  <!-- Navbar -->
+  <nav class="navbar">
+    <div class="navbar__inner">
+      <a href="../index.html" class="navbar__brand">
+        <span class="navbar__logo">GL Inside</span>
+        <span class="navbar__issue">#003</span>
+      </a>
+      <button class="navbar__hamburger" aria-label="Otevrit menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+      <div class="navbar__links">
+        <a href="#engine" class="navbar__link">Engine</a>
+        <a href="#decisions" class="navbar__link">Designová rozhodnutí</a>
+        <a href="#appka" class="navbar__link">Clay Appka</a>
+        <a href="#provoz" class="navbar__link">Z provozu</a>
+        <a href="#roadmap" class="navbar__link">Co dál</a>
+        <a href="#david" class="navbar__link">David říká</a>
+        <a href="../index.html" class="navbar__link">Archiv</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <header class="hero">
+    <div class="hero__badge">
+      <span class="hero__badge-dot"></span>
+      Vydání #003
+    </div>
+    <h1 class="hero__title">
+      Engine je <span class="accent">hotový.</span>
+    </h1>
+    <p class="hero__subtitle">
+      Generický B2B outreach engine na Clay + HeyReach. Jeden setup, libovolný klient. A jak jsme se k tomu dostali.
+    </p>
+    <div class="hero__date-badge">
+      29. června 2026
+    </div>
+  </header>
+
+  <!-- Sekce 1: Engine v kostce -->
+  <section class="section" id="engine">
+    <div class="section__header">
+      <p class="section__label">Hlavní téma</p>
+      <h2 class="section__title">Outreach engine v kostce</h2>
+    </div>
+
+    <p class="intro-text">
+      Postavili jsme generický B2B outreach engine na Clay + HeyReach. Z briefu klienta vyrobí cílení, oskóruje firmy a napíše personalizované LinkedIn zprávy. Jeden setup, libovolný klient. Personalizace a ruční kontrola relevance zůstávají. Tohle není spam mašina, je to nástroj, co odvede 90 % práce a kvalitu udrží.
+    </p>
+
+    <p class="intro-text" style="margin-bottom: 32px;">
+      Od minulé rekapitulace jsme dotáhli HR větev až do zpráv, přidali anglickou verzi a rozjeli vlastní appku pro Clay Assistanta. Engine teď zvládá obchod i nábor, česky i anglicky.
+    </p>
+
+    <div class="feature-grid">
+      <div class="feature glass">
+        <span class="feature__icon">&#x1F916;</span>
+        <h3 class="feature__title">Clay Assistant (GPT)</h3>
+        <p class="feature__desc">Z briefu klienta vyrobí pět konfiguračních sekcí: Popis, Diferenciátor, CTA, Cílová skupina, Kritéria.</p>
+      </div>
+      <div class="feature glass">
+        <span class="feature__icon">&#x1F3AF;</span>
+        <h3 class="feature__title">Scoring</h3>
+        <p class="feature__desc">Každou firmu oskóruje: JE / NENÍ / Neznámé, vždy s důvodem. Absolutní i podmíněné brány.</p>
+      </div>
+      <div class="feature glass">
+        <span class="feature__icon">&#x1F4AC;</span>
+        <h3 class="feature__title">Sales i HR režim</h3>
+        <p class="feature__desc">Obchodní i náborové zprávy, oslovovací i follow-up. Přepíná se podle pole Typ kampaně.</p>
+      </div>
+      <div class="feature glass">
+        <span class="feature__icon">&#x1F30D;</span>
+        <h3 class="feature__title">Anglická verze</h3>
+        <p class="feature__desc">Outreach v angličtině, ne strojový překlad. Lokalizátor s tvrdými pravidly per jazyk.</p>
+      </div>
+      <div class="feature glass">
+        <span class="feature__icon">&#x1F517;</span>
+        <h3 class="feature__title">Doménová funkce</h3>
+        <p class="feature__desc">Dohledá web firmy pro scrape. Když selže (generické názvy), použije LinkedIn jako vodítko.</p>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"><div class="divider__line"></div></div>
+
+  <!-- Sekce 2: Designová rozhodnutí -->
+  <section class="section" id="decisions">
+    <div class="section__header">
+      <p class="section__label">To zajímavé</p>
+      <h2 class="section__title">Nad čím jsme přemýšleli</h2>
+    </div>
+
+    <p class="intro-text">
+      Většina hodnoty není v tom, CO jsme udělali, ale PROČ jsme to udělali zrovna takhle. Tady je osm momentů, co stojí za řeč.
+    </p>
+
+    <!-- Klíčový zlom: large highlight card -->
+    <div class="keymoment">
+      <span class="keymoment__label">Klíčový zlom</span>
+      <h3 class="keymoment__title">Brána padá na důkazu nefitu, ne na chybějícím důkazu fitu.</h3>
+      <p class="keymoment__text">
+        Tvrdé brány vyžadovaly <strong>pozitivní</strong> potvrzení signálů (etablovanost, marketingová aktivita), které scrape často nedodá. Engine pak házel i dobré firmy do Neznámé jen proto, že o nich nebylo dost dat. Otočili jsme to: firma vypadne jen na pozitivním důkazu, že je nefit (prokazatelně mikrofirma, čisté B2C, doložený konkurent). Chybějící data ji neshazují. Engine přestal vyhazovat dobré leady kvůli tenkým datům.
+      </p>
+    </div>
+
+    <div class="decisions">
+      <div class="decision">
+        <span class="decision__num">1</span>
+        <div class="decision__body">
+          <h4>Generický engine, ne dvacet verzí na míru</h4>
+          <p>Klient žije v polích, ne v kódu. Pravidla jsou obecná, příklady v promptech vždy z jiného oboru, ať se nic nesveze k jednomu zákazníkovi. Nový klient = vyplnit config, ne přestavět systém.</p>
+        </div>
+      </div>
+
+      <div class="decision">
+        <span class="decision__num">2</span>
+        <div class="decision__body">
+          <h4>Scoring: absolutní vs podmíněné brány</h4>
+          <p>Binární „fit/nefit" je hloupé. Firma s B2C i B2B se nemá zahodit, když má reálné B2B vztahy. Kampaň se otočí na ně. Absolutní brána (porušení = tvrdé NENÍ) a podmíněná (má výjimku = „JE s výhradou" místo zahození). Engine umí nuanci, ne jen sekeru.</p>
+        </div>
+      </div>
+
+      <div class="decision">
+        <span class="decision__num">3</span>
+        <div class="decision__body">
+          <h4>Dvouprůchodové zprávy: obsah a redakce</h4>
+          <p>Jeden prompt nezvládal obojí naráz. Buď seděl obsah a kulhala čeština, nebo naopak. Rozdělili jsme to: generátor vybere obsah a hodnotu, redakce učeše slovosled, shody a délku. Zprávy konečně zní česky, ne jak překlad.</p>
+        </div>
+      </div>
+
+      <div class="decision">
+        <span class="decision__num">4</span>
+        <div class="decision__body">
+          <h4>Follow-up informuje, neprodává</h4>
+          <p>Druhý dotek nemá omílat produkt o držku. Předá jeden užitečný pohled, něco, co si příjemce odnese, i kdyby neodepsal. CTA je nízkotlaký: krátký hovor, ne velký požadavek.</p>
+        </div>
+      </div>
+
+      <div class="decision">
+        <span class="decision__num">5</span>
+        <div class="decision__body">
+          <h4>HR je jiný svět než sales</h4>
+          <p>Engine měl v DNA obchod, prodává produkt kupujícímu. U náborové kampaně je příjemce KANDIDÁT, ne zákazník, a hodnota je kariéra, ne produkt. HR režim adaptuje všech pět sekcí: firma jako zaměstnavatel, hodnota = proč u nás pracovat, CTA = kariérní konverzace, scoring hodnotí člověka.</p>
+        </div>
+      </div>
+
+      <div class="decision">
+        <span class="decision__num">6</span>
+        <div class="decision__body">
+          <h4>HR až do zpráv přes pole „Typ kampaně"</h4>
+          <p>Jeden engine, dvě větve. Sales i HR generátor sedí vedle sebe, ale spustí se vždycky jen jeden podle pole Typ kampaně. Pak je sloučíme jednoduchým pravidlem a redakce (ta, co češe češtinu) je <strong>jen jedna</strong> a společná. Nečešeme dvakrát, neudržujeme dva systémy. Přidat nový režim je o přidání větve, ne o přestavbě.</p>
+        </div>
+      </div>
+
+      <div class="decision">
+        <span class="decision__num">7</span>
+        <div class="decision__body">
+          <h4>Anglická verze: lokalizovat, neperkládat</h4>
+          <p>„Vygenerujeme česky a přeložíme" má dvě díry: schvaluje se něco jiného než se posílá, a překlad češtiny vždycky lehce zavání překladem. Per-jazyk samostatná šablona s vyladěným lokalizátorem. Tvrdá pravidla: jména osob se neskloňují, názvy firem v originále, formálnost napevno, délka se hlídá, závěrečná otázka zůstane otázkou. „I hope this email finds you well" zakázáno.</p>
+        </div>
+      </div>
+
+      <div class="decision">
+        <span class="decision__num">8</span>
+        <div class="decision__body">
+          <h4>Jazyky: spouštíme jen ty, na které máme kontrolu kvality</h4>
+          <p>Technicky umíme libovolný jazyk. Ale u jazyka, kterým nikdo z nás nemluví, neposoudíme, jestli to není trapas. A u zprávy jménem klienta cizí firmě je to riziko, co si nemůžeme dovolit. Napřed angličtina, případně němčina, další jazyk až s někým, kdo aspoň vzorek zkontroluje.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"><div class="divider__line"></div></div>
+
+  <!-- Sekce 3: Clay Assistant appka -->
+  <section class="section" id="appka">
+    <div class="section__header">
+      <p class="section__label">Rozjíždí se</p>
+      <h2 class="section__title">Clay Assistant dostane vlastní appku</h2>
+    </div>
+
+    <div class="appka-card glass">
+      <div class="appka-card__left">
+        <h3>Bez limitů, v hezčím rozhraní</h3>
+        <p>
+          Clay Assistant teď žije jako GPT v ChatGPT a kolegové bez Plus narážejí na limity konverzace. Nemůžou ho pořádně používat. Dáváme ho do vlastní appky, kde si s ním budou psát bez limitů (platí se přes API z firemního účtu) a v hezčím rozhraní.
+        </p>
+        <div class="appka-card__meta">
+          <span class="appka-tag appka-tag--url">apps.creaticom.cz</span>
+          <span class="appka-tag appka-tag--progress">Ve vývoji</span>
+          <span class="appka-tag">Pro celý tým</span>
+        </div>
+      </div>
+      <div class="appka-card__right">
+        <h4>Technicky</h4>
+        <p>GPT z ChatGPT nejde přenést jako celek. Co přenášíme, je jeho mozek (instrukce + knowledge soubory) a vložíme ho do volání API. Appka dělá přesně totéž co GPT, jen přes API. Pro kolegu se nic nemění, jen mizí limity.</p>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"><div class="divider__line"></div></div>
+
+  <!-- Sekce 4: Z provozu - co kouslo -->
+  <section class="section" id="provoz">
+    <div class="section__header">
+      <p class="section__label">Z provozu</p>
+      <h2 class="section__title">Co nás kouslo</h2>
+    </div>
+
+    <p class="intro-text">
+      Pět vrásek, co jsme vyžehlili. Sdílím je, protože jsou to přesně ty věci, co příště ušetří hodinu hledání.
+    </p>
+
+    <div class="lessons-grid">
+      <div class="lesson glass">
+        <span class="lesson__tag">GOTCHA</span>
+        <h3 class="lesson__title">Mezera zabíjí</h3>
+        <p class="lesson__desc">
+          V poli Typ kampaně bylo <code style="font-family: 'SF Mono', Menlo, monospace; font-size: 12.5px; background: var(--color-sky-blue-lightest); padding: 1px 5px; border-radius: 4px; color: var(--color-sky-blue-darkest);">HR&nbsp;</code> (mezera na konci) místo <code style="font-family: 'SF Mono', Menlo, monospace; font-size: 12.5px; background: var(--color-sky-blue-lightest); padding: 1px 5px; border-radius: 4px; color: var(--color-sky-blue-darkest);">HR</code>. Ta jedna mezera rozbila vyhodnocení podmínky a větev se nespustila.
+        </p>
+        <div class="lesson__lesson">
+          <strong>Ponaučení</strong>
+          Hodnoty v Select a v podmínkách musí sedět přesně, znak po znaku.
+        </div>
+      </div>
+
+      <div class="lesson glass">
+        <span class="lesson__tag">GOTCHA</span>
+        <h3 class="lesson__title">Když se větev nespouští, podezřelá je podmínka</h3>
+        <p class="lesson__desc">
+          Sales zprávy se negenerovaly kvůli špatně nastavené run condition. Nezačal jsem hledat v promptu, i když by se hodilo.
+        </p>
+        <div class="lesson__lesson">
+          <strong>Ponaučení</strong>
+          Když se větev nespouští, první podezřelý je run condition, ne prompt.
+        </div>
+      </div>
+
+      <div class="lesson glass">
+        <span class="lesson__tag">GOTCHA</span>
+        <h3 class="lesson__title">AI generátor vzorců v Clay si vymýšlí</h3>
+        <p class="lesson__desc">
+          Když mu necháš napsat vzorec, občas přidá nesmysl. Podmínku podle skóre, obalení do JSON, věci, co tam nemají co dělat.
+        </p>
+        <div class="lesson__lesson">
+          <strong>Ponaučení</strong>
+          Vzorce piš rovnou do formula boxu, ne přes AI pole.
+        </div>
+      </div>
+
+      <div class="lesson glass">
+        <span class="lesson__tag">GOTCHA</span>
+        <h3 class="lesson__title">Po publikaci funkce dej Run</h3>
+        <p class="lesson__desc">
+          Po publikaci funkce se tabulka nepřepočítá sama. Drží stará data a další krok hlásí chybu, i když je všechno správně zapojené.
+        </p>
+        <div class="lesson__lesson">
+          <strong>Ponaučení</strong>
+          Vždycky dej Run na sloupec, jinak budeš ladit fantoma.
+        </div>
+      </div>
+
+      <div class="lesson glass">
+        <span class="lesson__tag">GOTCHA</span>
+        <h3 class="lesson__title">Názvy polí musí sedět napříč řetězem</h3>
+        <p class="lesson__desc">
+          Když generátor vrací pole <code style="font-family: 'SF Mono', Menlo, monospace; font-size: 12.5px; background: var(--color-sky-blue-lightest); padding: 1px 5px; border-radius: 4px; color: var(--color-sky-blue-darkest);">message</code> a sloučení hledá <code style="font-family: 'SF Mono', Menlo, monospace; font-size: 12.5px; background: var(--color-sky-blue-lightest); padding: 1px 5px; border-radius: 4px; color: var(--color-sky-blue-darkest);">HRmessage</code>, jedna větev zůstane prázdná.
+        </p>
+        <div class="lesson__lesson">
+          <strong>Ponaučení</strong>
+          Většina záhad je rozjetý název, ne rozbitá logika.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"><div class="divider__line"></div></div>
+
+  <!-- Sekce 5: Co se povedlo -->
+  <section class="section" id="wins">
+    <div class="section__header">
+      <p class="section__label">Highlights</p>
+      <h2 class="section__title">Co se povedlo</h2>
+    </div>
+
+    <div class="wins-grid">
+      <div class="win">
+        <span class="win__check">&check;</span>
+        <p class="win__text"><strong>Funkční pipeline od briefu po HeyReach.</strong> Brief → config → scoring → zpráva → redakce → follow-up → push.</p>
+      </div>
+      <div class="win">
+        <span class="win__check">&check;</span>
+        <p class="win__text"><strong>Obchod i nábor v jednom enginu.</strong> Sales i HR větev jedou až do zpráv a follow-upu, přepínané jedním polem.</p>
+      </div>
+      <div class="win">
+        <span class="win__check">&check;</span>
+        <p class="win__text"><strong>Anglická verze hotová.</strong> Lokalizátor s tvrdými pravidly, ne strojový překlad.</p>
+      </div>
+      <div class="win">
+        <span class="win__check">&check;</span>
+        <p class="win__text"><strong>Ověřeno na klientech.</strong> Signati i GetLeads. Scoring řeže zahraniční firmy, pouští české B2B, aplikuje výjimky.</p>
+      </div>
+      <div class="win">
+        <span class="win__check">&check;</span>
+        <p class="win__text"><strong>Clay Assistant generuje použitelný config</strong> z briefu, sekci po sekci, v kvalitě připravené rovnou do Clay.</p>
+      </div>
+      <div class="win">
+        <span class="win__check">&check;</span>
+        <p class="win__text"><strong>Zprávy zní česky.</strong> Dvouprůchodová redakce odvedla svoje.</p>
+      </div>
+      <div class="win">
+        <span class="win__check">&check;</span>
+        <p class="win__text"><strong>Engine je generický.</strong> Další klient je o vyplnění configu, ne o přestavbě.</p>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"><div class="divider__line"></div></div>
+
+  <!-- Sekce 6: Co dál -->
+  <section class="section" id="roadmap">
+    <div class="section__header">
+      <p class="section__label">Roadmap</p>
+      <h2 class="section__title">Co dál</h2>
+    </div>
+
+    <div class="roadmap">
+      <div class="roadmap-item">
+        <span class="roadmap-item__marker"></span>
+        <div class="roadmap-item__body">
+          <h4>Clay Assistant appka</h4>
+          <p>Dotáhnout vlastní rozhraní na apps.creaticom.cz, ať kolegové bez Plus nemají limity.</p>
+        </div>
+      </div>
+      <div class="roadmap-item">
+        <span class="roadmap-item__marker"></span>
+        <div class="roadmap-item__body">
+          <h4>První ostrá kampaň v HR a EN režimu</h4>
+          <p>Pustit naostro a doladit podle reálných dat. Sales mód už běží, čekáme co ukáže HR a anglická větev.</p>
+        </div>
+      </div>
+      <div class="roadmap-item">
+        <span class="roadmap-item__marker"></span>
+        <div class="roadmap-item__body">
+          <h4>Návod pro tým</h4>
+          <p>Jak nakrmit Clay Assistant brief, ať to umí každý, ne jen ten, kdo to stavěl.</p>
+        </div>
+      </div>
+      <div class="roadmap-item">
+        <span class="roadmap-item__marker"></span>
+        <div class="roadmap-item__body">
+          <h4>Doladit doménovou funkci a auto přepočet</h4>
+          <p>Aby Run na sloupec nebyl ruční krok a generické názvy firem dohledal spolehlivěji.</p>
+        </div>
+      </div>
+      <div class="roadmap-item">
+        <span class="roadmap-item__marker"></span>
+        <div class="roadmap-item__body">
+          <h4>Rozšířit jazyky (opatrně)</h4>
+          <p>Jen tam, kde máme na kvalitu. Žádný jazyk bez někoho, kdo zkontroluje aspoň vzorek.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"><div class="divider__line"></div></div>
+
+  <!-- David říká -->
+  <section class="david-hero" id="david">
+    <img class="david-hero__bg" src="../img/david.jpg" alt="David Kolář">
+    <div class="david-hero__overlay"></div>
+    <div class="david-hero__content">
+      <p class="david-hero__label">David říká</p>
+      <h2 class="david-hero__title">Teď to rozjedeme naostro.</h2>
+      <p class="david-hero__quote">
+        &ldquo;Engine běží. Obchod i nábor, česky i anglicky, jeden setup pro libovolného klienta. To není málo. Díky všem, kdo se na tom podepsali. Teď zbývá to nejtěžší: pustit to do plné zátěže a doladit podle reálných dat.&rdquo;
+      </p>
+      <div class="david-hero__sig">
+        <span class="david-hero__sig-name">David Kolář</span>
+        <span class="david-hero__sig-role">CEO, GetLeads</span>
+      </div>
+      <div>
+        <button type="button" class="like" id="like-engine">
+          <span class="like__emoji">&#x1F44D;</span>
+          <span>Dát enginu like</span>
+          <span class="like__count" id="like-engine-count">0</span>
+        </button>
+        <span class="like__hint">Když ti dává smysl, kam to jede, klikni.</span>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    (function () {
+      const KEY = 'gl-inside-003-engine-likes';
+      const btn = document.getElementById('like-engine');
+      const countEl = document.getElementById('like-engine-count');
+      if (!btn || !countEl) return;
+      let n = parseInt(localStorage.getItem(KEY) || '0', 10);
+      if (isNaN(n)) n = 0;
+      countEl.textContent = n;
+      btn.addEventListener('click', () => {
+        n += 1;
+        localStorage.setItem(KEY, String(n));
+        countEl.textContent = n;
+        btn.classList.remove('like--clicked');
+        void btn.offsetWidth;
+        btn.classList.add('like--clicked');
+      });
+    })();
+  </script>
+
+  <!-- Footer -->
+  <footer class="footer footer--tight">
+    <p>GL Inside - interní newsletter GetLeads&ensp;|&ensp;<a href="../index.html">Archiv</a></p>
+    <p style="margin-top: 8px;">&copy; 2026 GetLeads s.r.o. Praha</p>
+  </footer>
+
+  <script>
+    document.querySelector('.navbar__hamburger').addEventListener('click', function () {
+      this.classList.toggle('is-open');
+      document.querySelector('.navbar__links').classList.toggle('is-open');
+    });
+  </script>
+</body>
+</html>
