@@ -542,8 +542,13 @@
       margin-top: 24px;
     }
   </style>
-</head>
-<body>
+<style>
+  .imageye-selected {
+    outline: 2px solid black !important;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5) !important;
+  }
+</style></head>
+<body cz-shortcut-listen="true">
 
   <!-- Background -->
   <div class="bg-canvas"></div>
@@ -579,10 +584,10 @@
       Vydání #003
     </div>
     <h1 class="hero__title">
-      Engine je <span class="accent">hotový.</span>
+      Nový clay je <span class="accent">ready.</span>
     </h1>
     <p class="hero__subtitle">
-      Od minule jede HR až do zpráv, přibyla angličtina a Clay Assistant dostává vlastní appku. Co se změnilo a proč zrovna takhle.
+      HR kampaně? Bez problému. Cizí jazyk taky a Clay Assistant dostane vlastní appku. Co se změnilo a proč zrovna takhle.
     </p>
     <div class="hero__date-badge">
       29. června 2026
@@ -593,40 +598,42 @@
   <section class="section" id="engine">
     <div class="section__header">
       <p class="section__label">Hlavní téma</p>
-      <h2 class="section__title">Kde engine stojí teď</h2>
+      <h2 class="section__title">Jak to teda teď funguje?</h2>
     </div>
 
     <p class="intro-text">
-      Od minule jsme dotáhli HR větev až do zpráv, přidali angličtinu a rozjeli vlastní appku pro Clay Assistanta. Engine teď jede obchod i nábor, česky i anglicky.
+      Od minule jsme dotáhli HR větev až do zpráv, přidali angličtinu a němčinu (ta ještě potřebuje review od našeho německy mluvícího přítele) a taky Clay Assistant brzy dostane vlastní appku.
     </p>
 
-    <p class="intro-text" style="margin-bottom: 32px;">
-      Rychlý přehled, co engine dělá, ať jsme na stejné vlně. Většina hodnoty ale není v tom, co umí, ale proč to umí zrovna takhle. To je zbytek vydání.
+    <p class="intro-text">
+      Stručně řečeno, teďka jede HR, 🇬🇧 i 🇩🇪.
     </p>
+
+    
 
     <div class="feature-grid">
       <div class="feature glass">
-        <span class="feature__icon">&#x1F916;</span>
+        <span class="feature__icon">🤖</span>
         <h3 class="feature__title">Clay Assistant (GPT)</h3>
-        <p class="feature__desc">Z briefu klienta vyrobí pět konfiguračních sekcí: Popis, Diferenciátor, CTA, Cílová skupina, Kritéria.</p>
+        <p class="feature__desc">Z briefu klienta vyrobí pět konfiguračních sekcí: <strong>Popis</strong>, <strong>Diferenciátor</strong>, <strong>CTA</strong>, <strong>Cílová skupina,</strong> <strong>Kritéria</strong>.</p>
       </div>
       <div class="feature glass">
-        <span class="feature__icon">&#x1F3AF;</span>
+        <span class="feature__icon">🎯</span>
         <h3 class="feature__title">Scoring</h3>
         <p class="feature__desc">Každou firmu oskóruje: JE / NENÍ / Neznámé, vždy s důvodem. Absolutní i podmíněné brány.</p>
       </div>
       <div class="feature glass">
-        <span class="feature__icon">&#x1F4AC;</span>
+        <span class="feature__icon">💬</span>
         <h3 class="feature__title">Sales i HR režim</h3>
         <p class="feature__desc">Obchodní i náborové zprávy, oslovovací i follow-up. Přepíná se podle pole Typ kampaně.</p>
       </div>
       <div class="feature glass">
-        <span class="feature__icon">&#x1F30D;</span>
+        <span class="feature__icon">🌍</span>
         <h3 class="feature__title">Anglická verze</h3>
         <p class="feature__desc">Outreach v angličtině, ne strojový překlad. Lokalizátor s tvrdými pravidly per jazyk.</p>
       </div>
       <div class="feature glass">
-        <span class="feature__icon">&#x1F517;</span>
+        <span class="feature__icon">🔗</span>
         <h3 class="feature__title">Doménová funkce</h3>
         <p class="feature__desc">Dohledá web firmy pro scrape. Když selže (generické názvy), použije LinkedIn jako vodítko.</p>
       </div>
@@ -643,16 +650,15 @@
     </div>
 
     <p class="intro-text">
-      Většina hodnoty není v tom, CO jsme udělali, ale PROČ jsme to udělali zrovna takhle. Tady je osm momentů, co stojí za řeč.
-    </p>
+      Většina hodnoty není v tom, CO jsme udělali, ale PROČ jsme to udělali zrovna takhle.&nbsp;</p>
 
     <!-- Klíčový zlom: large highlight card -->
     <div class="keymoment">
       <span class="keymoment__label">Klíčový zlom</span>
-      <h3 class="keymoment__title">Brána padá na důkazu nefitu, ne na chybějícím důkazu fitu.</h3>
+      <h3 class="keymoment__title">Brána (Důvod, zda člověk je relevantní nebo ne) padá na důkazu nefitu, ne na chybějícím důkazu fitu.</h3>
       <p class="keymoment__text">
-        Tvrdé brány vyžadovaly <strong>pozitivní</strong> potvrzení signálů (etablovanost, marketingová aktivita), které scrape často nedodá. Engine pak házel i dobré firmy do Neznámé jen proto, že o nich nebylo dost dat. Otočili jsme to: firma vypadne jen na pozitivním důkazu, že je nefit (prokazatelně mikrofirma, čisté B2C, doložený konkurent). Chybějící data ji neshazují. Engine přestal vyhazovat dobré leady kvůli tenkým datům.
-      </p>
+        Tvrdé brány vyžadovaly <strong>pozitivní</strong> potvrzení signálů (etablovanost, marketingová aktivita), které scrape často nedodá, protože je nemožné je najít na webu. Clay pak házel i dobré firmy jako nerelevantní jen proto, že o nich nebylo dost dat.&nbsp;<div><br></div><div><b style="color: rgb(255, 255, 255);">Tohle jsme otočili:</strong> firma vypadne jen na pozitivním důkazu, že je nefit (prokazatelně mikrofirma, čisté B2C, doložený konkurent). Chybějící data ji neshazují. Engine přestal vyhazovat dobré leady kvůli tenkým datům.
+      </div></p>
     </div>
 
     <div class="decisions">
@@ -660,15 +666,15 @@
         <span class="decision__num">1</span>
         <div class="decision__body">
           <h4>Jeden engine, ne dvacet verzí na míru</h4>
-          <p>Klient žije v polích, ne v kódu. Pravidla jsou obecná, příklady v promptech vždy z jiného oboru, ať se nic nesveze k jednomu zákazníkovi. Nový klient = vyplnit config, ne přestavět systém.</p>
+          <p>Klient žije v polích, ne v kódu. Pravidla jsou obecná, příklady v promptech vždy z jiného oboru, ať se nic nesveze k jednomu zákazníkovi.&nbsp;<div><br></div><div><span style="font-weight: bold;">Nový klient = vyplnit config, ne přestavět systém.</span></div></p>
         </div>
       </div>
 
       <div class="decision">
         <span class="decision__num">2</span>
         <div class="decision__body">
-          <h4>Scoring: absolutní vs podmíněné brány</h4>
-          <p>Binární „fit/nefit" je hloupé. Firma s B2C i B2B se nemá zahodit, když má reálné B2B vztahy. Kampaň se otočí na ně. Absolutní brána (porušení = tvrdé NENÍ) a podmíněná (má výjimku = „JE s výhradou" místo zahození). Engine umí nuanci, ne jen sekeru.</p>
+          <h4>Skórování neříká jen ano/ne</h4>
+          <p>Jen „sedí, nesedí" je málo. Když firma dělá B2C i B2B, nemá smysl ji zahodit kvůli B2C. Má reálné B2B vztahy a kampaň prostě zacílíme na ně. Skórování proto má dva druhy pravidel: <strong>tvrdá</strong> (když je firma poruší, je to jasné NE, třeba prokazatelně jen koncoví zákazníci) a <strong>měkká</strong> (firma úplně nesedí, ale má výjimku, tak místo vyhození dostane „ano, ale s výhradou" a ještě ji mrkneme ručně). Engine umí odstíny, ne jen sekeru.</p>
         </div>
       </div>
 
@@ -676,7 +682,7 @@
         <span class="decision__num">3</span>
         <div class="decision__body">
           <h4>Dvouprůchodové zprávy: obsah a redakce</h4>
-          <p>Jeden prompt nezvládal obojí naráz. Buď seděl obsah a kulhala čeština, nebo naopak. Rozdělili jsme to: generátor vybere obsah a hodnotu, redakce učeše slovosled, shody a délku. Zprávy konečně zní česky, ne jak překlad.</p>
+          <p>Jeden prompt nezvládal obojí naráz. Buď seděl obsah a kulhala čeština, nebo naopak. Takže jsme to rozdělili. Jeden prompt (Generátor) vybere obsah a hodnotu, druhý prompt (redakce) učeše slovosled, shody a délku. Zprávy konečně zní česky, ne jak překlad.</p>
         </div>
       </div>
 
@@ -684,7 +690,7 @@
         <span class="decision__num">4</span>
         <div class="decision__body">
           <h4>Follow-up informuje, neprodává</h4>
-          <p>Druhý dotek nemá omílat produkt o držku. Předá jeden užitečný pohled, něco, co si příjemce odnese, i kdyby neodepsal. CTA je nízkotlaký: krátký hovor, ne velký požadavek.</p>
+          <p>Druhý dotek nemá omílat produkt o pusu. Předá jeden užitečný pohled, něco, co si příjemce odnese, i kdyby neodepsal. CTA nevytváří tlak.</p>
         </div>
       </div>
 
@@ -692,7 +698,7 @@
         <span class="decision__num">5</span>
         <div class="decision__body">
           <h4>HR je jiný svět než sales</h4>
-          <p>Engine měl v DNA obchod, prodává produkt kupujícímu. U náborové kampaně je příjemce KANDIDÁT, ne zákazník, a hodnota je kariéra, ne produkt. HR režim adaptuje všech pět sekcí: firma jako zaměstnavatel, hodnota = proč u nás pracovat, CTA = kariérní konverzace, scoring hodnotí člověka.</p>
+          <p>Clay měl v DNA obchod, prodává produkt kupujícímu. U náborové kampaně je příjemce KANDIDÁT, ne zákazník, a hodnota je kariéra, ne produkt. HR režim adaptuje všech pět sekcí: firma jako zaměstnavatel, hodnota = proč u nás pracovat, CTA = kariérní konverzace, scoring hodnotí člověka.</p>
         </div>
       </div>
 
@@ -700,14 +706,14 @@
         <span class="decision__num">6</span>
         <div class="decision__body">
           <h4>HR až do zpráv přes pole „Typ kampaně"</h4>
-          <p>Jeden engine, dvě větve. Sales i HR generátor sedí vedle sebe, ale spustí se vždycky jen jeden podle pole Typ kampaně. Pak je sloučíme jednoduchým pravidlem a redakce (ta, co češe češtinu) je <strong>jen jedna</strong> a společná. Nečešeme dvakrát, neudržujeme dva systémy. Přidat nový režim je o přidání větve, ne o přestavbě.</p>
+          <p>Kampaň si nově určujete hned na začátku dané tabulky v Clayi. Sales i HR generátor sedí vedle sebe, ale spustí se vždycky jen jeden podle pole Typ kampaně. Pak je sloučíme jednoduchým pravidlem a redakce (ta, co češe češtinu) je <strong>jen jedna</strong> a společná. Nečešeme dvakrát, neudržujeme dva systémy. Přidat nový režim je o přidání větve, ne o přestavbě.</p>
         </div>
       </div>
 
       <div class="decision">
         <span class="decision__num">7</span>
         <div class="decision__body">
-          <h4>Anglická verze: lokalizovat, neperkládat</h4>
+          <h4>Anglická verze: lokalizovat, nepřekládat</h4>
           <p>„Vygenerujeme česky a přeložíme" má dvě díry: schvaluje se něco jiného než se posílá, a překlad češtiny vždycky lehce zavání překladem. Per-jazyk samostatná šablona s vyladěným lokalizátorem. Tvrdá pravidla: jména osob se neskloňují, názvy firem v originále, formálnost napevno, délka se hlídá, závěrečná otázka zůstane otázkou. „I hope this email finds you well" zakázáno.</p>
         </div>
       </div>
@@ -837,31 +843,31 @@
 
     <div class="wins-grid">
       <div class="win">
-        <span class="win__check">&check;</span>
+        <span class="win__check">✓</span>
         <p class="win__text"><strong>Funkční pipeline od briefu po HeyReach.</strong> Brief → config → scoring → zpráva → redakce → follow-up → push.</p>
       </div>
       <div class="win">
-        <span class="win__check">&check;</span>
+        <span class="win__check">✓</span>
         <p class="win__text"><strong>Obchod i nábor v jednom enginu.</strong> Sales i HR větev jedou až do zpráv a follow-upu, přepínané jedním polem.</p>
       </div>
       <div class="win">
-        <span class="win__check">&check;</span>
+        <span class="win__check">✓</span>
         <p class="win__text"><strong>Anglická verze hotová.</strong> Lokalizátor s tvrdými pravidly, ne strojový překlad.</p>
       </div>
       <div class="win">
-        <span class="win__check">&check;</span>
+        <span class="win__check">✓</span>
         <p class="win__text"><strong>Ověřeno na klientech.</strong> Signati i GetLeads. Scoring řeže zahraniční firmy, pouští české B2B, aplikuje výjimky.</p>
       </div>
       <div class="win">
-        <span class="win__check">&check;</span>
+        <span class="win__check">✓</span>
         <p class="win__text"><strong>Clay Assistant generuje použitelný config</strong> z briefu, sekci po sekci, v kvalitě připravené rovnou do Clay.</p>
       </div>
       <div class="win">
-        <span class="win__check">&check;</span>
+        <span class="win__check">✓</span>
         <p class="win__text"><strong>Zprávy zní česky.</strong> Dvouprůchodová redakce odvedla svoje.</p>
       </div>
       <div class="win">
-        <span class="win__check">&check;</span>
+        <span class="win__check">✓</span>
         <p class="win__text"><strong>Bez přestavby pro dalšího klienta.</strong> Vyplníš config a jedeš.</p>
       </div>
     </div>
@@ -891,27 +897,6 @@
           <p>Pustit naostro a doladit podle reálných dat. Sales mód už běží, čekáme co ukáže HR a anglická větev.</p>
         </div>
       </div>
-      <div class="roadmap-item">
-        <span class="roadmap-item__marker"></span>
-        <div class="roadmap-item__body">
-          <h4>Návod pro tým</h4>
-          <p>Jak nakrmit Clay Assistant brief, ať to umí každý, ne jen ten, kdo to stavěl.</p>
-        </div>
-      </div>
-      <div class="roadmap-item">
-        <span class="roadmap-item__marker"></span>
-        <div class="roadmap-item__body">
-          <h4>Doladit doménovou funkci a auto přepočet</h4>
-          <p>Aby Run na sloupec nebyl ruční krok a generické názvy firem dohledal spolehlivěji.</p>
-        </div>
-      </div>
-      <div class="roadmap-item">
-        <span class="roadmap-item__marker"></span>
-        <div class="roadmap-item__body">
-          <h4>Rozšířit jazyky (opatrně)</h4>
-          <p>Jen tam, kde máme na kvalitu. Žádný jazyk bez někoho, kdo zkontroluje aspoň vzorek.</p>
-        </div>
-      </div>
     </div>
   </section>
 
@@ -925,7 +910,7 @@
       <p class="david-hero__label">David říká</p>
       <h2 class="david-hero__title">Teď to rozjedeme naostro.</h2>
       <p class="david-hero__quote">
-        &ldquo;Engine běží. Obchod i nábor, česky i anglicky, jeden setup pro libovolného klienta. To není málo. Díky všem, kdo se na tom podepsali. Teď zbývá to nejtěžší: pustit to do plné zátěže a doladit podle reálných dat.&rdquo;
+        “Nový Clay by měl být lepší. Za lepší prosím nehledejte dokonalý, k tomu se musíme společně dokousat. Pokud najdete jakoukoliv chybu, dejte mi vědět. Budeme pro vás k dispozici!”
       </p>
       <div class="david-hero__sig">
         <span class="david-hero__sig-name">David Kolář</span>
@@ -933,7 +918,7 @@
       </div>
       <div>
         <button type="button" class="like" id="like-engine">
-          <span class="like__emoji">&#x1F44D;</span>
+          <span class="like__emoji">👍</span>
           <span>Dát enginu like</span>
           <span class="like__count" id="like-engine-count">0</span>
         </button>
@@ -964,8 +949,8 @@
 
   <!-- Footer -->
   <footer class="footer footer--tight">
-    <p>GL Inside - interní newsletter GetLeads&ensp;|&ensp;<a href="../index.html">Archiv</a></p>
-    <p style="margin-top: 8px;">&copy; 2026 GetLeads s.r.o. Praha</p>
+    <p>GL Inside - interní newsletter GetLeads | <a href="../index.html">Archiv</a></p>
+    <p style="margin-top: 8px;">© 2026 GetLeads s.r.o. Praha</p>
   </footer>
 
   <script>
@@ -974,5 +959,9 @@
       document.querySelector('.navbar__links').classList.toggle('is-open');
     });
   </script>
-</body>
-</html>
+
+
+
+
+
+<div class="calendly-frame-tag" manager_id="53544443-e717-4c9a-9148-5559e13c8724" style="height: 0px; width: 0px; visibility: hidden;" id="53544443-e717-4c9a-9148-5559e13c8724"></div><veepn-lock-screen><style>@font-face{font-family:FigtreeVF;src:url(chrome-extension://majdfhpaihoncoakbjgbdhglocklcgno/fonts/FigtreeVF.woff2)format("woff2 supports variations"),url(chrome-extension://majdfhpaihoncoakbjgbdhglocklcgno/fonts/FigtreeVF.woff2)format("woff2-variations");font-weight:100 1000;font-display:swap}</style></veepn-lock-screen><protonpass-root-5c1d data-protonpass-role="root" data-protonpass-theme="os"></protonpass-root-5c1d></body></html>
